@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Jeanyhwh Desulme -- Developer -- @jsleepy89
+
+# THANKS
+
+    Dan Bogaard
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizr
+    PHP, MYSQL
