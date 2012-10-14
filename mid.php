@@ -9,9 +9,9 @@
 
 		$serviceMethod = $_REQUEST['method'];
 		$data = $_REQUEST['data'];
-		
+
 		//make the call to the function $serviceMethod
-		$result=@call_user_func($serviceMethod, $data, $_SERVER['REMOTE_ADDR'], $_COOKIE['token']);
+		$result = @call_user_func($serviceMethod, $data, $_SERVER['REMOTE_ADDR'], $_COOKIE['token']);
 		
 		//might not be sending anything out
 		if ($result){

@@ -1,4 +1,26 @@
-/**
+$(document).ready(function(){
+    $('#login_form').submit(function(e){
+        var d = $('#login_form').serialize();
+        ajaxCall('post',{a:'user',method:'loginUser',data:d},getLoginCallback);
+        return false;
+    });
+
+    $('#register').submit(function(e){
+        var d = $(e.target).serialize();
+        ajaxCall('post',{a:'user',method:'registerUser',data:d},getNewUserCallback);
+        return false;
+    });
+
+    $('#email').on('change',function(e){
+        var d = e.target.value;
+        ajaxCall('post',{a:'user',method:'getAvatar',data:d},loadGravatar);
+    });
+
+});
+
+
+
+    /**
  * A generic ajax function for SOA
  *
  * @param getPost http method get or post
@@ -11,29 +33,16 @@ function ajaxCall(getPost, d, callback){
         async:true,
         cache:false,
         data:d,
-        url:"mid.php",
+        url:"./mid.php",
         dataType:'json',
         success:callback
     });
 }
 
-$('#login').submit(function(e){
-    var d = $(e.target).serializeArray();
-    ajaxCall('post',{a:'user',method:'registerUser',data:d},getNewUserCallback);
-    return false;
-});
+
+//http://www.jblotus.com/2011/05/24/keeping-your-handlebars-js-templates-organized/
 
 
-$('#register').submit(function(e){
-    var d = $(e.target).serializeArray();
-    ajaxCall('post',{a:'user',method:'registerUser',data:d},getNewUserCallback);
-    return false;
-});
-
-$('#email').on('change',function(e){
-    var d = e.target.value;
-    ajaxCall('post',{a:'user',method:'getAvatar',data:d},loadGravatar);
-});
 
 function loadGravatar(url){
     console.log(url);
@@ -47,7 +56,9 @@ function loadGravatar(url){
         });
 }
 
-
+function getLoginCallback(data){
+    alert(data);
+}
 
 function getNewUserCallback(data){
     console.log(data);

@@ -1,8 +1,9 @@
 <?php
 require_once("../dbInfoPS.inc");
+
 //TODO: Change to the actual path --> ../../../dbInfoPS.inc
 //include exceptions
-require_once('./BizDataLayer/exception.php');
+require_once('../BizDataLayer/exception.php');
 
 function login($user, $password){
     global $mysqli;

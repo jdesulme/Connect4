@@ -96,10 +96,8 @@ html {
     padding: 150px 10px;
     font-size: 20px;
     line-height: 1.4;
-    color: #737373;
-    background: #cc7d07;
-    background-image: url("../img/zenbg-1.png"), url("../img/zenbg-2.png");
-    background-repeat: repeat-x, repeat;
+    color: #4B2B16;
+    background: #E4BD82 url("../img/bg.gif") repeat;
 }
 
 html,
@@ -115,7 +113,6 @@ body {
     box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
     background: #fcfcfc;
 }
-
 
 h1 span {
     color: #bbb;
