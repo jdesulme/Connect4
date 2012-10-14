@@ -8,6 +8,7 @@
 # THANKS
 
     Dan Bogaard
+    Login Page Design - http://dribbble.com/shots/280567-Stacked-Paper-Login-reworked
 
 # TECHNOLOGY COLOPHON
 

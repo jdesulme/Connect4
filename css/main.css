@@ -92,16 +92,72 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+html {
+    padding: 150px 10px;
+    font-size: 20px;
+    line-height: 1.4;
+    color: #737373;
+    background: #cc7d07;
+    background-image: url("../img/zenbg-1.png"), url("../img/zenbg-2.png");
+    background-repeat: repeat-x, repeat;
+}
+
+html,
+input { font-family: "lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif; }
+
+body {
+    max-width: 500px;
+    _width: 500px;
+    padding: 30px 20px 50px;
+    border: 1px solid #b3b3b3;
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+    background: #fcfcfc;
+}
 
 
+h1 span {
+    color: #bbb;
+}
 
+p {
+    margin: 1em 0;
+}
 
+input {
+    margin: 1em 0 0;
+    width: 100%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    moz-box-shadow: 0 0 0 #000,inset 0px 3px 3px #eee;
+    -webkit-box-shadow: 0 0 0 black,inset 0px 3px 3px #EEE;
+    box-shadow: 0 0 0 black,inset 0px 3px 3px #EEE;
+    padding: 5px;
+}
 
+button {
+    margin: 1.5em .5em 0;
+    float: right;
+}
 
+.container {
+    max-width: 380px;
+    margin: 2.5em auto;
+}
 
+.gravatar-text {
+    font-size: .7em;
+}
 
-
-
+.new-account {
+    font-size: .5em;
+    float: right;
+    text-align: center;
+}
 
 
 
@@ -138,44 +194,6 @@ textarea {
 
 .hidden {
     display: none !important;
-    visibility: hidden;
-}
-
-/*
- * Hide only visually, but have it available for screenreaders: h5bp.com/v
- */
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-/*
- * Extends the .visuallyhidden class to allow the element to be focusable
- * when navigated to via the keyboard: h5bp.com/p
- */
-
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
-
-/*
- * Hide visually and from screenreaders, but maintain layout
- */
-
-.invisible {
     visibility: hidden;
 }
 
@@ -225,74 +243,3 @@ textarea {
     /* Style adjustments for high resolution devices */
 }
 
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
-
-@media print {
-    * {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster: h5bp.com/s */
-        box-shadow:none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    /*
-     * Don't show links for images, or javascript/internal links
-     */
-
-    .ir a:after,
-    a[href^="javascript:"]:after,
-    a[href^="#"]:after {
-        content: "";
-    }
-
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    thead {
-        display: table-header-group; /* h5bp.com/t */
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    @page {
-        margin: 0.5cm;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-}

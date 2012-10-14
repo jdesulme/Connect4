@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="http://code.jquery.com/jquery-latest.js">
+    </script>
+    <script>
+	$(document).ready(function(){
+		getChat();
+		getTurn();
+     });
+     
+     function getTurn(){
+     	//data:"55|43" - is gameId 55, playerid 43
+     	ajaxCall('get',{a:'game',method:'checkTurn',data:"55|43"},getTurnCallback);
+     }
+     
+     function getTurnCallback(data){
+     	$('#turn').html("Your turn: " + data[0].turn);
+     	if(!data[0].turn) setTimeout(getTurn,2000);
+
+     }
+     
+     ///////////////chat//////////////
+     function getChat(){
+     	ajaxCall('get',{a:'chat',method:'getChat'},getChatCallback);
+     }
+     
+     /*
+     function getChatCallback(data){
+     	var h='';
+     	for(var i=0, l=data.length;i<l;i++){
+     		h+=data[i].name+' says: '+data[i].message+'<span style="color:gray"> at the time '+data[i].timeStamp+'</span><br/>';
+     	}
+
+     	$('h5').html(h);
+     	setTimeout(getChat,1500);
+     }
+     */
+
+
+    function getChatCallback(users){
+        var names = users.map(function(u){ return u.name; });
+        var strNames = "Users " + users.map(prop("name")).join(", ");
+        console.log(strNames);
+
+        var h='';
+        for(var i=0, l=users.length; i<l; i++){
+            h+=users[i].name+' says: '+users[i].message+'<span style="color:gray"> at the time '+users[i].timeStamp+'</span><br/>';
+        }
+
+        $('h5').html(h);
+        setTimeout(getChat,1500);
+     }
+     
+     
+    function prop(name){
+        return function(object){
+            return object[name];
+        }
+    }
+
+
+    /**
+     *
+     * @param getPost http method get or post
+     * @param d the data being passed in
+     * @param callback the data being returned
+     */
+     function ajaxCall(getPost, d, callback){
+     	$.ajax({
+     		type:getPost,
+     		async:true,
+     		cache:false,
+     		data:d,
+     		url:"mid.php",
+     		dataType:'json',
+     		success:callback
+     	});
+     }
+    </script>
+  </head>
+
+  <body>
+    <h5></h5>
+
+
+
+    <div id="turn">Your turn:</div>
+  </body>
+</html>

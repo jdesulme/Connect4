@@ -3,80 +3,112 @@
 class Token {
     const SALT = "cf83e1357eefb8bdf1542850d66d8007d620921d31bd47417a81a538327af927da3e";
 
-    function generate_token($userID){
+    /**
+     *
+     * @param $userID
+     * @return string
+     */
+    function generate_token($userID = null){
         $tokenStr = "";
-        if( empty($userID) ) { $userID = 1234; }
+        //the user name
+        if( empty($userID) ) { $userID = 'efsfds'; }
+
+        $_SERVER['REMOTE_ADDR'] = "129.540.680";
 
         //gets the current users ip address and than converts it
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = preg_replace("/[^a-zA-Z0-9_-]/", "", $_SERVER['REMOTE_ADDR']);
         $convert_ip = base_convert($ip, 10, 24);
-        echo "ip: $ip <br />";
-        echo "convert_ip: $convert_ip -> " . strlen($convert_ip) ."<br /><br />";
+        echo "IP: " . $ip ." <br />";
+        echo "Converted IP: <span style='color:orange'>" . $convert_ip. "</span><br />";
+        echo "Converted IP Count: " . strlen($convert_ip) . "<br />";
+
+        echo "<p></p><p></p>";
 
         //gets the current date and converts it
-        $current_date = date(DATE_RFC822);
+        $current_date = time();
         $convert_date = base_convert($current_date, 10, 24);
-        echo "current_date: $current_date <br />";
-        echo "convert_date: $convert_date -> " . strlen($convert_date) . "<br /><br />";
+        echo "Current Date: " . $current_date . " <br />";
+        echo "Converted Date: <span style='color:purple'>" . $convert_date . "</span><br />";
+        echo "Converted Date Count: " .  strlen($convert_date) . "<br />";
+
+        echo "<p></p><p></p>";
 
 
-        $string = $convert_date . $userID . $convert_ip . 000;
+        //hashes the string and returns
+        $string =  $convert_date;
+        $string .= $convert_ip;
+        $string .= $userID;
+
         $hashed_string = sha1($string);
-
         $tokenStr = $hashed_string . $string;
 
-        echo "Regular String: <span style='color:green'>" . $string . "</span> -> ". strlen($string) ." <br />";
         echo "Hashed String: <span style='color:red'>" .  $hashed_string . "</span><br />";
-        echo "Check Summed String: <span style='color:red'>" . $hashed_string . " </span><span style='color:green'>" . $string . "</span><br />";
-        echo "Total Check Summed String Count: <span style='color:blue'>" . strlen($tokenStr) . " </span><br /><br />";
+        echo "Regular String: <span style='color:green'>" . $string . "</span> -> ". strlen($string) ." <br />";
+
+        echo "Token String Count: <span style='color:blue'>" . strlen($tokenStr) . " </span><br /><br />";
 
         return $tokenStr;
     }
 
+    /**
+     *
+     * @param $token
+     * @param $user_ip
+     * @return bool
+     */
     function verify_token($token, $user_ip){
         $result = false;
 
         //pulls apart the token getting the checksum
         $checksum = substr($token, 0, 40);
-        echo "<span style='color:red'>" . $checksum . "</span><br />";
+        echo "Hashed String: <span style='color:red'>" .  $checksum . "</span><br />";
 
         //pulls apart and get the original string
-        $original_string = substr($token, -21);
-        echo "<span style='color:green'>" . $original_string . "</span><br />";
+        $original_string = substr($token, 40);
+        echo "Regular String: <span style='color:green'>" . $original_string . "</span> -> ". strlen($original_string) ." <br />";
 
         //verifies the checksum and original string to make sure its valid
         if($checksum == sha1($original_string)){
-            echo "<span style='color:green'>OK!</span> The message has not been modified <br /><br /><br />";
+            echo "<span style='color:green'>OK!</span> The message has not been modified <br /><br />";
         }
 
-        //pull out the timestamp (and decode)
-        $timestamp = substr($original_string, 0, 10);
+        echo "<p></p><p></p>";
+
+        $timestamp = substr($original_string, 0, 7);
         $orig_timestamp = base_convert($timestamp, 24, 10);
-        echo "timestamp: $timestamp <br />";
-        echo "orig_timestamp: $orig_timestamp <br />";
+
+        echo "Current Date: " . time($orig_timestamp) . " <br />";
+        echo "Converted Date: <span style='color:purple'>" . $timestamp . "</span><br />";
+        echo "Converted Date Count: " .  strlen($timestamp) . "<br />";
 
         //verifies that the timestamp hasn't expired
 
+        $token_age = time() - time($orig_timestamp);
+        echo "Token Age: $token_age";
+
+        if ($token_age <= 3600) {
+            echo "<span style='color:green'>OK!</span> The time is still fine<br /><br /><br />";
+        }
 
 
-
+        echo "<p></p><p></p>";
 
         //pull out the ip (and decode)
-        $ip = substr($original_string, 11, 17);
-        $orig_ip = base_convert($ip, 24, 10);
+        $ip = substr($original_string, 7, 13);
+        $token_ip = base_convert($ip, 24, 10);
 
-        echo "ip: $ip <br />";
-        echo "orig_ip: $orig_ip <br />";
+        echo "IP: " . $token_ip ." <br />";
+        echo "Converted IP: <span style='color:orange'>" . $ip. "</span><br />";
+        echo "Converted IP Count: " . strlen($ip) . "<br />";
 
         //verifies that the ip matches what was sent in
-        if($user_ip == $orig_ip ){
-
-
+        if($user_ip == $token_ip ){
+            echo "<span style='color:green'>OK!</span> The ip address has not been modified <br /><br />";
         }
 
 
         //pull out the userId (and decode)
-
+        echo substr($original_string, 13);
 
         //verifies that the user actually exists
 
@@ -84,6 +116,10 @@ class Token {
         return $result;
 
     }
+
+
+
+
 
 }
 
