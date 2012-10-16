@@ -13,14 +13,14 @@ $(document).ready(function(){
 
     $('#email').on('change',function(e){
         var d = e.target.value;
-        ajaxCall('post',{a:'user',method:'getAvatar',data:d},loadGravatar);
+        ajaxCall('post',{a:'user',method:'getAvatar',data:d},loadProfileImage);
     });
 
 });
 
 
 
-    /**
+/**
  * A generic ajax function for SOA
  *
  * @param getPost http method get or post
@@ -44,34 +44,26 @@ function ajaxCall(getPost, d, callback){
 
 
 
-function loadGravatar(url){
-    console.log(url);
-    var img = $("<img />").attr('src', url)
-        .load(function() {
-            if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-                alert('broken image!');
-            } else {
-                $("#message").append(img);
-            }
-        });
+function loadProfileImage(img){
+    $(".gravatar-text")
+        .html('')
+        .append(img);
 }
 
 function getLoginCallback(data){
-    alert(data);
+    console.log(data);
 }
 
 function getNewUserCallback(data){
     console.log(data);
     $('#register').slideUp('slow', function(){
         $("#message").html("<p class='success'>You now have an account!</p>");
-    })
+    });
 }
-
-
 
 function checkPasswordMatch(input){
     var pass = document.getElementById('password').value;
-    if (input.value == pass) {
+    if (input.value === pass) {
         input.setCustomValidity('');
     } else {
         input.setCustomValidity("The two passwords must match!");

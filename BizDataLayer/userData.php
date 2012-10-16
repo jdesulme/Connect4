@@ -1,34 +1,21 @@
 <?php
-require_once("../dbInfoPS.inc");
 
-//TODO: Change to the actual path --> ../../../dbInfoPS.inc
+require_once("../../dbInfoPS.inc");
 //include exceptions
-require_once('../BizDataLayer/exception.php');
+require_once('./BizDataLayer/exception.php');
+require_once('./BizDataLayer/genericFunctions.php');
 
-function login($user, $password){
+function login($username, $password){
     global $mysqli;
 
     $sql = "SELECT (password = ?) AS password_matches FROM user WHERE username = ?";
-
     $hash = hash('sha256', $password);
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ss',$hash, $user);
-            $stmt->execute();
-            $row = $stmt->fetch();
+            $stmt->bind_param('ss',$hash, $username);
+            return returnJson($stmt);
 
-            if ($row === false) {
-                // user does not exist
-                $password_matches = $row[0];
-
-                if (!$password_matches) {
-                    // password given was incorrect
-                }
-            }
-
-            //if it works generate the token (cookies) and automatically go to the main room
-            //set their name in the session
             $stmt->close();
             $mysqli->close();
         } else {
@@ -41,39 +28,42 @@ function login($user, $password){
 }
 
 
-function generate_account($username, $email, $pass, $samePass){
+/**
+ * Creates a new account for the new player
+ *
+ * @param $username
+ * @param $email
+ * @param $password
+ * @throws Exception
+ * @return string
+ */
+function generate_account($username, $email, $password){
+    global $mysqli;
+
+    $sql = 'INSERT INTO user (username, email, password) VALUES (?,?,?)';
+
+    $hash = hash('sha256', $password);
+    $result = array();
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('sss',$username, $email, $hash);
+            $stmt->execute();
+
+            //$result = ($stmt->affected_rows() == 1) ? true : false;
+
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail';
+    }
+
     //check to make sure the username doesn't already exist
 
-
+    return json_encode($result);
 }
 
-function logout(){
-    session_destroy();
-    header("Location: /index.php");
-
-}
-
-/**
- * Get either a Gravatar URL or complete image tag for a specified email address.
- *
- * @param string $email The email address
- * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
- * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
- * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
- * @param boole $img True to return a complete IMG tag False for just the URL
- * @param array $atts Optional, additional key/value attributes to include in the IMG tag
- * @return String containing either just a URL or a complete image tag
- * @source http://gravatar.com/site/implement/images/php/
- */
-function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
-    $url = 'http://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=$s&d=$d&r=$r";
-    if ( $img ) {
-        $url = '<img src="' . $url . '"';
-        foreach ( $atts as $key => $val )
-            $url .= ' ' . $key . '="' . $val . '"';
-        $url .= ' />';
-    }
-    return $url;
-}
+?>

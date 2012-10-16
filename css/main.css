@@ -144,10 +144,22 @@ button {
 .container {
     max-width: 380px;
     margin: 2.5em auto;
+
+
 }
 
 .gravatar-text {
     font-size: .7em;
+}
+
+#message {
+    /*
+    background-color:white;
+    background-image:
+        linear-gradient(90deg, rgba(0,0,0,.5) 5%, transparent 5%),
+        linear-gradient(rgba(0,0,0,.5) 5%, transparent 5%);
+    background-size:20px 20px;
+    */
 }
 
 .new-account {

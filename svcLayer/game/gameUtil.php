@@ -3,7 +3,7 @@
 
 	function checkTurn($d,$ip,$token){
 		//a VERY good idea to check the token make sure they should be here - then...
-		
+
 		//we should be here (security checked!)
 		//prepare data "num|num"
 		$h=explode('|',$d);
