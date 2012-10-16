@@ -14,6 +14,10 @@ class Token {
         if( empty($userID) ) { $userID = 'efsfds'; }
 
         $_SERVER['REMOTE_ADDR'] = "129.540.680";
+        
+        //pad the values with 0's then using strpad()
+        //
+
 
         //gets the current users ip address and than converts it
         $ip = preg_replace("/[^a-zA-Z0-9_-]/", "", $_SERVER['REMOTE_ADDR']);
@@ -57,6 +61,8 @@ class Token {
      * @return bool
      */
     function verify_token($token, $user_ip){
+        //remove the zeros with 
+        $removeLeadingZeros = preg_replace ('/^(0*)/', '', '00000000jean');
         $result = false;
 
         //pulls apart the token getting the checksum
