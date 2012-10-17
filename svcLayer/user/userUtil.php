@@ -1,12 +1,16 @@
 <?php
 
 require_once('./BizDataLayer/userData.php');
+require_once('./svcLayer/security.php');
 
 function loginUser($d,$ip,$token){
     //a VERY good idea to check the token make sure they should be here - then...
     $data = parseDataFromRequest($d);
 
     $result = login($data['username'],$data['password']);
+
+    //generate_cookie()
+
 
     echo $result;
 }
@@ -17,13 +21,22 @@ function registerUser($d,$ip,$token){
     $data = parseDataFromRequest(urldecode($d));
     $cleanData = cleanRegisterFormData($data);
 
-    if ( generate_account($cleanData['username'], $cleanData['email'], $cleanData['password']) ) {
-        //if it works generate the token (cookies) and automatically go to the main room
-        //set their name and email in the session
-        $cleanData['account'] = 'it works';
+
+    //make sure the passwords are exactly the same
+    if ($cleanData['password'] === $cleanData['password-confirm']){
+
+        if (generate_account($cleanData['username'], $cleanData['email'], $cleanData['password'])) {
+            //if it works generate the token (cookies) and automatically go to the main room
+            generate_cookie($cleanData['username'],$ip, $cleanData['email']);
+            $cleanData['account_creation'] = 'Successful';
+        } else {
+            $cleanData['account_creation'] = 'Failure';
+        }
+
     } else {
-        $cleanData['account'] = 'it failed sorry';
+        $cleanData['pass_validation'] = 'Passwords do not match. Please try again!';
     }
+
 
     echo json_encode($cleanData);
     //echo generate_account()
@@ -65,16 +78,6 @@ function cleanRegisterFormData($data){
 
     $sanitizedData = filter_var_array($data, $args);
     $filteredData = array_filter(array_map('trim', $sanitizedData));
-
-    //validate the email
-    if( filter_var($filteredData['email'], FILTER_VALIDATE_EMAIL) ) {
-
-    }
-
-    //make sure the passwords are exactly the same
-    if ( $filteredData['password'] === $filteredData['password-confirm'] ){
-
-    }
 
     return $filteredData;
 }

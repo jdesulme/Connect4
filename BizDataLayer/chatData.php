@@ -16,7 +16,7 @@ function getChatData(){
             $stmt->close();
             $mysqli->close();
         } else {
-            throw new Exception("An error occured while fetching record data");
+            throw new Exception("An error occurred while fetching record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
