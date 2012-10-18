@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#login_form').submit(function(e){
+    $('#login_form').submit(function(){
         var d = $('#login_form').serialize();
         ajaxCall('post',{a:'user',method:'loginUser',data:d},getLoginCallback);
         return false;
@@ -50,15 +50,20 @@ function loadProfileImage(img){
         .append(img);
 }
 
-function getLoginCallback(data){
-    console.log(data);
+function getLoginCallback(msg){
+    window.console.log(msg);
+    $('#message')
+        .attr('class', msg.status)
+        .html(msg.message);
+
 }
 
-function getNewUserCallback(data){
-    console.log(data);
-    $('#register').slideUp('slow', function(){
-        $("#message").html("<p class='success'>You now have an account!</p>");
-    });
+function getNewUserCallback(msg){
+    //$('#register').slideUp('slow', function(){
+        $('#message')
+            .attr('class', msg.status)
+            .html(msg.message);
+    //});
 }
 
 function checkPasswordMatch(input){

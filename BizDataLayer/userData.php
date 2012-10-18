@@ -14,7 +14,10 @@ function login($username, $password){
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ss',$hash, $username);
-            return returnJson($stmt);
+            $stmt->execute();
+            $stmt->bind_result($password_matches);
+            $stmt->fetch();
+            return $password_matches;
 
             $stmt->close();
             $mysqli->close();
@@ -27,6 +30,30 @@ function login($username, $password){
     }
 }
 
+
+function check_username($username){
+    global $mysqli;
+    $sql = "SELECT (username = ?) AS user_matches FROM user WHERE username = ?";
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('s',$username);
+            $stmt->execute();
+            $stmt->bind_result($username_matches);
+            $stmt->fetch();
+            return $username_matches;
+
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail';
+    }
+
+}
 
 /**
  * Creates a new account for the new player
@@ -41,15 +68,14 @@ function generate_account($username, $email, $password){
     global $mysqli;
 
     $sql = 'INSERT INTO user (username, email, password) VALUES (?,?,?)';
-
     $hash = hash('sha256', $password);
-    $result = array();
+
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('sss',$username, $email, $hash);
             $stmt->execute();
-
-            //$result = ($stmt->affected_rows() == 1) ? true : false;
+            $result = ($stmt->affected_rows() == 1) ? true : false;
+            return $result;
 
             $stmt->close();
             $mysqli->close();
@@ -60,10 +86,6 @@ function generate_account($username, $email, $password){
         log_error($e, $sql, null);
         echo 'fail';
     }
-
-    //check to make sure the username doesn't already exist
-
-    return json_encode($result);
 }
 
 ?>

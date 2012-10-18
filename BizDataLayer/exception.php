@@ -22,4 +22,3 @@ function log_error($e, $sqlst, $params){
 		echo 'error';
     }
 }
-?>

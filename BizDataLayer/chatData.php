@@ -10,7 +10,7 @@ function getChatData(){
     global $mysqli;
     $sql="Select * from 546ArchChat";
     try {
-        if ($stmt=$mysqli->prepare($sql)){
+        if ($stmt = $mysqli->prepare($sql)){
             //would bind here if need be
             echo returnJson($stmt);
             $stmt->close();
