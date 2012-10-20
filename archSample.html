@@ -48,7 +48,7 @@
             h+=users[i].name+' says: '+users[i].message+'<span style="color:gray"> at the time '+users[i].timeStamp+'</span><br/>';
         }
 
-        $('h5').html(h);
+        $('#lobby-chat-box').html(h);
         setTimeout(getChat,1500);
      }
      

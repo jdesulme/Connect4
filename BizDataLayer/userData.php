@@ -30,10 +30,41 @@ function login($username, $password){
     }
 }
 
+/**
+ * Updates a users status in the user table
+ * @param string $username
+ * @param bool $active sets the users status to active or inactive {0/1}
+ * @throws Exception
+ */
+function set_player_status($username, $active){
+    global $mysqli;
 
+    $sql = "UPDATE user SET status = ?, last_login = NOW() WHERE username = ?";
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('ds',intval($active), $username);
+            $stmt->execute();
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail';
+    }
+
+}
+
+/**
+ * Checks to see if the supplied username already exists
+ * @param $username
+ * @return bool
+ * @throws Exception
+ */
 function check_username($username){
     global $mysqli;
-    $sql = "SELECT (username = ?) AS user_matches FROM user WHERE username = ?";
+    $sql = "SELECT COUNT(1) AS user_matches FROM user WHERE username = ?";
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
@@ -74,7 +105,7 @@ function generate_account($username, $email, $password){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('sss',$username, $email, $hash);
             $stmt->execute();
-            $result = ($stmt->affected_rows() == 1) ? true : false;
+            $result = $stmt->affected_rows;
             return $result;
 
             $stmt->close();

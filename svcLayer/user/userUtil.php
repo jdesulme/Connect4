@@ -15,8 +15,11 @@ function loginUser($d,$ip,$token){
     $loginResponse = login($data['username'],$data['password']);
 
     if ($loginResponse){
-        //generate_cookie()
-        //redirect them to the lobby
+        session_start();
+        $_SESSION['user_name']= $data['username'];
+        set_player_status($data['username'],'1');
+        generate_cookie($data['username'],$ip, $data['email']);
+
         $result['status'] = 'success';
         $result['message'] = 'You are now logged into the game';
     } else {
@@ -46,34 +49,33 @@ function registerUser($d,$ip,$token){
     $paramCheck = (!empty($cleanData['password']) && !empty($cleanData['username']) && !empty($cleanData['email'])) ? true : false;
 
     //make sure the passwords are exactly the same
-    if (!$passCheck){
+    if ($passCheck == false){
         $result['message'] = 'Passwords do not match. Please try again!';
         $result['status'] = 'error';
     }
 
     //make sure the account doesn't already exist
-    if (!$userCheck){
+    if ($userCheck > 0){
         $result['message'] = 'This user account already exists. Please try another username!';
         $result['status'] = 'error';
     }
 
     //your missing some parameters
-    if (!$paramCheck){
+    if ($paramCheck == false){
         $result['message'] = 'Your missing some fields please fill in everything!';
         $result['status'] = 'error';
     }
 
     //once they pass validation create the account
-    if ($userCheck && $passCheck && $paramCheck) {
-        $registerResponse = generate_account($cleanData['username'], $cleanData['email'], $cleanData['password']);
+    if ($userCheck == 0 && $passCheck == true && $paramCheck == true) {
+        session_start();
+        generate_account($cleanData['username'], $cleanData['email'], $cleanData['password']);
+        $_SESSION['user_name']= $cleanData['username'];
+        set_player_status($cleanData['username'],'1');
+        generate_cookie($cleanData['username'],$ip, $cleanData['email']);
 
-        if ($registerResponse) {
-            //if it works generate the token (cookies) and automatically go to the main room
-            generate_cookie($cleanData['username'],$ip, $cleanData['email']);
-            $result['status'] = 'success';
-        } else {
-            $result['status'] = 'error';
-        }
+        $result['message'] = 'New Account successfully created';
+        $result['status'] = 'success';
     }
 
     echo json_encode($result);
@@ -92,7 +94,7 @@ function getAvatar($email, $ip, $token) {
  */
 function cleanLoginFormData($data){
     $args = array (
-        'username' => FILTER_SANITIZE_STRING,
+        'username' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
         'password' => FILTER_SANITIZE_STRING
     );
     $sanitizedData = filter_var_array($data, $args);
@@ -107,7 +109,7 @@ function cleanLoginFormData($data){
 function cleanRegisterFormData($data){
     $args = array (
         'email' => FILTER_SANITIZE_EMAIL,
-        'username' => FILTER_SANITIZE_STRING,
+        'username' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
         'password' => FILTER_SANITIZE_STRING,
         'password-confirm' => FILTER_SANITIZE_STRING
     );

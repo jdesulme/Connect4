@@ -1,36 +1,27 @@
 <?php
+session_start();
+require_once("settings.php");
 
-error_reporting(E_ALL);
-
-function get_gravatar( $email, $s = 50, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
-    $url = 'http://www.gravatar.com/avatar/';
-    $url .= md5( strtolower( trim( $email ) ) );
-    $url .= "?s=$s&d=$d&r=$r";
-    if ( $img ) {
-        $url = '<img src="' . $url . '"';
-        foreach ( $atts as $key => $val )
-            $url .= ' ' . $key . '="' . $val . '"';
-        $url .= ' />';
-    }
-    return $url;
-}
-
-$image_url = get_gravatar('jdesulme@gmail.com');
-
-
-echo '<img src="' . $image_url . '" alt="name">';
-
-print "<br /><br /><br /><br />";
-
-require_once('lib/Token.class.php');
-
-
-$tokens = new Token();
-$result = $tokens->generate_token();
-	
-print "<br /><br /><br /><br />";
-
-$tokens->verify_token($result, $_SERVER['REMOTE_ADDR']);
+$page = new Page();
+$page->html_header();
 
 ?>
+<article class="entrance">
+    <div class="container">
+        <form id="login_form" action="lobby.php" method="post">
+            <h1>Login <a href="register.php"><span class="new-account">Create an account</span></a></h1>
 
+            <input name="username" placeholder="Username" autofocus required> <br>
+
+            <input name="password" type="password" placeholder="Password" required> <br>
+
+            <button name="sign-in" type="submit">Sign in</button>
+        </form>
+        <div id="message"></div>
+    </div>
+</article>
+<?php
+
+$page->html_footer();
+
+?>
