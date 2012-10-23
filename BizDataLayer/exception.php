@@ -16,7 +16,7 @@ function log_error($e, $sqlst, $params){
             fwrite($fh, "    Params: ".implode(",",$params)."\n");
         fwrite($fh, "    File: ".$e->getFile()."\n");
         fwrite($fh, "    Line: ".$e->getLine()."\n");
-        fwrite($fh, "    Trace: ".$e->getTraceAsString()."\n");
+        fwrite($fh, "    Trace: ".$e->getTraceAsString()."\n\n\n");
         fclose($fh);
 	} catch (Exception $e) {
 		echo 'error';

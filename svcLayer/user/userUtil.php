@@ -14,11 +14,16 @@ function loginUser($d,$ip,$token){
     $data = parseDataFromRequest($d);
     $loginResponse = login($data['username'],$data['password']);
 
+    $result['ip'] = $ip;
+    $result['data'] = $data;
+    $result['loginResponse'] = $loginResponse;
+
     if ($loginResponse){
         session_start();
-        $_SESSION['user_name']= $data['username'];
+        $_SESSION['user_name'] = $data['username'];
+        $_SESSION['email'] = $data['email'];
         set_player_status($data['username'],'1');
-        generate_cookie($data['username'],$ip, $data['email']);
+        generate_cookie($data['username'],$ip);
 
         $result['status'] = 'success';
         $result['message'] = 'You are now logged into the game';
@@ -26,7 +31,6 @@ function loginUser($d,$ip,$token){
         //tell them it didn't work
         $result['status'] = 'error';
         $result['message'] = 'There was an error with your credentials. Please try again!';
-
     }
 
     echo json_encode($result);
@@ -69,10 +73,11 @@ function registerUser($d,$ip,$token){
     //once they pass validation create the account
     if ($userCheck == 0 && $passCheck == true && $paramCheck == true) {
         session_start();
-        generate_account($cleanData['username'], $cleanData['email'], $cleanData['password']);
         $_SESSION['user_name']= $cleanData['username'];
+        $_SESSION['email'] = $cleanData['email'];
+        generate_account($cleanData['username'], $cleanData['email'], $cleanData['password']);
         set_player_status($cleanData['username'],'1');
-        generate_cookie($cleanData['username'],$ip, $cleanData['email']);
+        generate_cookie($cleanData['username'],$ip);
 
         $result['message'] = 'New Account successfully created';
         $result['status'] = 'success';

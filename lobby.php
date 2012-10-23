@@ -1,28 +1,20 @@
 <?php
-require_once("settings.php");
-
 //start the session
 session_start();
 
-new dBug($_COOKIE);
-new dBug($_SESSION);
-
-/*
 //if not logged in, re-direct to login.php
-if (empty($_SESSION['username']) ) {
+/*
+if ( empty($_SESSION['user_name']) && empty($_COOKIE['token']) ) {
     header("location: index.php");
 }
 */
+require_once("settings.php");
 
 $page = new Page();
-$page->html_header();
-
-
+$page->html_header(null,'Connect 4 - Lobby');
 ?>
+
 <section>
-
-
-
     <aside id="main-lobby-chat">
         <nav>Chat Room</nav>
         <div id="lobby-chat-box"></div>
@@ -31,11 +23,11 @@ $page->html_header();
         <input id="send-message" type="text">
         <button>Send</button>
     </aside>
-
 </section>
 
 <?php
 
-$page->html_footer();
+$js = array();
+$page->html_footer($js);
 
 ?>

@@ -15,9 +15,9 @@ function login($username, $password){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ss',$hash, $username);
             $stmt->execute();
-            $stmt->bind_result($password_matches);
+            $stmt->bind_result($pass);
             $stmt->fetch();
-            return $password_matches;
+            return $pass;
 
             $stmt->close();
             $mysqli->close();
@@ -26,7 +26,7 @@ function login($username, $password){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail';
+        echo 'fail - login';
     }
 }
 
@@ -51,9 +51,8 @@ function set_player_status($username, $active){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail';
+        echo 'fail - set_player_status';
     }
-
 }
 
 /**
@@ -81,9 +80,8 @@ function check_username($username){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail';
+        echo 'fail - check_username';
     }
-
 }
 
 /**
@@ -115,7 +113,7 @@ function generate_account($username, $email, $password){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail';
+        echo 'fail - generate_account';
     }
 }
 
