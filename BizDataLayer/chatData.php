@@ -24,5 +24,48 @@ function getChatData(){
     }
 }
 
+function getChatData($room = 0){
+    global $mysqli;
+    $sql="SELECT * FROM chat WHERE room = ?";
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+			$stmt->bind_param('d',$room);
+            //would bind here if need be
+            echo returnJson($stmt);
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail';
+    }
+}
+
+
+function sendChatData($id_user, $message, $room){
+    global $mysqli;
+    $sql = 'INSERT INTO chat (id_user, message, room) VALUES (?,?,?)';
+    $hash = hash('sha256', $password);
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('ssd',$id_user, $message, $room);
+            $stmt->execute();
+            $result = $stmt->affected_rows;
+            return $result;
+
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while inserting record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - send_chat_data';
+    }
+}
+
 
 ?>

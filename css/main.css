@@ -162,9 +162,11 @@ footer {
     height: 200px;
     width: 400px;
     overflow: auto;
-
 }
 
+.lobby-send-box {
+	display: inline-block;	
+}
 
 
 /* ==========================================================================
