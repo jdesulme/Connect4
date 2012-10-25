@@ -1,23 +1,16 @@
 <?php
-require_once("settings.php");
-
 //start the session
 session_start();
 
-new dBug($_COOKIE);
-new dBug($_SESSION);
+require_once("settings.php");
 
-/*
 //if not logged in, re-direct to login.php
-if (empty($_SESSION['username']) ) {
+if (empty($_SESSION['user_name']) && empty($_COOKIE['token'])) {
     header("location: index.php");
 }
-*/
 
 $page = new Page();
 $page->html_header(null,'Connect 4 - Game');
-
-
 ?>
 
 

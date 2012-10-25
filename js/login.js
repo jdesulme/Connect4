@@ -5,25 +5,24 @@
  * Time: 8:15 PM
  * To change this template use File | Settings | File Templates.
  */
-$(function() {
-    //handles the login submission
+$(document).ready(function() {    //handles the login submission
     $('#login_form').submit(function(e){
         var formData = $(e.target).serialize();
-        ajaxCall('post',{a:'user',method:'loginUser',data:formData},getLoginRegistrationCallback);
+        ajaxCall('post', {a:'user',method:'loginUser',data:formData}, getLoginRegistrationCallback);
         return false;
     });
 
     //handles the registration submission
     $('#register_form').submit(function(e){
         var formData = $(e.target).serialize();
-        ajaxCall('post',{a:'user',method:'registerUser',data:formData},getLoginRegistrationCallback);
+        ajaxCall('post', {a:'user',method:'registerUser',data:formData}, getLoginRegistrationCallback);
         return false;
     });
 
     //sends a request to gravatar.com asking for the user's image
     $('#email').on('change',function(e){
         var formData = e.target.value;
-        ajaxCall('post',{a:'user',method:'getAvatar',data:formData},loadProfileImage);
+        ajaxCall('post', {a:'user',method:'getAvatar',data:formData}, loadProfileImage);
     });
 
     $('button').button();
@@ -34,7 +33,7 @@ $(function() {
  * @param img
  */
 function loadProfileImage(img){
-    $(".gravatar-text")
+    $('.gravatar-text')
         .html('')
         .append(img);
 }

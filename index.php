@@ -15,7 +15,6 @@
                     <input name="password" type="password" placeholder="Password" required> <br>
 
                     <button name="sign-in" type="submit">Sign in</button>
-
                 </form>
 
                 <div id="message"></div>

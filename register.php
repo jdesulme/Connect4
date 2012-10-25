@@ -16,7 +16,7 @@
 
                     <input id="password" name="password" type="password" placeholder="Password" required> <br>
 
-                    <input name="password-confirm" type="password" placeholder="Confirm Password" required oninput="checkPasswordMatch(this)"> <br>
+                    <input name="password-confirm" type="password" placeholder="Confirm Password" oninput="checkPasswordMatch(this)" required> <br>
 
                     <button name="register-submit" type="submit">Create Account</button>
 

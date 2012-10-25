@@ -10,7 +10,7 @@ function login($username, $password){
 
     $sql = "SELECT (password = ?) AS password_matches FROM user WHERE username = ?";
     $hash = hash('sha256', $password);
-
+    echo $hash;
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ss',$hash, $username);
