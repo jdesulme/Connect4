@@ -5,7 +5,7 @@
     $page->html_header();
 ?>
 
-        <article class="entrance">
+        <section class="main-outside-container">
             <div class="container">
                 <form id="register_form" method="post">
                     <h1>Registration</h1>
@@ -26,6 +26,6 @@
 
                 <div id="message"></div>
             </div>
-        </article>
+        </section>
 
 <?php $page->html_footer(array('login'));  ?>

@@ -4,8 +4,10 @@ var KEY = {
 	};
 
 
+
+
 function getChat(){
-    ajaxCall('get', {a:'chat',method:'getChat'}, getChatCallback);
+    ajaxCall('POST', {a:'chat',method:'getChat'}, getChatCallback);
 
     var $chat = $('#lobby-chat-box');
     $chat.scrollTop($chat[0].scrollHeight);
@@ -26,11 +28,11 @@ function getChatCallback(users){
 }
 
 function sendChat(msg){
-	ajaxCall('get', {a:'chat',method:'setChat', data:msg}, setChatCallback);	
+	ajaxCall('POST', {a:'chat',method:'setChat', data:msg}, setChatCallback);
 }
 
 function setChatCallback(data){
-	console.dir(data);	
+	console.log(data);
 }
 
 

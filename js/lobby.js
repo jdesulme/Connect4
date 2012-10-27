@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var $chatMessageBox = $("#send-message");
 	
 	$chatMessageBox.on("keydown",function(e){
-		if (e.which == KEY.ENTER) {
+		if (e.which === KEY.ENTER) {
 			//send the user id as well 
 			sendChat($chatMessageBox.val());
 		}	
@@ -11,5 +11,6 @@ $(document).ready(function(){
 	
 	
 	getChat();
-	
+    getOnlineUsers();
+
 });

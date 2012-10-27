@@ -10,7 +10,7 @@ class Page {
      */
     function html_header($cssArray = '', $title='Connect 4'){
         $this->title = $title;
-        $this->css = (!empty($cssArray)) ? implode('\n', array_map("linkTag", $cssArray)) : '';
+        $this->css = (!empty($cssArray)) ? implode(' ', array_map("linkTag", $cssArray)) : '';
         $string = <<<END
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -38,7 +38,7 @@ END;
 
     function html_footer($jsArray = '', $footer='Connect 4 - Created & Designed by Jeanyhwh Desulme'){
         $this->footer = $footer;
-        $this->js = (!empty($jsArray)) ? implode('\n', array_map("scriptTag", $jsArray)) : '';
+        $this->js = (!empty($jsArray)) ? implode(' ', array_map("scriptTag", $jsArray)) : '';
         $string = <<<END
         <footer>$this->footer</footer>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
