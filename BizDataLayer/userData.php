@@ -5,7 +5,7 @@ require_once("../../dbInfoPS.inc");
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
-function login($username, $password){
+function getLoginData($username, $password){
     global $mysqli;
 
     $sql = "SELECT (password = ?) AS password_matches FROM user WHERE username = ?";
@@ -36,10 +36,10 @@ function login($username, $password){
  * @param bool $active sets the users status to active or inactive {0/1}
  * @throws Exception
  */
-function set_player_status($username, $active){
+function setPlayerStatusData($username, $active){
     global $mysqli;
 
-    $sql = "UPDATE user SET status = ?, last_login = NOW() WHERE username = ?";
+    $sql = "UPDATE user SET status = ? WHERE username = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ds',intval($active), $username);
@@ -61,7 +61,7 @@ function set_player_status($username, $active){
  * @return bool
  * @throws Exception
  */
-function check_username($username){
+function checkUsernameData($username){
     global $mysqli;
     $sql = "SELECT COUNT(1) AS user_matches FROM user WHERE username = ?";
 
@@ -93,7 +93,7 @@ function check_username($username){
  * @throws Exception
  * @return string
  */
-function generate_account($username, $email, $password){
+function generateAccountData($username, $email, $password){
     global $mysqli;
 
     $sql = 'INSERT INTO user (username, email, password) VALUES (?,?,?)';
@@ -115,6 +115,26 @@ function generate_account($username, $email, $password){
         log_error($e, $sql, null);
         echo 'fail - generate_account';
     }
+}
+
+function getUserData(){
+    global $mysqli;
+    $sql = "SELECT * FROM user ORDER BY status DESC";
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            echo returnJson($stmt);
+
+            $stmt->close();
+            $mysqli->close();
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - get_all_players';
+    }
+
 }
 
 ?>

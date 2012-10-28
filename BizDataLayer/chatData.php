@@ -5,7 +5,7 @@ require_once("../../dbInfoPS.inc");
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
-
+/*
 function getChatData(){
     global $mysqli;
     $sql="Select * from 546ArchChat";
@@ -23,6 +23,7 @@ function getChatData(){
         echo 'fail';
     }
 }
+*/
 
 function getChatData2($room = 0){
     global $mysqli;
@@ -39,7 +40,7 @@ function getChatData2($room = 0){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail';
+        echo 'fail - getChatData';
     }
 }
 

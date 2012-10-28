@@ -3,7 +3,7 @@
 session_start();
 
 //if not logged in, re-direct to login.php
-if ( empty($_SESSION['user_name']) && empty($_COOKIE['token']) ) {
+if ( empty($_SESSION['user_name']) || empty($_COOKIE['token']) ) {
     header("location: index.php");
 }
 
@@ -13,28 +13,37 @@ $page = new Page();
 $page->html_header(null,'Connect 4 - Lobby');
 ?>
 
-<section>
-    <aside id="main-lobby-chat">
-        <nav>Chat Room</nav>
-        <div id="lobby-chat-box"></div>
-        <div class="lobby-send-box">
-            <label for="send-message">Chat Message</label>
-            <input id="send-message" type="text">
-        </div
-    </aside>
-    <aside id="online-users">
-    	<nav></nav>
-        <div id="online-users-box"></div>
-    </aside>
-</section>
+    <header>
+        <p>Profile Pic</p>
+        <p>Username</p>
+        <button id="logout">Logout</button>
+    </header>
 
-<script type="text/javascript">
-	//var player="<?php //echo $_GET['player']?>";
-</script>
+    <section class="game-outside-container">
+
+            <aside id="online-users">
+                <nav>Online Users</nav>
+                <div id="online-users-box"></div>
+            </aside>
+
+            <aside id="main-lobby-chat">
+                <nav>Chat Room</nav>
+                <div id="lobby-chat-box"></div>
+                <div class="lobby-send-box">
+                    <label for="send-message">Chat Message</label>
+                    <input id="send-message" type="text">
+                </div>
+            </aside>
+
+    </section>
+
+    <script type="text/javascript">
+        var player="<?php ?>";
+    </script>
 
 <?php
 
-$js = array('chat','lobby');
+$js = array('chat','challenge','lobby');
 $page->html_footer($js);
 
 ?>

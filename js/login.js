@@ -8,25 +8,24 @@
 $(document).ready(function() {    //handles the login submission
     $('#login_form').submit(function(e){
         var formData = $(e.target).serialize();
-        ajaxCall('post', {a:'user',method:'loginUser',data:formData}, getLoginRegistrationCallback);
+        ajaxCall('POST', {a:'user',method:'loginUser',data:formData}, getLoginRegistrationCallback);
         return false;
     });
 
     //handles the registration submission
     $('#register_form').submit(function(e){
         var formData = $(e.target).serialize();
-        ajaxCall('post', {a:'user',method:'registerUser',data:formData}, getLoginRegistrationCallback);
+        ajaxCall('POST', {a:'user',method:'registerUser',data:formData}, getLoginRegistrationCallback);
         return false;
     });
 
     //sends a request to gravatar.com asking for the user's image
     $('#email').on('change',function(e){
         var formData = e.target.value;
-        ajaxCall('post', {a:'user',method:'getAvatar',data:formData}, loadProfileImage);
+        ajaxCall('POST', {a:'user',method:'getAvatar',data:formData}, loadProfileImage);
     });
-
-    $('button').button();
 });
+
 
 /**
  * Loads a preview image
@@ -75,23 +74,4 @@ function checkPasswordMatch(input){
     } else {
         input.setCustomValidity("The two passwords must match!");
     }
-}
-
-/**
- * A generic ajax function for SOA
- *
- * @param getPost http method get or post
- * @param d the data being passed in
- * @param callback the data being returned
- */
-function ajaxCall(getPost, d, callback){
-    $.ajax({
-        type:getPost,
-        async:true,
-        cache:false,
-        data:d,
-        url:"./mid.php",
-        dataType:'json',
-        success:callback
-    });
 }

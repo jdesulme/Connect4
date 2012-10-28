@@ -1,6 +1,12 @@
-//SAMPLE!!!!!
 $(document).ready(function(){
-    //getChat();
+    $('button').button();
+
+    $('#logout').on('click', function(){
+
+        //ajaxCall('post', {a:'user',method:'logout',data:username}, null);
+        document.location = 'logout.php';
+    });
+
 });
 
 

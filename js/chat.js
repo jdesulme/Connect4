@@ -5,7 +5,7 @@ var KEY = {
 
 
 function getChat(){
-    ajaxCall('get', {a:'chat',method:'getChat'}, getChatCallback);
+    ajaxCall('POST', {a:'chat',method:'getChat'}, getChatCallback);
 
     var $chat = $('#lobby-chat-box');
     $chat.scrollTop($chat[0].scrollHeight);
@@ -36,7 +36,7 @@ function sendChat(player, txt, roomNum){
 }
 
 function setChatCallback(data){
-	console.dir(data);	
+	console.log(data);
 }
 
 
