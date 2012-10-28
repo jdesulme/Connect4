@@ -4,8 +4,10 @@ $(document).ready(function(){
 	
 	$chatMessageBox.on("keydown",function(e){
 		if (e.which == KEY.ENTER) {
-			//send the user id as well 
-			sendChat($chatMessageBox.val());
+			//send the user id as well
+
+            //sendChat(player, txt, roomNum)
+			sendChat(1,$chatMessageBox.val(),0);
 		}	
 	});
 	

@@ -1,0 +1,22 @@
+Exception caught @01:03:43 10.23.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ?, last_login = NOW() WHERE username = ?
+    File: /Volumes/Students/students/111/jxd1827/Sites/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Volumes/Students/students/111/jxd1827/Sites/Connect4/svcLayer/user/userUtil.php(25): set_player_status('jxd1827', '1')
+#1 [internal function]: loginUser('username=jxd182...', '129.21.118.201', NULL)
+#2 /Volumes/Students/students/111/jxd1827/Sites/Connect4/mid.php(14): call_user_func('loginUser', 'username=jxd182...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @01:05:00 10.23.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ?, last_login = NOW() WHERE username = ?
+    File: /Volumes/Students/students/111/jxd1827/Sites/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Volumes/Students/students/111/jxd1827/Sites/Connect4/svcLayer/user/userUtil.php(24): set_player_status('jxd1827', '1')
+#1 [internal function]: loginUser('username=jxd182...', '129.21.118.201', NULL)
+#2 /Volumes/Students/students/111/jxd1827/Sites/Connect4/mid.php(14): call_user_func('loginUser', 'username=jxd182...', '129.21.118.201', NULL)
+#3 {main}
+
+

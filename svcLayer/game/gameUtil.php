@@ -11,7 +11,7 @@
 		$userId=$h[1];
 		
 		//go to game layer and run this function
-		require_once('BizDataLayer/checkTurn.php');
+		require_once('./BizDataLayer/checkTurn.php');
 
 			echo(checkTurnData($gameId,$userId));
 		

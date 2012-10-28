@@ -11,10 +11,10 @@
 		$data = $_REQUEST['data'];
 
         //captures local host
-        $ip = ($_SERVER['REMOTE_ADDR'] == '::1') ? '129.21.118.201': $_SERVER['REMOTE_ADDR'];
+       // $ip = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ? '129.21.118.201': $_SERVER['REMOTE_ADDR'];
 
 		//make the call to the function $serviceMethod
-		$result = @call_user_func($serviceMethod, $data, $ip, $_COOKIE['token']);
+		$result = @call_user_func($serviceMethod, $data, $_SERVER['REMOTE_ADDR'], $_COOKIE['token']);
 		
 		//might not be sending anything out
 		if ($result){

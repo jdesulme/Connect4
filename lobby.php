@@ -29,7 +29,7 @@ $page->html_header(null,'Connect 4 - Lobby');
 </section>
 
 <script type="text/javascript">
-	var player="<?php echo $_GET['player']?>";
+	//var player="<?php //echo $_GET['player']?>";
 </script>
 
 <?php

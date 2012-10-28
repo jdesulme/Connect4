@@ -24,7 +24,7 @@ function getChatData(){
     }
 }
 
-function getChatData($room = 0){
+function getChatData2($room = 0){
     global $mysqli;
     $sql="SELECT * FROM chat WHERE room = ?";
     try {
@@ -47,7 +47,6 @@ function getChatData($room = 0){
 function sendChatData($id_user, $message, $room){
     global $mysqli;
     $sql = 'INSERT INTO chat (id_user, message, room) VALUES (?,?,?)';
-    $hash = hash('sha256', $password);
 
     try {
         if ($stmt = $mysqli->prepare($sql)){

@@ -25,8 +25,14 @@ function getChatCallback(users){
     setTimeout(getChat,1500);
 }
 
-function sendChat(msg){
-	ajaxCall('get', {a:'chat',method:'setChat', data:msg}, setChatCallback);	
+function sendChat(player, txt, roomNum){
+    var chatMsg = {
+        id_user : player,
+        message : txt,
+        room    : roomNum
+    };
+
+	ajaxCall('get', {a:'chat',method:'setChat', data:chatMsg}, setChatCallback);
 }
 
 function setChatCallback(data){

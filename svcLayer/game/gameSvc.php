@@ -3,8 +3,8 @@
 //Check if they should be here!
 //if so - prepare data and make call to data/biz layer
 
-//error_reporting (E_ALL);
-require "./bizDataLayer/gameBizData.php";
+error_reporting(E_ALL);
+require "./BizDataLayer/gameBizData.php";
 //Why include the database stuff here?  (not doing any db stuff in the service layer!)
 //because it forces all to go through the service layer in order to get to the bizLayer
 //if someone tries to access the bizLayer on it's own the code will fail since there isn't a connection!
