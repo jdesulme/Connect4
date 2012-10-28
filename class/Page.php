@@ -17,7 +17,6 @@ class Page {
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<html>
 	<head>
 	    <title>$this->title</title>
         <meta charset="utf-8">

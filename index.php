@@ -21,4 +21,9 @@
             </div>
         </section>
 
-<?php $page->html_footer(array('login')); ?>
+<?php
+
+$js = array('login');
+$page->html_footer($js);
+
+?>

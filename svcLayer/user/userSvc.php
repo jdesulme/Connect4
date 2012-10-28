@@ -11,20 +11,28 @@ require_once('./svcLayer/security.php');
  */
 function loginUser($d,$ip,$token){
     $result = array();
-    $data = parseDataFromRequest($d);
-    $loginResponse = getLoginData($data['username'],$data['password']);
-
-    $result['ip'] = $ip;
-    $result['data'] = $data;
-    $result['loginResponse'] = $loginResponse;
+    $loginData = parseDataFromRequest($d);
+    $loginResponse = checkLoginData($loginData['username'],$loginData['password']);
 
     if ($loginResponse){
         session_start();
-        $_SESSION['user_name'] = $data['username'];
-        $_SESSION['email'] = $data['email'];
-        setPlayerStatusData($data['username'],'1');
-        generate_cookie($data['username'],$ip);
+        //retrieve user data
+        /*
+        $userData = json_decode(getUserData($loginData['username']));
 
+        //sets the session variables
+        $_SESSION['username'] = $userData['username'];
+        $_SESSION['userID'] = $userData['id_user'];
+        $_SESSION['email'] = $userData['email'];
+        $_SESSION['win'] = $userData['win'];
+        $_SESSION['loss'] = $userData['loss'];
+
+        //sets the players status to active and creates the token
+        setPlayerStatusData('1', $userData['username']);
+        generate_cookie($userData['username'],$ip);
+        */
+
+        //combine everything
         $result['status'] = 'success';
         $result['message'] = 'You are now logged into the game';
     } else {
@@ -76,7 +84,7 @@ function registerUser($d,$ip,$token){
         $_SESSION['user_name']= $cleanData['username'];
         $_SESSION['email'] = $cleanData['email'];
         generateAccountData($cleanData['username'], $cleanData['email'], $cleanData['password']);
-        setPlayerStatusData($cleanData['username'],'1');
+        setPlayerStatusData('1', $cleanData['username']);
         generate_cookie($cleanData['username'],$ip);
 
         $result['message'] = 'New Account successfully created';

@@ -25,16 +25,16 @@ function getChatData(){
 }
 */
 
-function getChatData2($room = 0){
+function getChatData($room = 0){
     global $mysqli;
     $sql="SELECT * FROM chat WHERE room = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
 			$stmt->bind_param('d',$room);
-            //would bind here if need be
-            echo returnJson($stmt);
+            $data = returnJson($stmt);
             $stmt->close();
             $mysqli->close();
+            return $data;
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
@@ -53,11 +53,10 @@ function sendChatData($id_user, $message, $room){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ssd',$id_user, $message, $room);
             $stmt->execute();
-            $result = $stmt->affected_rows;
-            return $result;
-
+            $data = $stmt->affected_rows;
             $stmt->close();
             $mysqli->close();
+            return $data;
         } else {
             throw new Exception("An error occurred while inserting record data");
         }

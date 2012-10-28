@@ -20,3 +20,421 @@ Exception caught @01:05:00 10.23.12
 #3 {main}
 
 
+Exception caught @11:32:11 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login WHERE username = ? FROM user ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 139
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(20): getUserData('admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#3 {main}
+
+
+Exception caught @11:32:12 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login WHERE username = ? FROM user ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 139
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(20): getUserData('admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#3 {main}
+
+
+Exception caught @11:33:37 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(24): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '46b5762aae6bb87...')
+#3 {main}
+
+
+Exception caught @11:37:37 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(26): setPlayerStatusData(NULL, '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '8baba1fdc8c12bf...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '8baba1fdc8c12bf...')
+#3 {main}
+
+
+Exception caught @11:38:20 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData(NULL, '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '692841eb04bc6e4...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '692841eb04bc6e4...')
+#3 {main}
+
+
+Exception caught @11:40:48 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(26): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', 'b320981125930be...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', 'b320981125930be...')
+#3 {main}
+
+
+Exception caught @11:46:24 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @11:46:27 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '3c50d9829f58c9a...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '3c50d9829f58c9a...')
+#3 {main}
+
+
+Exception caught @11:46:27 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '98b08d13004dce8...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '98b08d13004dce8...')
+#3 {main}
+
+
+Exception caught @11:46:28 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '98b08d13004dce8...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '98b08d13004dce8...')
+#3 {main}
+
+
+Exception caught @11:46:28 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '827da0d9168cea9...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '827da0d9168cea9...')
+#3 {main}
+
+
+Exception caught @11:46:42 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '827da0d9168cea9...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '827da0d9168cea9...')
+#3 {main}
+
+
+Exception caught @11:47:40 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', 'f1e29c94b5d4625...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', 'f1e29c94b5d4625...')
+#3 {main}
+
+
+Exception caught @11:51:15 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '3a3232ca897f115...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '3a3232ca897f115...')
+#3 {main}
+
+
+Exception caught @11:51:21 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(27): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '8b6e63d6cdc6dde...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '8b6e63d6cdc6dde...')
+#3 {main}
+
+
+Exception caught @11:55:33 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(25): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '38586b2e36471dd...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '38586b2e36471dd...')
+#3 {main}
+
+
+Exception caught @11:55:59 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(25): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '44b6cd4d4810ef2...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '44b6cd4d4810ef2...')
+#3 {main}
+
+
+Exception caught @11:56:09 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(25): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '19fc72d2d86252c...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '19fc72d2d86252c...')
+#3 {main}
+
+
+Exception caught @11:56:10 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 50
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(25): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '952ed46cf143db3...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '952ed46cf143db3...')
+#3 {main}
+
+
+Exception caught @12:25:42 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(22): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @12:25:52 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(22): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', 'b6f50dc9e8aa396...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', 'b6f50dc9e8aa396...')
+#3 {main}
+
+
+Exception caught @12:25:55 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(22): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '34bcbd57383b9de...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '34bcbd57383b9de...')
+#3 {main}
+
+
+Exception caught @12:26:23 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(22): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '8d405426f46d399...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '8d405426f46d399...')
+#3 {main}
+
+
+Exception caught @12:26:24 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(22): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '013e2162b35f81e...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '013e2162b35f81e...')
+#3 {main}
+
+
+Exception caught @12:28:39 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', 'e3ac381d723a012...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', 'e3ac381d723a012...')
+#3 {main}
+
+
+Exception caught @12:30:07 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '14422a826150ed5...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '14422a826150ed5...')
+#3 {main}
+
+
+Exception caught @12:30:42 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '0af055ea0e2c684...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '0af055ea0e2c684...')
+#3 {main}
+
+
+Exception caught @12:34:36 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '42aef7add960500...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '42aef7add960500...')
+#3 {main}
+
+
+Exception caught @12:34:36 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('admin', '1')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '42aef7add960500...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '42aef7add960500...')
+#3 {main}
+
+
+Exception caught @12:36:19 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('1', 'admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '42aef7add960500...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '42aef7add960500...')
+#3 {main}
+
+
+Exception caught @12:36:19 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(23): setPlayerStatusData('1', 'admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '42aef7add960500...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '42aef7add960500...')
+#3 {main}
+
+
+Exception caught @12:41:40 10.28.12
+    Message: An error occurred while fetching record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user WHERE username = ? ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 139
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(19): getUserData('admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', '3f5fe216bef33b4...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', '3f5fe216bef33b4...')
+#3 {main}
+
+
+Exception caught @12:45:54 10.28.12
+    Message: An error occurred while fetching user record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user WHERE username = ? ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 138
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(19): getUserData('admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @12:47:07 10.28.12
+    Message: An error occurred while fetching user record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user WHERE username = ? ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 138
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(19): getUserData('reggie')
+#1 [internal function]: loginUser('username=reggie...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=reggie...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @12:59:11 10.28.12
+    Message: An error occurred while fetching user record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user WHERE username = ? ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 138
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(19): getUserData('reggie')
+#1 [internal function]: loginUser('username=reggie...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=reggie...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @12:59:57 10.28.12
+    Message: An error occurred while fetching user record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 138
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(20): getUserData()
+#1 [internal function]: loginUser('username=reggie...', '129.21.118.201', '342cadbea8801b5...')
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=reggie...', '129.21.118.201', '342cadbea8801b5...')
+#3 {main}
+
+
+Exception caught @14:00:24 10.28.12
+    Message: An error occurred while fetching user record data
+    SQL: SELECT id_user, username, email, win, loss, status, last_login FROM user WHERE username = ? ORDER BY status DESC
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 138
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(20): getUserData('admin')
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', NULL)
+#3 {main}
+
+
+Exception caught @14:00:24 10.28.12
+    Message: An error occurred while setting player status
+    SQL: UPDATE user SET status = ? WHERE username = ?
+    File: /Users/jdesulme/Documents/Workspace/Connect4/BizDataLayer/userData.php
+    Line: 49
+    Trace: #0 /Users/jdesulme/Documents/Workspace/Connect4/svcLayer/user/userSvc.php(30): setPlayerStatusData('1', NULL)
+#1 [internal function]: loginUser('username=admin&...', '129.21.118.201', NULL)
+#2 /Users/jdesulme/Documents/Workspace/Connect4/mid.php(17): call_user_func('loginUser', 'username=admin&...', '129.21.118.201', NULL)
+#3 {main}
+
+

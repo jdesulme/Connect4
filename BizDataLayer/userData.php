@@ -5,28 +5,27 @@ require_once("../../dbInfoPS.inc");
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
-function getLoginData($username, $password){
+function checkLoginData($username, $password){
     global $mysqli;
 
     $sql = "SELECT (password = ?) AS password_matches FROM user WHERE username = ?";
     $hash = hash('sha256', $password);
-    echo $hash;
+
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ss',$hash, $username);
             $stmt->execute();
             $stmt->bind_result($pass);
             $stmt->fetch();
-            return $pass;
-
             $stmt->close();
             $mysqli->close();
+            return $pass;
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - login';
+        echo 'fail - checkLoginData';
     }
 }
 
@@ -36,23 +35,24 @@ function getLoginData($username, $password){
  * @param bool $active sets the users status to active or inactive {0/1}
  * @throws Exception
  */
-function setPlayerStatusData($username, $active){
+function setPlayerStatusData($active, $username){
     global $mysqli;
 
     $sql = "UPDATE user SET status = ? WHERE username = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ds',intval($active), $username);
+            $stmt->bind_param('is', intval($active), $username);
             $stmt->execute();
             $stmt->close();
-            $mysqli->close();
+
         } else {
-            throw new Exception("An error occurred while fetching record data");
+            throw new Exception("An error occurred while setting player status");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - set_player_status';
+        echo 'fail - setPlayerStatusData';
     }
+    $mysqli->close();
 }
 
 /**
@@ -69,18 +69,18 @@ function checkUsernameData($username){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('s',$username);
             $stmt->execute();
-            $stmt->bind_result($username_matches);
+            $stmt->bind_result($matches);
             $stmt->fetch();
-            return $username_matches;
-
             $stmt->close();
             $mysqli->close();
+            return $matches;
+
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - check_username';
+        echo 'fail - checkUsernameData';
     }
 }
 
@@ -103,36 +103,43 @@ function generateAccountData($username, $email, $password){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('sss',$username, $email, $hash);
             $stmt->execute();
-            $result = $stmt->affected_rows;
-            return $result;
-
+            $data = $stmt->affected_rows;
             $stmt->close();
             $mysqli->close();
+            return $data;
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - generate_account';
+        echo 'fail - generateAccountData';
     }
 }
 
-function getUserData(){
+function getUserData($username = null){
     global $mysqli;
-    $sql = "SELECT * FROM user ORDER BY status DESC";
+
+    $sql = "SELECT id_user, username, email, win, loss, status, last_login FROM user ";
+    if ( isset($username) ){
+        $sql .= "WHERE username = ? ";
+    }
+    $sql .= "ORDER BY status DESC";
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
+            if ( isset($username) ){
+                $stmt->bind_param('s',$username);
+            }
             echo returnJson($stmt);
 
             $stmt->close();
             $mysqli->close();
         } else {
-            throw new Exception("An error occurred while fetching record data");
+            throw new Exception("An error occurred while fetching user record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - get_all_players';
+        echo 'fail - getUserData';
     }
 
 }

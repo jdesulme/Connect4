@@ -7,13 +7,17 @@
  */
 
 function getOnlineUsers(){
-    ajaxCall('GET', {a:'user',method:'getAllUsers'}, getOnlineUsersCallback);
-
-
+    ajaxCall('POST', {a:'user',method:'getAllUsers'}, getOnlineUsersCallback);
 }
 
-function getOnlineUsersCallback(data){
-    console.log(data);
-    //#online-users-box
+function getOnlineUsersCallback(users){
+
+    var h='';
+    for(var i=0, l=users.length; i<l; i++){
+        h += users[i].username+ ' '+users[i].id_user+'  '+users[i].status + '<br/>';
+    }
+
+    $('#online-users-box').html(h);
+
     setTimeout(getOnlineUsers,1500);
 }

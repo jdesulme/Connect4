@@ -42,6 +42,8 @@ function loadProfileImage(img){
  * @param msg
  */
 function getLoginRegistrationCallback(msg){
+    console.log(msg);
+
     var $messageBox = $('#message');
 
     $messageBox

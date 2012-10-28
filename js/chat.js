@@ -12,13 +12,19 @@ function getChat(){
 }
 
 function getChatCallback(users){
-    var names = users.map(function(u){ return u.name; });
-    var strNames = "Users " + users.map(prop("name")).join(", ");
-    //console.log(strNames);
+   // var names = users.map(function(u){ return u.name; });
+    //var strNames = "Users " + users.map(prop("name")).join(", ");
+
+   var names = users.map(prop("name"));
+   // var users = data[0];
+
+
+    console.dir(users);
+
 
     var h='';
     for(var i=0, l=users.length; i<l; i++){
-        h+=users[i].name+' says: '+users[i].message+'<span style="color:gray"> at the time '+users[i].timeStamp+'</span><br/>';
+        h+=users[i].name+' says: '+users[i].message+'<span style="color:gray"> at the time '+users[i].time_stamp+'</span><br/>';
     }
 
     $('#lobby-chat-box').html(h);
@@ -32,7 +38,7 @@ function sendChat(player, txt, roomNum){
         room    : roomNum
     };
 
-	ajaxCall('get', {a:'chat',method:'setChat', data:chatMsg}, setChatCallback);
+	ajaxCall('POST', {a:'chat',method:'setChat', data:chatMsg}, setChatCallback);
 }
 
 function setChatCallback(data){

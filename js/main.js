@@ -2,7 +2,6 @@ $(document).ready(function(){
     $('button').button();
 
     $('#logout').on('click', function(){
-
         //ajaxCall('post', {a:'user',method:'logout',data:username}, null);
         document.location = 'logout.php';
     });
@@ -30,5 +29,10 @@ function ajaxCall(getPost, d, callback){
     });
 }
 
+
+$('.log').ajaxComplete(function(e, xhr, settings) {
+    //console.log(xhr.responseText);
+    $(this).text('Triggered ajaxComplete handler.');
+});
 
 //http://www.jblotus.com/2011/05/24/keeping-your-handlebars-js-templates-organized/

@@ -3,11 +3,11 @@ $(document).ready(function(){
 	var $chatMessageBox = $("#send-message");
 	
 	$chatMessageBox.on("keydown",function(e){
-		if (e.which == KEY.ENTER) {
+		if (e.which === KEY.ENTER) {
 			//send the user id as well
 
             //sendChat(player, txt, roomNum)
-			sendChat(1,$chatMessageBox.val(),0);
+			sendChat(12,$chatMessageBox.val(),0);
 		}	
 	});
 	

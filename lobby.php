@@ -2,10 +2,12 @@
 //start the session
 session_start();
 
-//if not logged in, re-direct to login.php
-if ( empty($_SESSION['user_name']) || empty($_COOKIE['token']) ) {
+//if not logged in, re-direct to login
+/*
+if ( !isset($_SESSION['username']) || !isset($_COOKIE['token']) ) {
     header("location: index.php");
 }
+*/
 
 require_once("settings.php");
 
@@ -37,11 +39,17 @@ $page->html_header(null,'Connect 4 - Lobby');
 
     </section>
 
+    <div class="log"></div>
+
     <script type="text/javascript">
         var player="<?php ?>";
     </script>
 
+
 <?php
+
+new dBug($_SESSION);
+new dBug($_COOKIE);
 
 $js = array('chat','challenge','lobby');
 $page->html_footer($js);

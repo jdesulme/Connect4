@@ -9,12 +9,24 @@
 session_start();
 
 //if not logged in, re-direct to login.php
-if (empty($_SESSION['user_name']) && empty($_COOKIE['token'])) {
+if (empty($_SESSION['username']) && empty($_COOKIE['token'])) {
     header("location: index.php");
 }
 
 session_destroy();
+setcookie("token", "", time()-3600);
 
+if (isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+        $parts = explode('=', $cookie);
+        $name = trim($parts[0]);
+        setcookie($name, '', time()-1000);
+        setcookie($name, '', time()-1000, '/');
+    }
+}
+
+unset($_COOKIE['token']);
 
 require_once("settings.php");
 $page = new Page();

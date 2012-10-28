@@ -5,7 +5,7 @@ session_start();
 require_once("settings.php");
 
 //if not logged in, re-direct to login page
-if ( empty($_SESSION['user_name']) || empty($_COOKIE['token']) ) {
+if ( empty($_SESSION['username']) || empty($_COOKIE['token']) ) {
     header("location: index.php");
 }
 
