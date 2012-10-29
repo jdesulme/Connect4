@@ -95,7 +95,6 @@ function checkUsernameData($username){
  */
 function generateAccountData($username, $email, $password){
     global $mysqli;
-
     $sql = 'INSERT INTO user (username, email, password) VALUES (?,?,?)';
     $hash = hash('sha256', $password);
 
@@ -116,18 +115,21 @@ function generateAccountData($username, $email, $password){
     }
 }
 
-function getUserData($username = null){
+function getUserData($username) {
     global $mysqli;
 
     $sql = "SELECT id_user, username, email, win, loss, status, last_login FROM user ";
-    if ( isset($username) ){
+    if (isset($username)){
         $sql .= "WHERE username = ? ";
     }
     $sql .= "ORDER BY status DESC";
 
+    echo $username;
+    echo $sql;
+
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            if ( isset($username) ){
+            if (isset($username)){
                 $stmt->bind_param('s',$username);
             }
             echo returnJson($stmt);

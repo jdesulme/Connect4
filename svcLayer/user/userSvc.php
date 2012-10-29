@@ -17,7 +17,10 @@ function loginUser($d,$ip,$token){
     if ($loginResponse){
         session_start();
         //retrieve user data
-        /*
+
+        var_dump($loginData['username']);
+        var_dump(getUserData($loginData['username']));
+
         $userData = json_decode(getUserData($loginData['username']));
 
         //sets the session variables
@@ -30,7 +33,6 @@ function loginUser($d,$ip,$token){
         //sets the players status to active and creates the token
         setPlayerStatusData('1', $userData['username']);
         generate_cookie($userData['username'],$ip);
-        */
 
         //combine everything
         $result['status'] = 'success';
@@ -117,7 +119,10 @@ function getAvatar($email, $ip, $token) {
 
 
 function logout($username){
-    setPlayerStatusData($username,'1');
-    setcookie('token', '', time() - 1*24*60*60);
+    if (isset($username)){
+        setPlayerStatusData('-1',$username);
+    }
+    setcookie("token", "", time()-3600);
+    unset($_COOKIE['token']);
 }
 
