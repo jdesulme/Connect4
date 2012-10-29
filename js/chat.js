@@ -6,9 +6,7 @@ var KEY = {
 
 function getChat(){
     ajaxCall('POST', {a:'chat',method:'getChat'}, getChatCallback);
-
-    var $chat = $('#lobby-chat-box');
-    $chat.scrollTop($chat[0].scrollHeight);
+    scrollChatBox();
 }
 
 function getChatCallback(users){
@@ -55,3 +53,8 @@ function prop(name){
     };
 }
 
+
+function scrollChatBox() {
+    var $chat = $('#lobby-chat-box');
+    $chat.scrollTop($chat[0].scrollHeight - $chat[0].clientHeight);
+}

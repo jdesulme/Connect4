@@ -17,6 +17,15 @@ new dBug($_SESSION);
 
 ?>
 
+    <header>
+        <nav>
+            <p>Connect 4</p>
+            <p>Profile Pic</p>
+            <p>Username</p>
+            <p><a id="logout">Logout</a></p>
+        </nav>
+    </header>
+
     <section class="game-outside-container">
 
 

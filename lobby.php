@@ -16,30 +16,23 @@ $page->html_header(null,'Connect 4 - Lobby');
 ?>
 
     <header>
-        <p>Profile Pic</p>
-        <p>Username</p>
-        <button id="logout">Logout</button>
+        <nav>
+            <p>Connect 4</p>
+            <p>Profile Pic</p>
+            <p>Username</p>
+            <p><a id="logout">Logout</a></p>
+        </nav>
     </header>
 
     <section class="game-outside-container">
-
-            <aside id="online-users">
-                <nav>Online Users</nav>
-                <div id="online-users-box"></div>
-            </aside>
-
-            <aside id="main-lobby-chat">
-                <nav>Chat Room</nav>
-                <div id="lobby-chat-box"></div>
-                <div class="lobby-send-box">
-                    <label for="send-message">Chat Message</label>
-                    <input id="send-message" type="text">
-                </div>
-            </aside>
-
+        <ul id="lobby-chat-box"></ul>
+        <ul id="online-users-box"></ul>
+        <div id="chat-entry">
+            <input type="text" id="send-message" maxlength="140" />
+        </div>
     </section>
 
-    <div class="log"></div>
+    <div class="line"></div>
 
     <script type="text/javascript">
         var player="<?php ?>";
@@ -48,10 +41,11 @@ $page->html_header(null,'Connect 4 - Lobby');
 
 <?php
 
-new dBug($_SESSION);
-new dBug($_COOKIE);
 
 $js = array('chat','challenge','lobby');
 $page->html_footer($js);
+
+new dBug($_SESSION);
+new dBug($_COOKIE);
 
 ?>
