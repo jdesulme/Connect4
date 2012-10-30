@@ -15,26 +15,29 @@ function loginUser($d,$ip,$token){
     $loginResponse = checkLoginData($loginData['username'],$loginData['password']);
 
     if ($loginResponse){
+        session_name("Connect 4 - Jean");
         session_start();
-        //retrieve user data
 
-        var_dump($loginData['username']);
-        var_dump(getUserData($loginData['username']));
-
+        /*
+        //decodes the users's information
         $userData = json_decode(getUserData($loginData['username']));
 
         //sets the session variables
         $_SESSION['username'] = $userData['username'];
-        $_SESSION['userID'] = $userData['id_user'];
+        $_SESSION['id_user'] = $userData['id_user'];
         $_SESSION['email'] = $userData['email'];
         $_SESSION['win'] = $userData['win'];
         $_SESSION['loss'] = $userData['loss'];
+        $_SESSION['last_login'] = $userData['last_login'];
+        $_SESSION['auth'] = true;
+        */
 
         //sets the players status to active and creates the token
-        setPlayerStatusData('1', $userData['username']);
-        generate_cookie($userData['username'],$ip);
+        setPlayerStatusData('1', $loginData['username']);
+        generate_cookie($loginData['username'],$ip);
 
         //combine everything
+        $result['username'] = $loginData['username'];
         $result['status'] = 'success';
         $result['message'] = 'You are now logged into the game';
     } else {
@@ -82,13 +85,18 @@ function registerUser($d,$ip,$token){
 
     //once they pass validation create the account
     if ($userCheck == 0 && $passCheck == true && $paramCheck == true) {
+        session_name("Connect 4 - Jean");
         session_start();
+
+        $_SESSION['auth'] = true;
         $_SESSION['user_name']= $cleanData['username'];
         $_SESSION['email'] = $cleanData['email'];
+
         generateAccountData($cleanData['username'], $cleanData['email'], $cleanData['password']);
         setPlayerStatusData('1', $cleanData['username']);
         generate_cookie($cleanData['username'],$ip);
 
+        $result['username'] = $cleanData['username'];
         $result['message'] = 'New Account successfully created';
         $result['status'] = 'success';
     }
@@ -106,6 +114,7 @@ function getAllUsers($d,$ip,$token){
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);
+        logout();
     }
 }
 
@@ -116,12 +125,11 @@ function getAvatar($email, $ip, $token) {
 }
 
 
-
-
-function logout($username){
+function logout($username = null){
     if (isset($username)){
         setPlayerStatusData('-1',$username);
     }
+
     setcookie("token", "", time()-3600);
     unset($_COOKIE['token']);
 }

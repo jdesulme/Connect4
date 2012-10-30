@@ -27,7 +27,7 @@ function getChatData(){
 
 function getChatData($room = 0){
     global $mysqli;
-    $sql="SELECT * FROM chat WHERE room = ?";
+    $sql="SELECT username, message, email, time_stamp FROM chat c JOIN user u USING(id_user) WHERE c.room = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
 			$stmt->bind_param('d',$room);

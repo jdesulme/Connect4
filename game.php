@@ -9,8 +9,7 @@ if ( empty($_SESSION['username']) || empty($_COOKIE['token']) ) {
     header("location: index.php");
 }
 
-$page = new Page();
-$page->html_header(null,'Connect 4 - Game');
+Page::html_header(null,'Connect 4 - Game');
 
 new dBug($_COOKIE);
 new dBug($_SESSION);
@@ -34,6 +33,6 @@ new dBug($_SESSION);
 <?php
 
 
-$page->html_footer();
+Page::html_footer();
 
 ?>

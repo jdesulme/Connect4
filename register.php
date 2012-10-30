@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once("settings.php");
-    $page = new Page();
-    $page->html_header();
+
+    Page::html_header();
 ?>
 
         <section class="main-outside-container">
@@ -28,4 +28,4 @@
             </div>
         </section>
 
-<?php $page->html_footer(array('login'));  ?>
+<?php Page::html_footer(array('login'));  ?>

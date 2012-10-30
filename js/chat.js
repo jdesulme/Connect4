@@ -1,4 +1,5 @@
 ///////////////chat//////////////
+var chatBox = $('#lobby-chat-box');
 var KEY = {
 		ENTER : 13
 	};
@@ -6,26 +7,17 @@ var KEY = {
 
 function getChat(){
     ajaxCall('POST', {a:'chat',method:'getChat'}, getChatCallback);
-    scrollChatBox();
 }
 
 function getChatCallback(users){
-   // var names = users.map(function(u){ return u.name; });
-    //var strNames = "Users " + users.map(prop("name")).join(", ");
+    var tmp = '';
 
-   var names = users.map(prop("name"));
-   // var users = data[0];
+    $.each(users, function(i,itm){
+        tmp += '<li>' + itm.username + ': ' + itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
+    });
 
-
-    console.dir(users);
-
-
-    var h='';
-    for(var i=0, l=users.length; i<l; i++){
-        h+=users[i].name+' says: '+users[i].message+'<span style="color:gray"> at the time '+users[i].time_stamp+'</span><br/>';
-    }
-
-    $('#lobby-chat-box').html(h);
+    chatBox.html('').append(tmp);
+    scrollChatBox();
     setTimeout(getChat,1500);
 }
 
@@ -36,6 +28,7 @@ function sendChat(player, txt, roomNum){
         room    : roomNum
     };
 
+    console.log(JSON.stringify(chatMsg));
 	ajaxCall('POST', {a:'chat',method:'setChat', data:chatMsg}, setChatCallback);
 }
 
@@ -55,6 +48,6 @@ function prop(name){
 
 
 function scrollChatBox() {
-    var $chat = $('#lobby-chat-box');
-    $chat.scrollTop($chat[0].scrollHeight - $chat[0].clientHeight);
+    chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
 }
+

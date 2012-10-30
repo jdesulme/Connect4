@@ -1,8 +1,10 @@
 $(document).ready(function(){
+    var username;
+
     $('button').button();
 
     $('#logout').on('click', function(){
-        //ajaxCall('post', {a:'user',method:'logout',data:username}, null);
+        ajaxCall('post', {a:'user',method:'logout',data:username}, null);
         document.location = 'logout.php';
     });
 

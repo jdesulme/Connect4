@@ -57,6 +57,7 @@ function getLoginRegistrationCallback(msg){
 
     //redirect to the lobby page
     if (msg.status === 'success') {
+        username = msg.username;
         $messageBox
             .html('Logging in.....')
             .fadeTo(900,1, function(){

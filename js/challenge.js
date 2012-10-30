@@ -11,13 +11,16 @@ function getOnlineUsers(){
 }
 
 function getOnlineUsersCallback(users){
+    var tmp = '';
 
-    var h='';
-    for(var i=0, l=users.length; i<l; i++){
-        h += users[i].username+ ' '+users[i].id_user+'  '+users[i].status + '<br/>';
-    }
+    $.each(users, function(i,itm){
+        var status = (itm.status > 0) ? 'green' : 'red';
+        tmp += '<li id="'+ itm.id_user + '" class="' + status + '" >' + itm.username +'</li>';
+    });
 
-    $('#online-users-box').html(h);
-
+    $('#online-users-box').html('').append(tmp);
     setTimeout(getOnlineUsers,1500);
 }
+
+
+

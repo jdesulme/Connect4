@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once("settings.php");
-    $page = new Page();
-    $page->html_header();
+
+    Page::html_header();
 ?>
 
         <section class="main-outside-container">
@@ -23,7 +23,9 @@
 
 <?php
 
-$js = array('login');
-$page->html_footer($js);
+    $js = array('login');
+    Page::html_footer($js);
 
+    new dBug($_SESSION);
+    new dBug($_COOKIE);
 ?>

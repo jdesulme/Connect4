@@ -85,6 +85,7 @@ function verify_token($user_ip, $token){
 
 function generate_cookie($username, $ip){
     setcookie("token", generate_token($username,$ip), time()+3600, '/');
+    setcookie("username", $username, time()+3600, '/');
 }
 
 ?>

@@ -5,9 +5,17 @@ require_once("../../dbInfoPS.inc");
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
+/**
+ * Validates the login info making sure that it's correct
+ * @param $username
+ * @param $password
+ * @return boolean
+ * @throws Exception
+ */
 function checkLoginData($username, $password){
     global $mysqli;
 
+    $pass = '';
     $sql = "SELECT (password = ?) AS password_matches FROM user WHERE username = ?";
     $hash = hash('sha256', $password);
 
@@ -18,8 +26,7 @@ function checkLoginData($username, $password){
             $stmt->bind_result($pass);
             $stmt->fetch();
             $stmt->close();
-            $mysqli->close();
-            return $pass;
+
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
@@ -27,6 +34,7 @@ function checkLoginData($username, $password){
         log_error($e, $sql, null);
         echo 'fail - checkLoginData';
     }
+    return $pass;
 }
 
 /**
@@ -44,7 +52,6 @@ function setPlayerStatusData($active, $username){
             $stmt->bind_param('is', intval($active), $username);
             $stmt->execute();
             $stmt->close();
-
         } else {
             throw new Exception("An error occurred while setting player status");
         }
@@ -52,7 +59,7 @@ function setPlayerStatusData($active, $username){
         log_error($e, $sql, null);
         echo 'fail - setPlayerStatusData';
     }
-    $mysqli->close();
+   // $mysqli->close();
 }
 
 /**
@@ -63,6 +70,8 @@ function setPlayerStatusData($active, $username){
  */
 function checkUsernameData($username){
     global $mysqli;
+
+    $matches = '';
     $sql = "SELECT COUNT(1) AS user_matches FROM user WHERE username = ?";
 
     try {
@@ -72,9 +81,7 @@ function checkUsernameData($username){
             $stmt->bind_result($matches);
             $stmt->fetch();
             $stmt->close();
-            $mysqli->close();
-            return $matches;
-
+            //$mysqli->close();
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
@@ -82,6 +89,7 @@ function checkUsernameData($username){
         log_error($e, $sql, null);
         echo 'fail - checkUsernameData';
     }
+    return $matches;
 }
 
 /**
@@ -104,8 +112,8 @@ function generateAccountData($username, $email, $password){
             $stmt->execute();
             $data = $stmt->affected_rows;
             $stmt->close();
-            $mysqli->close();
-            return $data;
+            //$mysqli->close();
+
         } else {
             throw new Exception("An error occurred while fetching record data");
         }
@@ -113,29 +121,36 @@ function generateAccountData($username, $email, $password){
         log_error($e, $sql, null);
         echo 'fail - generateAccountData';
     }
+    return $data;
 }
 
-function getUserData($username) {
+/**
+ * Gets one or all of the users information
+ * @param $username
+ * @return json
+ * @throws Exception
+ */
+function getUserData($username = null) {
     global $mysqli;
 
     $sql = "SELECT id_user, username, email, win, loss, status, last_login FROM user ";
+
     if (isset($username)){
         $sql .= "WHERE username = ? ";
     }
+
     $sql .= "ORDER BY status DESC";
 
-    echo $username;
-    echo $sql;
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
             if (isset($username)){
                 $stmt->bind_param('s',$username);
             }
-            echo returnJson($stmt);
+            return returnJson($stmt);
 
             $stmt->close();
-            $mysqli->close();
+            //$mysqli->close();
         } else {
             throw new Exception("An error occurred while fetching user record data");
         }
@@ -146,4 +161,3 @@ function getUserData($username) {
 
 }
 
-?>

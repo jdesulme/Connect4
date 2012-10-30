@@ -1,18 +1,16 @@
 <?php
+require_once("settings.php");
 //start the session
+session_name("Connect 4 - Jean");
 session_start();
 
-//if not logged in, re-direct to login
-/*
-if ( !isset($_SESSION['username']) || !isset($_COOKIE['token']) ) {
-    header("location: index.php");
+$ip = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ? '129.21.118.201' : $_SERVER['REMOTE_ADDR'];
+
+if (!Authentication::checkToken($ip,$_COOKIE['token'])){
+    header("Location: index.php");
 }
-*/
 
-require_once("settings.php");
-
-$page = new Page();
-$page->html_header(null,'Connect 4 - Lobby');
+Page::html_header(null,'Connect 4 - Lobby');
 ?>
 
     <header>
@@ -35,7 +33,7 @@ $page->html_header(null,'Connect 4 - Lobby');
     <div class="line"></div>
 
     <script type="text/javascript">
-        var player="<?php ?>";
+        var username="<?=$_COOKIE['username']?>";
     </script>
 
 
@@ -43,9 +41,10 @@ $page->html_header(null,'Connect 4 - Lobby');
 
 
 $js = array('chat','challenge','lobby');
-$page->html_footer($js);
+Page::html_footer($js);
 
 new dBug($_SESSION);
 new dBug($_COOKIE);
+
 
 ?>

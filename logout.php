@@ -6,24 +6,25 @@
  * Time: 2:55 PM
  * To change this template use File | Settings | File Templates.
  */
+require_once("settings.php");
+
+session_name("Connect 4 - Jean");
 session_start();
 
-//if not logged in, re-direct to login.php
-if (empty($_SESSION['username']) && empty($_COOKIE['token'])) {
-    header("location: index.php");
-}
 
+// Unset all of the session variables.
+$_SESSION = array();
+
+// Finally, destroy the session.
 session_destroy();
 
+//destroy the cookies now
+setcookie("token", '', time() - 42000);
+setcookie("username", '', time() - 42000);
+unset($_COOKIE);
+$_COOKIE = array();
 
-require_once("settings.php");
-$page = new Page();
-$page->html_header();
-
-
-new dBug($_COOKIE);
-new dBug($_SESSION);
-
+Page::html_header();
 ?>
 
     <section class="main-outside-container">
@@ -34,4 +35,10 @@ new dBug($_SESSION);
     </section>
 
 
-<?php $page->html_footer(); ?>
+<?php
+Page::html_footer();
+
+new dBug($_COOKIE);
+new dBug($_SESSION);
+
+?>
