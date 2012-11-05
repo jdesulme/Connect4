@@ -22,5 +22,17 @@ function getOnlineUsersCallback(users){
     setTimeout(getOnlineUsers,1500);
 }
 
+/**
+ * Polls the database looking to see if one is available
+ */
+function checkForChallenge(username){
+    ajaxCall('POST', {a:'challenge',method:'getChallengeByID', data:username}, getOnlineUsersCallback);
+}
 
+function checkForChallengeCallback(){
+    //popup a dialog screen
+    //make it last only for 30 seconds
+        //after 30 seconds go away and remove the challenge
+
+}
 

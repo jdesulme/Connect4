@@ -19,10 +19,7 @@ $_SESSION = array();
 session_destroy();
 
 //destroy the cookies now
-setcookie("token", '', time() - 42000);
-setcookie("username", '', time() - 42000);
-unset($_COOKIE);
-$_COOKIE = array();
+setcookie("token", '', time() - 42000, '/~jxd1827/Connect4','nova.it.rit.edu');
 
 Page::html_header();
 ?>
@@ -38,7 +35,6 @@ Page::html_header();
 <?php
 Page::html_footer();
 
-new dBug($_COOKIE);
-new dBug($_SESSION);
+
 
 ?>

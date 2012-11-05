@@ -13,7 +13,14 @@ function getChatCallback(users){
     var tmp = '';
 
     $.each(users, function(i,itm){
-        tmp += '<li>' + itm.username + ': ' + itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
+        tmp += '<li>';
+
+        //don't display the message for the original player
+        if(itm.username !== username){
+            tmp += itm.username + ': ' ;
+        }
+
+        tmp += itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
     });
 
     chatBox.html('').append(tmp);
@@ -28,12 +35,7 @@ function sendChat(player, txt, roomNum){
         room    : roomNum
     };
 
-    console.log(JSON.stringify(chatMsg));
-	ajaxCall('POST', {a:'chat',method:'setChat', data:chatMsg}, setChatCallback);
-}
-
-function setChatCallback(data){
-	console.log(data);
+	ajaxCall('POST', {a:'chat',method:'setChat', data:chatMsg}, null);
 }
 
 

@@ -83,9 +83,11 @@ function verify_token($user_ip, $token){
     return $result;
 }
 
+
+
 function generate_cookie($username, $ip){
-    setcookie("token", generate_token($username,$ip), time()+3600, '/');
-    setcookie("username", $username, time()+3600, '/');
+    setcookie("token", generate_token($username,$ip), time()+3600, '/~jxd1827/Connect4','nova.it.rit.edu');
+   // setcookie("username", $username, time()+3600, '/');
 }
 
 ?>

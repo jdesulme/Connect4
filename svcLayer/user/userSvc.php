@@ -114,7 +114,7 @@ function getAllUsers($d,$ip,$token){
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);
-        logout();
+        //logout();
     }
 }
 
@@ -125,12 +125,7 @@ function getAvatar($email, $ip, $token) {
 }
 
 
-function logout($username = null){
-    if (isset($username)){
-        setPlayerStatusData('-1',$username);
-    }
-
-    setcookie("token", "", time()-3600);
-    unset($_COOKIE['token']);
+function logout($username){
+    setPlayerStatusData('-1',$username);
 }
 

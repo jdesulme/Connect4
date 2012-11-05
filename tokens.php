@@ -4,6 +4,10 @@ define('SEPARATOR','32c8bf');
 
 $token = generate_token('50', '129.540.680');
 
+echo "<p>---------------------------------------</p><p></p>";
+echo "<p>---------------------------------------</p><p></p>";
+
+
 verify_token($token, '129.540.680');
 
 function generate_token($userID=null, $ip=null){
@@ -43,9 +47,6 @@ function generate_token($userID=null, $ip=null){
     return $tokenStr;
 
 }
-
-echo "<p></p><p></p>";
-echo "<p></p><p></p>";
 
 /**
  *
