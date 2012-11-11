@@ -19,7 +19,11 @@ $_SESSION = array();
 session_destroy();
 
 //destroy the cookies now
-setcookie("token", '', time() - 42000, '/~jxd1827/Connect4','nova.it.rit.edu');
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
+    setcookie("token", '', time() - 42000, '/','');
+} else {
+    setcookie("token", '', time() - 42000, '/~jxd1827/Connect4','nova.it.rit.edu');
+}
 
 Page::html_header();
 ?>

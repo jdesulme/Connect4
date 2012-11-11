@@ -6,13 +6,17 @@ $(document).ready(function(){
     chatMessageBox.on("keydown",function(e){
 		if (e.which === KEY.ENTER) {
             var message = chatMessageBox.val();
-            chatMessageBox.val('');
 
-            console.log(message);
-            //send the user id as well
+            if (message !== ''){
+                chatMessageBox.val('');
 
-            //sendChat(player, txt, roomNum)
-			sendChat(12,message,0);
+                console.log(message);
+                //send the user id as well
+
+                //sendChat(player, txt, roomNum)
+                sendChat(12,message,0);
+            }
+
 		}	
 	});
 

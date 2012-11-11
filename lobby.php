@@ -4,11 +4,20 @@ require_once("settings.php");
 session_name("Connect 4 - Jean");
 session_start();
 
-$ip = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ? '129.21.118.201' : $_SERVER['REMOTE_ADDR'];
+//for working on local hose
+$ip = ($_SERVER['SERVER_NAME'] == 'localhost') ? '129.21.118.201' : $_SERVER['REMOTE_ADDR'];
 
 if (!Authentication::checkToken($ip,$_COOKIE['token'])){
     header("Location: index.php");
+} else {
+
 }
+
+
+new dBug($ip);
+new dBug($_COOKIE);
+new dBug($_SESSION);
+new dBug($_POST);
 
 Page::html_header(null,'Connect 4 - Lobby');
 ?>

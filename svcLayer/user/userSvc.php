@@ -15,22 +15,12 @@ function loginUser($d,$ip,$token){
     $loginResponse = checkLoginData($loginData['username'],$loginData['password']);
 
     if ($loginResponse){
-        session_name("Connect 4 - Jean");
+        session_name("JeanGame");
         session_start();
 
-        /*
-        //decodes the users's information
-        $userData = json_decode(getUserData($loginData['username']));
-
         //sets the session variables
-        $_SESSION['username'] = $userData['username'];
-        $_SESSION['id_user'] = $userData['id_user'];
-        $_SESSION['email'] = $userData['email'];
-        $_SESSION['win'] = $userData['win'];
-        $_SESSION['loss'] = $userData['loss'];
-        $_SESSION['last_login'] = $userData['last_login'];
+        $_SESSION['username'] = $loginData['username'];
         $_SESSION['auth'] = true;
-        */
 
         //sets the players status to active and creates the token
         setPlayerStatusData('1', $loginData['username']);
@@ -85,12 +75,11 @@ function registerUser($d,$ip,$token){
 
     //once they pass validation create the account
     if ($userCheck == 0 && $passCheck == true && $paramCheck == true) {
-        session_name("Connect 4 - Jean");
+        session_name("JeanGame");
         session_start();
 
+        $_SESSION['user_name'] = $cleanData['username'];
         $_SESSION['auth'] = true;
-        $_SESSION['user_name']= $cleanData['username'];
-        $_SESSION['email'] = $cleanData['email'];
 
         generateAccountData($cleanData['username'], $cleanData['email'], $cleanData['password']);
         setPlayerStatusData('1', $cleanData['username']);

@@ -19,9 +19,28 @@ class Authentication
         return verify_token($ip,$token);
     }
 
-    public static function getInformation($ip, $token){
-        require_once './svcLayer/user/userSvc.php';
+    public static function getUserInformation($ip, $token){
+        if (checkToken($ip, $token)){
+            require_once './svcLayer/user/userSvc.php';
+
+        }
+
+
         return getAllUsers(null,$ip,$token);
+
+        /*
+        //decodes the users's information
+        $userData = json_decode(getUserData($loginData['username']));
+
+        //sets the session variables
+        $_SESSION['username'] = $userData['username'];
+        $_SESSION['id_user'] = $userData['id_user'];
+        $_SESSION['email'] = $userData['email'];
+        $_SESSION['win'] = $userData['win'];
+        $_SESSION['loss'] = $userData['loss'];
+        $_SESSION['last_login'] = $userData['last_login'];
+        $_SESSION['auth'] = true;
+        */
 
     }
 }

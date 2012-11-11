@@ -72,9 +72,9 @@ function getLoginRegistrationCallback(msg){
  */
 function checkPasswordMatch(input){
     var pass = document.getElementById('password').value;
-    if (pass === input.value) {
-        input.setCustomValidity('');
-    } else {
+    if (pass !== input.value) {
         input.setCustomValidity("The two passwords must match!");
+    } else {
+        input.setCustomValidity('');
     }
 }

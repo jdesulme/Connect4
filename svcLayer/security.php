@@ -84,10 +84,12 @@ function verify_token($user_ip, $token){
 }
 
 
-
 function generate_cookie($username, $ip){
-    setcookie("token", generate_token($username,$ip), time()+3600, '/~jxd1827/Connect4','nova.it.rit.edu');
-   // setcookie("username", $username, time()+3600, '/');
+    if ($_SERVER['SERVER_NAME'] == 'localhost') {
+        setcookie("token", generate_token($username,$ip), time()+3600, '/','');
+    } else {
+        setcookie("token", generate_token($username,$ip), time()+3600, '/~jxd1827/Connect4','nova.it.rit.edu');
+    }
 }
 
 ?>
