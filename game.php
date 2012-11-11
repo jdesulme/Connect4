@@ -1,5 +1,6 @@
 <?php
 //start the session
+session_name("JeanGame");
 session_start();
 
 require_once("settings.php");

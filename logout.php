@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: student
- * Date: 10/27/12
- * Time: 2:55 PM
- * To change this template use File | Settings | File Templates.
- */
-require_once("settings.php");
-
-session_name("Connect 4 - Jean");
+session_name("JeanGame");
 session_start();
+
+require_once("settings.php");
 
 
 // Unset all of the session variables.
@@ -39,6 +32,6 @@ Page::html_header();
 <?php
 Page::html_footer();
 
-
+new dBug($_SESSION);
 
 ?>

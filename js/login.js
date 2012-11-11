@@ -32,9 +32,7 @@ $(document).ready(function() {    //handles the login submission
  * @param img
  */
 function loadProfileImage(img){
-    $('.gravatar-text')
-        .html('')
-        .append(img);
+    $('.gravatar-text').html(img);
 }
 
 /**
@@ -44,9 +42,9 @@ function loadProfileImage(img){
 function getLoginRegistrationCallback(msg){
     console.log(msg);
 
-    var $messageBox = $('#message');
+    var messageBox = $('#message');
 
-    $messageBox
+    messageBox
         .attr('class', msg.status)
         .html(msg.message);
 
@@ -58,7 +56,7 @@ function getLoginRegistrationCallback(msg){
     //redirect to the lobby page
     if (msg.status === 'success') {
         username = msg.username;
-        $messageBox
+        messageBox
             .html('Logging in.....')
             .fadeTo(900,1, function(){
                 document.location='lobby.php';
@@ -72,9 +70,9 @@ function getLoginRegistrationCallback(msg){
  */
 function checkPasswordMatch(input){
     var pass = document.getElementById('password').value;
-    if (pass !== input.value) {
-        input.setCustomValidity("The two passwords must match!");
-    } else {
+    if (pass === input.value) {
         input.setCustomValidity('');
+    } else {
+        input.setCustomValidity("The two passwords must match!");
     }
 }

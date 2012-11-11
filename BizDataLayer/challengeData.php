@@ -1,17 +1,17 @@
 <?php
-//include dbInfo
 require_once("../../dbInfoPS.inc");
 //include exceptions
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
 
-function getChatData($room){
+
+function getChallengeData($userID){
     global $mysqli;
-    $sql="SELECT username, message, email, time_stamp FROM chat c JOIN user u USING(id_user) WHERE c.room = ? ORDER BY time_stamp ASC";
+    $sql="SELECT player_1, player_2, state FROM challenges c WHERE state = 'W' AND player_2 = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
-			$stmt->bind_param('d',$room);
+            $stmt->bind_param('i',$userID);
             $data = returnJson($stmt);
             $stmt->close();
             $mysqli->close();
@@ -21,18 +21,24 @@ function getChatData($room){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - getChatData';
+        echo 'fail - get_challenge';
     }
 }
 
-
-function sendChatData($id_user, $message, $room){
+/**
+ * @param $p1 the user currently logged in
+ * @param $p2 the player that's challenged
+ * @param $state (waiting-W), accepted-A, or declined-D
+ * @return mixed
+ * @throws Exception
+ */
+function setChallengeData($p1, $p2){
     global $mysqli;
-    $sql = 'INSERT INTO chat (id_user, message, room) VALUES (?,?,?)';
+    $sql = 'INSERT INTO challenges (player_1, player_2, state) VALUES (?,?,?)';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ssd',$id_user, $message, $room);
+            $stmt->bind_param('iis',$p1, $p2, 'W');
             $stmt->execute();
             $data = $stmt->affected_rows;
             $stmt->close();
@@ -43,7 +49,7 @@ function sendChatData($id_user, $message, $room){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - send_chat_data';
+        echo 'fail - send_challenge';
     }
 }
 

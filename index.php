@@ -1,5 +1,7 @@
 <?php
+    session_name("JeanGame");
     session_start();
+
     require_once("settings.php");
 
     Page::html_header();

@@ -19,8 +19,8 @@ function loginUser($d,$ip,$token){
         session_start();
 
         //sets the session variables
-        $_SESSION['username'] = $loginData['username'];
-        $_SESSION['auth'] = true;
+        $userData = json_decode(getUserData($loginData['username']));
+        $_SESSION['data'] = $userData;
 
         //sets the players status to active and creates the token
         setPlayerStatusData('1', $loginData['username']);
@@ -78,12 +78,13 @@ function registerUser($d,$ip,$token){
         session_name("JeanGame");
         session_start();
 
-        $_SESSION['user_name'] = $cleanData['username'];
-        $_SESSION['auth'] = true;
-
         generateAccountData($cleanData['username'], $cleanData['email'], $cleanData['password']);
         setPlayerStatusData('1', $cleanData['username']);
         generate_cookie($cleanData['username'],$ip);
+
+        //sets the session variables
+        $userData = json_decode(getUserData($cleanData['username']));
+        $_SESSION['data'] = $userData;
 
         $result['username'] = $cleanData['username'];
         $result['message'] = 'New Account successfully created';

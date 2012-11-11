@@ -5,13 +5,16 @@ var KEY = {
 	};
 
 
-function getChat(){
-    ajaxCall('POST', {a:'chat',method:'getChat'}, getChatCallback);
+function getChat(roomNum){
+    var chatRm = {
+        room    : roomNum
+    };
+
+    ajaxCall('POST', {a:'chat',method:'getChat', data:chatRm}, getChatCallback);
 }
 
 function getChatCallback(users){
     var tmp = '';
-
     $.each(users, function(i,itm){
         tmp += '<li>';
 
@@ -23,10 +26,14 @@ function getChatCallback(users){
         tmp += itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
     });
 
-    chatBox.html('').append(tmp);
+    chatBox.html(tmp);
     scrollChatBox();
-    setTimeout(getChat,1500);
+
+    setTimeout(function(){
+        getChat(gameID);
+    }, 2000);
 }
+
 
 function sendChat(player, txt, roomNum){
     var chatMsg = {
@@ -39,14 +46,6 @@ function sendChat(player, txt, roomNum){
 }
 
 
-
-
-
-function prop(name){
-    return function(object){
-        return object[name];
-    };
-}
 
 
 function scrollChatBox() {

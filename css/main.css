@@ -265,6 +265,24 @@ footer {
 }
 
 
+li.green {
+    cursor: pointer;
+    /*
+    background-image: url(bullet_doc.gif);
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding: 3px 0 3px 20px;
+    margin: .4em 0;
+    */
+}
+
+li.red {
+
+
+}
+
+
+
 #chat-entry {
     padding: 5px 0;
     width: 100%;
@@ -323,6 +341,14 @@ footer {
 
 .red {
     color: red;
+}
+
+/* ==========================================================================
+   jQuery UI Styling
+   ========================================================================== */
+
+#dialog-send-challenge, #dialog-reject-challenge, #dialog-new-challenge {
+    display: none;
 }
 /* ==========================================================================
    Helper classes

@@ -83,7 +83,6 @@ function verify_token($user_ip, $token){
     return $result;
 }
 
-
 function generate_cookie($username, $ip){
     if ($_SERVER['SERVER_NAME'] == 'localhost') {
         setcookie("token", generate_token($username,$ip), time()+3600, '/','');

@@ -1,46 +1,64 @@
 $(document).ready(function(){
 	//variable declarations
+
 	var chatMessageBox = $("#send-message");
-    var onlineUsers = $('#online-users-box');
 
     chatMessageBox.on("keydown",function(e){
 		if (e.which === KEY.ENTER) {
-            var message = chatMessageBox.val();
+
+            var message = e.target.value;
 
             if (message !== ''){
                 chatMessageBox.val('');
-
-                console.log(message);
-                //send the user id as well
-
-                //sendChat(player, txt, roomNum)
-                sendChat(12,message,0);
+                sendChat(userID,message,gameID);
             }
-
-		}	
+		}
 	});
 
-    onlineUsers.find('li.green').css('cursor', 'pointer');
-    onlineUsers.on('click','li.green',function(){
-        //ask the user if they really want to play the currently picked person
-            //send the challenge  .... getChallengeCallback
-        //else
-            //don't do anything
-
+    $('#online-users-box').on('click','li.green',function(){
+        challengePlayer(this.id);
         //?? Set a timer for 30 seconds
         //?? popup and notify the other user  (maybe look at the table)
         //??
-        confirm(this.id + '  ' + $(this).text());
+        console.log(this.id + '  ' + $(this).text());
     });
 
-	getChat();
+	getChat(gameID);
     getOnlineUsers();
+    getProfilePic();
+
+
 });
 
-function getChallengeCallback(data){
-    //getChallengeCallback
-    //if the challenge is accepted
-        //redirect them to the game itself
-    //else
-        //cancel the challenge and wait for the user
+
+
+
+function getOnlineUsers(){
+    ajaxCall('POST', {a:'user',method:'getAllUsers'}, getOnlineUsersCallback);
+}
+
+function getOnlineUsersCallback(users){
+    var tmp = '';
+
+    $.each(users, function(i,itm){
+        if (itm.username !== username){
+            var status = (itm.status > 0) ? 'green' : 'red';
+            tmp += '<li id="'+ itm.id_user + '" class="' + status + '" >' + itm.username +'</li>';
+        }
+    });
+
+    $('#online-users-box').html(tmp);
+
+    setTimeout(function(){
+        getOnlineUsers();
+    }, 1500);
+}
+
+function getProfilePic(){
+    ajaxCall('POST', {a:'user',method:'getAvatar',data:email}, loadLobbyProfilePic);
+
+}
+
+function loadLobbyProfilePic(img){
+    $('#profilePic').html(img);
 }
