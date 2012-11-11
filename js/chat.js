@@ -46,8 +46,9 @@ function sendChat(player, txt, roomNum){
 }
 
 
-
-
+/**
+ * Fixes the height of the chat box div to make it go to the bottom
+ */
 function scrollChatBox() {
     chatBox.scrollTop(chatBox[0].scrollHeight - chatBox[0].clientHeight);
 }

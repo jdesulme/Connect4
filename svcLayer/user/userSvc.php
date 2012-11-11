@@ -95,10 +95,6 @@ function registerUser($d,$ip,$token){
 }
 
 function getAllUsers($d,$ip,$token){
-    $result['d'] = $d;
-    $result['$ip'] = $ip;
-    $result['$token'] = $token;
-
     if (verify_token($ip, $token)) {
         echo getUserData();
     } else {

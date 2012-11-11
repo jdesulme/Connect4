@@ -132,7 +132,8 @@ function generateAccountData($username, $email, $password){
  */
 function getUserData($username = null) {
     global $mysqli;
-
+    //to get all the users waiting on a challenge as well
+    //SELECT id_user, username, email, win, loss, status, last_login, state FROM user u LEFT JOIN challenges c ON u.id_user = c.player_2
     $sql = "SELECT id_user, username, email, win, loss, status, last_login FROM user ";
 
     if (isset($username)){

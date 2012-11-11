@@ -26,6 +26,7 @@ $(document).ready(function(){
 	getChat(gameID);
     getOnlineUsers();
     getProfilePic();
+    checkForChallenge(userID);
 
 
 });

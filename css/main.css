@@ -192,7 +192,6 @@ footer {
     width: 500px;
 }
 
-
 .container {
     max-width: 22em;
     margin: 2.5em auto;
@@ -207,6 +206,18 @@ footer {
 
 #logout {
     cursor: pointer;
+}
+/* ==========================================================================
+   Game Area
+   ========================================================================== */
+
+.game-board-outside-container {
+    margin: 5.5em auto;
+    text-align: center;
+}
+.game-board-chat-container {
+    margin: auto;
+    text-align: center;
 }
 
 /* ==========================================================================
@@ -224,6 +235,7 @@ footer {
     background: #FCFCFC;
     width: 700px;
     height: auto;
+
 }
 
 #lobby-chat-box {
@@ -350,6 +362,24 @@ li.red {
 #dialog-send-challenge, #dialog-reject-challenge, #dialog-new-challenge {
     display: none;
 }
+
+
+/* ==========================================================================
+   Original Checker Game Style
+   ========================================================================== */
+#background { fill: #666; stroke: black; stroke-width: 2px; }
+.player0   {fill: #990000; stroke: white; stroke-width: 1px; }
+.player1 {fill: green; stroke: red; stroke-width: 1px; }
+.htmlBlock {position:absolute;top:200px;left:300px;width:200px;height:100px;background:#ffc;padding:10px;display:none;}
+body{padding:0px;margin:0px;}
+.cell_white{fill:white;stroke-width:2px;stroke:red;}
+.cell_black{fill:black;stroke-width:2px;stroke:red;}
+.cell_alert{fill:#336666;stroke-width:2px;stroke:red;}
+.name_black{fill:black;font-size:18px}
+.name_orange{fill:orange;font-size:24px;}
+
+
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

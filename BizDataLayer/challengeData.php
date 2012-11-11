@@ -1,11 +1,15 @@
 <?php
+//include dbInfo
 require_once("../../dbInfoPS.inc");
 //include exceptions
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
 
-
-
+/**
+ * @param $userID The user that's currently logged in
+ * @return json|string
+ * @throws Exception
+ */
 function getChallengeData($userID){
     global $mysqli;
     $sql="SELECT player_1, player_2, state FROM challenges c WHERE state = 'W' AND player_2 = ?";
@@ -53,5 +57,25 @@ function setChallengeData($p1, $p2){
     }
 }
 
+function updateChallengeData($player, $state){
+    global $mysqli;
+    $sql = 'UPDATE challenges SET state = ? WHERE player_2 = ?';
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('si',$state, $player);
+            $stmt->execute();
+            $data = $stmt->affected_rows;
+            $stmt->close();
+            $mysqli->close();
+            return $data;
+        } else {
+            throw new Exception("An error occurred while inserting record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - send_challenge';
+    }
+}
 
 ?>
