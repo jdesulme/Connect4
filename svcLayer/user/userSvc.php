@@ -11,7 +11,8 @@ require_once('./svcLayer/security.php');
  */
 function loginUser($d,$ip,$token){
     $result = array();
-    $loginData = parseDataFromRequest($d);
+    $formData = parseDataFromRequest($d);
+    $loginData = cleanLoginFormData($formData);
     $loginResponse = checkLoginData($loginData['username'],$loginData['password']);
 
     if ($loginResponse){

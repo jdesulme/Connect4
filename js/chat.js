@@ -14,6 +14,7 @@ function getChat(roomNum){
 }
 
 function getChatCallback(users){
+
     var tmp = '';
     $.each(users, function(i,itm){
         tmp += '<li>';

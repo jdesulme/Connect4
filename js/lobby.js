@@ -2,10 +2,8 @@ $(document).ready(function(){
 	//variable declarations
 
 	var chatMessageBox = $("#send-message");
-
     chatMessageBox.on("keydown",function(e){
 		if (e.which === KEY.ENTER) {
-
             var message = e.target.value;
 
             if (message !== ''){
@@ -27,8 +25,6 @@ $(document).ready(function(){
     getOnlineUsers();
     getProfilePic();
     checkForChallenge(userID);
-
-
 });
 
 

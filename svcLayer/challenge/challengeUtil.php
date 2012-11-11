@@ -23,8 +23,20 @@ function setChallenge($d,$ip,$token){
         $h = explode('|', $d);
         $player1 = $h[0];
         $player2 = $h[1];
-        var_dump($h);
         echo setChallengeData($player1, $player2);
+    } else {
+        $result['token'] = 'fail';
+        echo json_encode($result);
+    }
+}
+
+
+function updateChallenge($d,$ip,$token){
+    if (verify_token($ip, $token)) {
+        $h = explode('|', $d);
+        $userid = $h[0];
+        $state = $h[1];
+        echo setChallengeData($userid, $state);
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);

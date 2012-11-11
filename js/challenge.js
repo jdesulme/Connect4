@@ -20,13 +20,13 @@ function checkForChallengeCallback(data){
                 "Yes": function() {
                     //accepts the challenge to the player
                     var challengeData = userID + '|' + 'A';
-                    ajaxCall('POST', {a:'challenge',method:'acceptChallenge', data:challengeData}, acceptedChallengeCallback);
+                    ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, acceptedChallengeCallback);
 
                     $(this).dialog("close");
                 },
                 "No": function() {
                     var challengeData = userID + '|' + 'D';
-                    ajaxCall('POST', {a:'challenge',method:'rejectChallenge', data:challengeData}, rejectedChallengeCallback);
+                    ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, rejectedChallengeCallback);
 
                     $(this).dialog("close");
                 }
