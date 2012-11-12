@@ -1,11 +1,18 @@
+/***************POV from the Challengee ***************/
+
 
 /**
- * Polls the database looking to see if one is available
+ * Polls the database looking to see if a challenge is available
+ * @param userID
  */
 function checkForChallenge(userID){
     ajaxCall('POST', {a:'challenge',method:'getChallenge', data:userID}, checkForChallengeCallback);
 }
 
+/**
+ * The callback that keeps checking until something arrives
+ * @param data
+ */
 function checkForChallengeCallback(data){
     if (data){
         console.log(data);
@@ -27,7 +34,7 @@ function checkForChallengeCallback(data){
                 },
                 "No": function() {
                     var challengeData = userID + '|' + 'D';
-                    ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, rejectedChallengeCallback);
+                    ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, null);
 
                     $(this).dialog("close");
                 }
@@ -52,17 +59,18 @@ function acceptedChallengeCallback(data){
 
 }
 
-function rejectedChallengeCallback(data){
-    console.log(data)
-}
 
+/***************POV from the Initiator ***************/
+
+/**
+ * The logged in player selects an active player to challenge
+ * @param challengeId
+ */
 function challengePlayer(challengeId ) {
     //ask the user if they really want to play the currently picked person
         //send the challenge  .... getChallengeCallback
     //else
         //don't do anything
-
-
     $("#dialog-send-challenge").dialog({
         autoOpen: open,
         resizable: false,
@@ -83,12 +91,30 @@ function challengePlayer(challengeId ) {
     });
 }
 
+
+
+function rejectedChallengeCallback(data){
+    console.log(data)
+}
+
+/**
+ *
+ * @param data
+ */
 function challengePlayerCallback(data){
+
+    setTimeout(function(){
+        //look for the status of my sent challenge
+    }, 2000);
 
     //getChallengeCallback
     //if the challenge is accepted
     //redirect them to the game itself
     //else
     //cancel the challenge and wait for the user
+}
 
+
+function checkSentChallenge(userID){
+    ajaxCall('POST', {a:'challenge',method:'getChallengeStatus', data:userID}, challengePlayerCallback);
 }

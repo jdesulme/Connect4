@@ -7,7 +7,9 @@
  */
 $(document).ready(function() {    //handles the login submission
     $('#login_form').submit(function(e){
+        console.log(e);
         var formData = $(e.target).serialize();
+        console.log(formData);
         ajaxCall('POST', {a:'user',method:'loginUser',data:formData}, getLoginRegistrationCallback);
         return false;
     });

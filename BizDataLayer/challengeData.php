@@ -29,7 +29,34 @@ function getNewChallengeData($userID){
     }
 }
 
+
 /**
+ * Gets the status of the sent challenge for the originator
+ * @param $userID
+ * @return json|string
+ * @throws Exception
+ */
+function getStatusChallengeData($userID){
+    global $mysqli;
+    $sql="SELECT state FROM challenges c WHERE player_1 = ?";
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('i',$userID);
+            $data = returnJson($stmt);
+            $stmt->close();
+            $mysqli->close();
+            return $data;
+        } else {
+            throw new Exception("An error occurred while fetching record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - get_challenge';
+    }
+}
+
+/**
+ * Creates a new challenge request that initially has waiting stored
  * @param $p1 the user currently logged in
  * @param $p2 the player that's challenged
  * @return mixed
@@ -43,7 +70,7 @@ function setChallengeData($p1, $p2){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ii',$p1,$p2);
             $stmt->execute();
-            $data = $stmt->affected_rows;
+            $data = $stmt->insert_id;
             $stmt->close();
             $mysqli->close();
             return $data;
@@ -56,6 +83,13 @@ function setChallengeData($p1, $p2){
     }
 }
 
+/**
+ * Updates the status of the challenge from the challengee
+ * @param $player the challenged player
+ * @param $state A-accepted OR D-declined
+ * @return mixed
+ * @throws Exception
+ */
 function updateChallengeData($player, $state){
     global $mysqli;
     $sql = 'UPDATE challenges SET state = ? WHERE player_2 = ?';

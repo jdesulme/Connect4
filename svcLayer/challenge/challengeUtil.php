@@ -17,7 +17,27 @@ function getChallenge($d,$ip,$token){
     }
 }
 
+/**
+ * Gets the status of a challenge for the player that sent it
+ * @param $d -> the userid of the current player
+ * @param $ip
+ * @param $token
+ */
+function getChallengeStatus($d, $ip, $token){
+    if (verify_token($ip, $token)) {
+        echo getStatusChallengeData($d);
+    } else {
+        $result['token'] = 'fail';
+        echo json_encode($result);
+    }
+}
 
+/**
+ * Create a new challenge
+ * @param $d -> player1 and player2
+ * @param $ip
+ * @param $token
+ */
 function setChallenge($d,$ip,$token){
     if (verify_token($ip, $token)) {
         $h = explode('|', $d);
@@ -31,7 +51,12 @@ function setChallenge($d,$ip,$token){
     }
 }
 
-
+/**
+ * The challengee updates the status of the challenege
+ * @param $d -> the userid and state (accept or decline)
+ * @param $ip
+ * @param $token
+ */
 function updateChallenge($d,$ip,$token){
     if (verify_token($ip, $token)) {
         $h = explode('|', $d);
