@@ -43,7 +43,7 @@ function generate_token($user, $ip){
  * @param $token
  * @return bool
  */
-function verify_token($user_ip, $token){
+function verify_token2($user_ip, $token){
     //strip the periods from the users ip address
     $user_ip = (string) preg_replace("/[^a-zA-Z0-9_-]/", "", $user_ip);
 
@@ -69,6 +69,55 @@ function verify_token($user_ip, $token){
     foreach ($vTokenArr as $key => $value) {
         $vTokenArr[$key] = preg_replace ('/^(0*)/', '', $value);
     }
+
+    //verifies that the timestamp hasn't expired within the last hour
+    $token_age = time() - time($vTokenArr['time']);
+    $bTokenAge = ($token_age <= 3600) ? true : false;
+
+    //verifies that the ip passed in is the same one being used
+    $bIP = ($user_ip == $vTokenArr['ip']) ? true : false;
+
+    //checks everything now
+    $result = ($bCheckSum && $bIP && $bTokenAge ) ? true : false;
+
+    return $result;
+}
+
+function get_token_data($token){
+    //pulls apart and get the original string
+    $original_string = substr($token, 40);
+
+    //pulls apart the original string into an array
+    list($xIP, $xTime, $xUserID) = explode(SEPARATOR, $original_string);
+    $vTokenArr = array('ip'=>$xIP, 'time'=>$xTime, 'userid'=>$xUserID);
+
+    //converts it back to the original base
+    foreach ($vTokenArr as $key => $value) {
+        $vTokenArr[$key] = base_convert($value,32,16);
+    }
+
+    //removes all the zeros
+    foreach ($vTokenArr as $key => $value) {
+        $vTokenArr[$key] = preg_replace ('/^(0*)/', '', $value);
+    }
+
+    return $vTokenArr;
+}
+
+function verify_token($user_ip, $token){
+    $vTokenArr = get_token_data($token);
+
+    //pulls apart the token getting the checksum
+    $checksum = substr($token, 0, 40);
+
+    //pulls apart and get the original string
+    $original_string = substr($token, 40);
+
+    //verifies the checksum and original string to make sure its valid
+    $bCheckSum = ($checksum == sha1($original_string)) ? true : false;
+
+    //strip the periods from the users ip address
+    $user_ip = (string) preg_replace("/[^a-zA-Z0-9_-]/", "", $user_ip);
 
     //verifies that the timestamp hasn't expired within the last hour
     $token_age = time() - time($vTokenArr['time']);

@@ -10,7 +10,7 @@ require_once('./svcLayer/security.php');
  */
 function getChallenge($d,$ip,$token){
     if (verify_token($ip, $token)) {
-        echo getChallengeData($d);
+        echo getNewChallengeData($d);
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);
@@ -23,6 +23,7 @@ function setChallenge($d,$ip,$token){
         $h = explode('|', $d);
         $player1 = $h[0];
         $player2 = $h[1];
+
         echo setChallengeData($player1, $player2);
     } else {
         $result['token'] = 'fail';
@@ -34,9 +35,10 @@ function setChallenge($d,$ip,$token){
 function updateChallenge($d,$ip,$token){
     if (verify_token($ip, $token)) {
         $h = explode('|', $d);
-        $userid = $h[0];
+        $userID = $h[0];
         $state = $h[1];
-        echo setChallengeData($userid, $state);
+
+        echo updateChallengeData($userID, $state);
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);

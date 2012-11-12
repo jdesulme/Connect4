@@ -11,7 +11,7 @@ function getChatData($room){
     $sql="SELECT username, message, email, time_stamp FROM chat c JOIN user u USING(id_user) WHERE c.room = ? ORDER BY time_stamp ASC";
     try {
         if ($stmt = $mysqli->prepare($sql)){
-			$stmt->bind_param('d',$room);
+			$stmt->bind_param('i',$room);
             $data = returnJson($stmt);
             $stmt->close();
             $mysqli->close();
@@ -32,7 +32,7 @@ function sendChatData($id_user, $message, $room){
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('ssd',$id_user, $message, $room);
+            $stmt->bind_param('isi',$id_user, $message, $room);
             $stmt->execute();
             $data = $stmt->affected_rows;
             $stmt->close();

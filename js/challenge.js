@@ -8,6 +8,7 @@ function checkForChallenge(userID){
 
 function checkForChallengeCallback(data){
     if (data){
+        console.log(data);
         //popup a dialog screen
         //make it last only for 30 seconds
         //after 30 seconds go away and remove the challenge

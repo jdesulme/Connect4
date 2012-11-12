@@ -10,7 +10,7 @@ require_once('./BizDataLayer/genericFunctions.php');
  * @return json|string
  * @throws Exception
  */
-function getChallengeData($userID){
+function getNewChallengeData($userID){
     global $mysqli;
     $sql="SELECT player_1, player_2, state FROM challenges c WHERE state = 'W' AND player_2 = ?";
     try {
@@ -32,17 +32,16 @@ function getChallengeData($userID){
 /**
  * @param $p1 the user currently logged in
  * @param $p2 the player that's challenged
- * @param $state (waiting-W), accepted-A, or declined-D
  * @return mixed
  * @throws Exception
  */
 function setChallengeData($p1, $p2){
     global $mysqli;
-    $sql = 'INSERT INTO challenges (player_1, player_2, state) VALUES (?,?,?)';
+    $sql = 'INSERT INTO challenges (player_1, player_2) VALUES (?,?)';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('iis',$p1, $p2, 'W');
+            $stmt->bind_param('ii',$p1,$p2);
             $stmt->execute();
             $data = $stmt->affected_rows;
             $stmt->close();
@@ -74,7 +73,7 @@ function updateChallengeData($player, $state){
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - send_challenge';
+        echo 'fail - updateChallengeData';
     }
 }
 

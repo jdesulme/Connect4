@@ -8,7 +8,7 @@ function ajaxCall(GetPost,d,callback){
   		cache:false,
   		url: "mid.php",
   		data: d,  
-  		dataType: "json",
+  		dataType: 'json',
   		success: callback
 	});
 }
