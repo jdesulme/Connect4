@@ -61,6 +61,9 @@ Page::html_header(null,'Connect 4 - Game');
 
     <script src="js/Objects/Cell.js" type="text/javascript"></script>
     <script src="js/Objects/Piece.js" type="text/javascript"></script>
+    <script src="js/gameFunctions.js" type="text/javascript"></script>
+    <script src="js/ajaxFunctions.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         var gameId=<?=$gameID?>;
         var player="<?=$userID?>";
@@ -70,7 +73,7 @@ Page::html_header(null,'Connect 4 - Game');
 
 <?php
 
-$js = array('chat','ajaxFunctions','gameFunctions');
+$js = array('chat');
 Page::html_footer($js);
 
 new dBug($ip);

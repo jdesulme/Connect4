@@ -79,7 +79,7 @@ function challengePlayer(challengeId ) {
             "Yes": function() {
                 //sends the challenge to the player
                 var challengeData = userID + '|' + challengeId ;
-                ajaxCall('POST', {a:'challenge',method:'setChallenge', data:challengeData}, challengePlayerCallback);
+                ajaxCall('POST', {a:'challenge',method:'setChallenge', data:challengeData}, checkSentChallenge);
 
                 $(this).dialog( "close" );
 
@@ -103,15 +103,22 @@ function rejectedChallengeCallback(data){
  */
 function challengePlayerCallback(data){
 
-    setTimeout(function(){
-        //look for the status of my sent challenge
-    }, 2000);
-
     //getChallengeCallback
     //if the challenge is accepted
     //redirect them to the game itself
     //else
     //cancel the challenge and wait for the user
+
+    if (data){
+
+        console.log(data);
+
+    } else {
+        setTimeout(function(){
+            //look for the status of my sent challenge
+            checkSentChallenge(userID);
+        }, 2000);
+    }
 }
 
 
