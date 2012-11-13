@@ -3,12 +3,12 @@
 //Check if they should be here!
 //if so - prepare data and make call to data/biz layer
 
-error_reporting(E_ALL);
-require "./BizDataLayer/gameBizData.php";
+//error_reporting(E_ALL);
+require_once('./BizDataLayer/gameBizData.php');
 //Why include the database stuff here?  (not doing any db stuff in the service layer!)
 //because it forces all to go through the service layer in order to get to the bizLayer
 //if someone tries to access the bizLayer on it's own the code will fail since there isn't a connection!
-require "../../dbInfoPS.inc";//to use we need to put in: global $mysqli;
+require_once("../../dbInfoPS.inc");//to use we need to put in: global $mysqli;
 //remember that dbInfo.inc looks like:
 /*
 $mysqli=new mysqli("localhost","yourUsername","yourPass",'yourUsername');             

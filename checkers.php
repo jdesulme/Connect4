@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>checkers (turns working, logic not)</title>
-	<style type="text/css">
+    <title>checkers (turns working, logic not)</title>
+    <meta charset="utf-8">
+    <style type="text/css">
 		#background { fill: #666; stroke: black; stroke-width: 2px; }
 		.player0   {fill: #990000; stroke: white; stroke-width: 1px; }
 		.player1 {fill: green; stroke: red; stroke-width: 1px; }

@@ -107,10 +107,6 @@ function rejectedChallengeCallback(data){
  * @param data
  */
 function challengePlayerCallback(data){
-    console.log(data[0].id_challenges);
-    console.log(data[0].state);
-    console.log(data[0].id_game);
-
     //getChallengeCallback
     //if the challenge is accepted
         //redirect them to the game itself

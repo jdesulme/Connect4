@@ -1,6 +1,6 @@
 <?php
 //ALL game goes in this folder
-
+/*
 	function checkTurn($d,$ip,$token){
 		//a VERY good idea to check the token make sure they should be here - then...
 
@@ -16,7 +16,7 @@
 			echo(checkTurnData($gameId,$userId));
 		
 	}
-
+*/
 
 
 ?>

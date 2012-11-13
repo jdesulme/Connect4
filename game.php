@@ -68,8 +68,8 @@ Page::html_header(null,'Connect 4 - Game');
     <script src="js/ajaxFunctions.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var gameId=<?=$_GET['gameID']?>;
-        var player="<?=$userID?>";
+        var gameId = <?=$_GET['gameID']?>;
+        var player = "<?=$userID?>";
         //alert(playerId);
         initGameAjax('start', gameId);
     </script>
