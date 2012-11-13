@@ -1,5 +1,6 @@
 <?php
 require_once('./BizDataLayer/challengeData.php');
+require_once('./BizDataLayer/userData.php');
 require_once('./svcLayer/security.php');
 
 /**
@@ -68,6 +69,7 @@ function updateChallenge($d,$ip,$token){
             //create a new game record and get the id to put inside the challenge record
             $gameID = createNewGame($player1,$player2);
             updateAcceptChallengeData($state,$player2,$gameID);
+            setPlayerStatusDataByID($gameID, $player2);
             $result['gameID'] = $gameID;
 
         } else {

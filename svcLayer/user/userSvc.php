@@ -105,6 +105,18 @@ function getAllUsers($d, $ip,$token){
     }
 }
 
+function updatePlayerStatus($d, $ip,$token){
+    if (verify_token($ip, $token)) {
+        list($status, $userID) = explode('|',$d);
+        echo setPlayerStatusDataByID($status, $userID);
+    } else {
+        $result['token'] = 'fail';
+        echo json_encode($result);
+        //logout();
+    }
+
+}
+
 
 function getAvatar($email, $ip, $token) {
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);

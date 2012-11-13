@@ -115,6 +115,9 @@ function challengePlayerCallback(data){
 
     if (data[0].state == 'A'){
         console.log('Challenge Accepted -> Go to the game');
+        //redirects and updates their status
+        playerInfo = data[0].id_challenges + '|' + userID;
+        ajaxCall('POST', {a:'user',method:'updatePlayerStatus', data: playerInfo}, null);
         window.location = 'game.php?gameID=' + data[0].id_game;
 
    } else if (data[0].state == 'D') {

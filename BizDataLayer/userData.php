@@ -63,6 +63,31 @@ function setPlayerStatusData($active, $username){
 }
 
 /**
+ * Updates a users status in the user table
+ * @param $active sets the users status to active, inactive, or gameid
+ * @param $userID
+ * @throws Exception
+ * @internal param int $username
+ */
+function setPlayerStatusDataByID($active, $userID){
+    global $mysqli;
+
+    $sql = "UPDATE user SET status = ? WHERE id_user = ?";
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('ii', intval($active), intval($userID));
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            throw new Exception("An error occurred while setting player status");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - setPlayerStatusData';
+    }
+    // $mysqli->close();
+}
+/**
  * Checks to see if the supplied username already exists
  * @param $username
  * @return bool

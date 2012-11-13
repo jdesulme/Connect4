@@ -34,11 +34,24 @@ function getOnlineUsers(){
 
 function getOnlineUsersCallback(users){
     console.log(users);
-    var tmp = '';
+    var tmp;
 
     $.each(users, function(i,itm){
         if (itm.username !== username){
-            var status = (itm.status > 0) ? 'green' : 'red';
+            var status;
+
+            switch (itm.status){
+                case -1 :
+                    status = 'red';
+                    break;
+                case 0 :
+                    status = 'green';
+                    break;
+                default :
+                    status = 'yellow';
+                    break;
+            }
+
             tmp += '<li id="'+ itm.id_user + '" class="' + status + '" >' + itm.username +'</li>';
         }
     });
