@@ -36,7 +36,6 @@ function getOnlineUsersCallback(users){
     var tmp = [];
 
     $.each(users, function(i,itm){
-    console.log(users);
         if (itm.username !== username){
             var status;
 

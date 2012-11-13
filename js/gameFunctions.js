@@ -24,7 +24,7 @@ function gameInit(){
 	for(i=0;i<BOARDWIDTH;i++){
 		boardArr[i]=new Array();
 		for(j=0;j<BOARDHEIGHT;j++){
-			boardArr[i][j]=new Cell(document.getElementById('game_'+gameId),'cell_'+j+i,75,j,i);
+			boardArr[i][j]=new Cell(document.getElementById('game_'+gameId),'cell_'+j+i,60,j,i);
 		}
 	}
 	
@@ -34,10 +34,10 @@ function gameInit(){
 	var idCount=0;
 	for(i=0;i<8;i++){
 		for(j=0;j<3;j++){
-			if((i+j)%2==0){
-				pieceArr[0][idCount]=new Piece('game_'+gameId,0,j,i,'Checker',idCount);
+		//	if((i+j)%2==0){
+				pieceArr[0][idCount]=new Piece('game_'+gameId,0,570,250,'Checker',idCount);
 				idCount++;
-			}
+		//	}
 		}
 	}
 				
@@ -46,10 +46,10 @@ function gameInit(){
 	idCount=0
 	for(i=0;i<8;i++){
 		for(j=5;j<8;j++){
-			if((i+j)%2==0){
-				pieceArr[1][idCount]=new Piece('game_'+gameId,1,j,i,'Checker',idCount);
+		//	if((i+j)%2==0){
+				pieceArr[1][idCount]=new Piece('game_'+gameId,1,570,310,'Checker',idCount);
 				idCount++;
-			}
+		//	}
 		}
 	}
 
@@ -122,8 +122,13 @@ function releaseMove(evt){
 //	move the thing I'm moving...
 ////////////////
 function go(evt){
-	if(mover != ''){
-		setTransform(mover,evt.clientX,evt.clientY);
+    console.log('X: '+ evt.clientX + ' Y: ' + evt.clientY );
+    var mouseX = evt.clientX;
+    var mouseY = evt.client;
+    console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
+
+    if(mover != ''){
+		setTransform(mover,mouseX,mouseY);
 	}
 }
 			
