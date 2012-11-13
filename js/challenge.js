@@ -11,11 +11,14 @@ function checkForChallenge(userID){
 
 /**
  * The callback that keeps checking until something arrives
- * @param data
+ * @param jsonObj
  */
-function checkForChallengeCallback(data){
-    if (data){
-        console.log(data);
+function checkForChallengeCallback(jsonObj){
+    if (jsonObj){
+
+        var player1 = jsonObj[0].player_1;
+        var player2 = jsonObj[0].player_2;
+
         //popup a dialog screen
         //make it last only for 30 seconds
         //after 30 seconds go away and remove the challenge
@@ -27,13 +30,14 @@ function checkForChallengeCallback(data){
             buttons: {
                 "Yes": function() {
                     //accepts the challenge to the player
-                    var challengeData = userID + '|' + 'A';
+                    var challengeData = player1 + '|' + player2  + '|' + 'A';
                     ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, acceptedChallengeCallback);
 
                     $(this).dialog("close");
                 },
                 "No": function() {
-                    var challengeData = userID + '|' + 'D';
+                    var challengeData = player1 + '|' + player2  + '|' + 'D';
+                    console.log(challengeData);
                     ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, null);
 
                     $(this).dialog("close");
@@ -52,8 +56,10 @@ function checkForChallengeCallback(data){
  * @param data
  */
 function acceptedChallengeCallback(data){
+    //create the game board now and update the challenge record with the gameid
     console.log(data)
-    window.location = 'game.php';
+    alert(data);
+    window.location = 'game.php?gameID=' + data.gameID;
     //needs the game id
     //along with the associated players
 
@@ -80,7 +86,6 @@ function challengePlayer(challengeId ) {
                 //sends the challenge to the player
                 var challengeData = userID + '|' + challengeId ;
                 ajaxCall('POST', {a:'challenge',method:'setChallenge', data:challengeData}, checkSentChallenge);
-
                 $(this).dialog( "close" );
 
             },
@@ -102,26 +107,34 @@ function rejectedChallengeCallback(data){
  * @param data
  */
 function challengePlayerCallback(data){
+    console.log(data[0].id_challenges);
+    console.log(data[0].state);
+    console.log(data[0].id_game);
 
     //getChallengeCallback
     //if the challenge is accepted
-    //redirect them to the game itself
+        //redirect them to the game itself
     //else
-    //cancel the challenge and wait for the user
+        //cancel the challenge and wait for the user
 
-    if (data){
+    if (data[0].state == 'A'){
+        console.log('Challenge Accepted -> Go to the game');
+        window.location = 'game.php?gameID=' + data[0].id_game;
 
-        console.log(data);
+   } else if (data[0].state == 'D') {
+        console.log('Challenge Denied -> Display a message')
 
     } else {
         setTimeout(function(){
             //look for the status of my sent challenge
-            checkSentChallenge(userID);
+            checkSentChallenge(data);
         }, 2000);
     }
 }
 
 
-function checkSentChallenge(userID){
-    ajaxCall('POST', {a:'challenge',method:'getChallengeStatus', data:userID}, challengePlayerCallback);
+function checkSentChallenge(data){
+    console.log("checkSentChallenge: " + data[0].id_challenges);
+
+    ajaxCall('POST', {a:'challenge',method:'getChallengeStatus', data: data[0].id_challenges}, challengePlayerCallback);
 }

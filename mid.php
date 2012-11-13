@@ -5,7 +5,7 @@
 		//include all of the files in area 'a'
 		foreach(glob("./svcLayer/".$_REQUEST['a']."/*.php") as $filename){
 			include $filename;
-		}
+        }
 
 		$serviceMethod = $_REQUEST['method'];
 		$data = $_REQUEST['data'];
@@ -21,5 +21,6 @@
 			header("Content-type:application/json");
 			echo $result;
 		}
-	}
+
+    }
 ?>

@@ -28,13 +28,12 @@ $(document).ready(function(){
 });
 
 
-
-
 function getOnlineUsers(){
-    ajaxCall('POST', {a:'user',method:'getAllUsers'}, getOnlineUsersCallback);
+    ajaxCall('POST', {a:'user',method:'getAllUsers', data:null}, getOnlineUsersCallback);
 }
 
 function getOnlineUsersCallback(users){
+    console.log(users);
     var tmp = '';
 
     $.each(users, function(i,itm){

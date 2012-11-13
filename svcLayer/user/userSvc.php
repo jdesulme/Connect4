@@ -95,7 +95,7 @@ function registerUser($d,$ip,$token){
     echo json_encode($result);
 }
 
-function getAllUsers($d,$ip,$token){
+function getAllUsers($d, $ip,$token){
     if (verify_token($ip, $token)) {
         echo getUserData();
     } else {

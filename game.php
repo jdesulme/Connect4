@@ -9,12 +9,14 @@ $ip = ($_SERVER['SERVER_NAME'] == 'localhost') ? '129.21.118.201' : $_SERVER['RE
 
 if (!Authentication::checkToken($ip,$_COOKIE['token']) && $_SESSION['auth'] !== TRUE){
     header("Location: index.php");
+} else if (!isset($_GET['gameID'])){
+    header("Location: lobby.php");
 }
 
 $email = $_SESSION['data'][0]->email;
 $userID = $_SESSION['data'][0]->id_user;
 $username = $_SESSION['data'][0]->username;
-$gameID = 0;
+
 Page::html_header(null,'Connect 4 - Game');
 ?>
 
@@ -51,12 +53,13 @@ Page::html_header(null,'Connect 4 - Game');
                 piece id
             </text>
         </svg>
-    </section>
 
-    <section class="game-board-chat-container">
-        <div id="game-board-chat-entry">
-            <input type="text" id="send-message" maxlength="140" />
-        </div>
+
+        <section class="game-board-chat-container">
+            <div id="game-board-chat-entry">
+                <input type="text" id="send-message" maxlength="140" />
+            </div>
+        </section>
     </section>
 
     <script src="js/Objects/Cell.js" type="text/javascript"></script>
@@ -65,7 +68,7 @@ Page::html_header(null,'Connect 4 - Game');
     <script src="js/ajaxFunctions.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var gameId=<?=$gameID?>;
+        var gameId=<?=$_GET['gameID']?>;
         var player="<?=$userID?>";
         //alert(playerId);
         initGameAjax('start', gameId);
@@ -73,12 +76,14 @@ Page::html_header(null,'Connect 4 - Game');
 
 <?php
 
-$js = array('chat');
-Page::html_footer($js);
 
 new dBug($ip);
 new dBug($_SESSION);
 new dBug($_COOKIE);
+new dBug($_GET);
+
+$js = array('chat');
+Page::html_footer($js);
 
 
 

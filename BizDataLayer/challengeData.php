@@ -12,7 +12,7 @@ require_once('./BizDataLayer/genericFunctions.php');
  */
 function getNewChallengeData($userID){
     global $mysqli;
-    $sql="SELECT player_1, player_2, state FROM challenges c WHERE state = 'W' AND player_2 = ?";
+    $sql="SELECT player_1, player_2, state, id_game FROM challenges c WHERE state = 'W' AND player_2 = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('i',$userID);
@@ -30,21 +30,14 @@ function getNewChallengeData($userID){
 }
 
 
-/**
- * Gets the status of the sent challenge for the originator
- * @param $userID
- * @return json|string
- * @throws Exception
- */
-function getStatusChallengeData($userID){
+function getStatusChallengeData($challengeID){
     global $mysqli;
-    $sql="SELECT state FROM challenges c WHERE player_1 = ?";
+    $sql="SELECT id_challenges, state, id_game  FROM challenges c WHERE id_challenges = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
-            $stmt->bind_param('i',$userID);
+            $stmt->bind_param('i',$challengeID);
             $data = returnJson($stmt);
             $stmt->close();
-            $mysqli->close();
             return $data;
         } else {
             throw new Exception("An error occurred while fetching record data");
@@ -54,6 +47,7 @@ function getStatusChallengeData($userID){
         echo 'fail - get_challenge';
     }
 }
+
 
 /**
  * Creates a new challenge request that initially has waiting stored
@@ -70,16 +64,17 @@ function setChallengeData($p1, $p2){
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('ii',$p1,$p2);
             $stmt->execute();
-            $data = $stmt->insert_id;
+            $data['id_challenges'] = $stmt->insert_id;
             $stmt->close();
-            $mysqli->close();
-            return $data;
+
+            $result[0] = $data;
+            return json_encode($result);
         } else {
             throw new Exception("An error occurred while inserting record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - send_challenge';
+        echo 'fail - setChallengeData';
     }
 }
 
@@ -90,7 +85,7 @@ function setChallengeData($p1, $p2){
  * @return mixed
  * @throws Exception
  */
-function updateChallengeData($player, $state){
+function updateDenyChallengeData($state, $player){
     global $mysqli;
     $sql = 'UPDATE challenges SET state = ? WHERE player_2 = ?';
 
@@ -100,15 +95,56 @@ function updateChallengeData($player, $state){
             $stmt->execute();
             $data = $stmt->affected_rows;
             $stmt->close();
-            $mysqli->close();
             return $data;
         } else {
             throw new Exception("An error occurred while inserting record data");
         }
     } catch(Exception $e){
         log_error($e, $sql, null);
-        echo 'fail - updateChallengeData';
+        echo 'fail - updateDenyChallengeData';
     }
+}
+
+
+function updateAcceptChallengeData($state, $player, $gameID){
+    global $mysqli;
+    $sql = 'UPDATE challenges SET state = ?, id_game = ? WHERE player_2 = ?';
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('sii',$state, $gameID, $player);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            throw new Exception("An error occurred while updating challenge data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - updateAcceptChallengeData';
+    }
+}
+
+function createNewGame($p1,$p2){
+    global $mysqli;
+
+    $sql = 'INSERT INTO game (player_1, player_2) VALUES (?,?)';
+
+    try {
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param('ii',$p1,$p2);
+            $stmt->execute();
+            $data = $stmt->insert_id;
+            $stmt->close();
+            return $data;
+        } else {
+            throw new Exception("An error occurred while inserting record data");
+        }
+    } catch(Exception $e){
+        log_error($e, $sql, null);
+        echo 'fail - createNewGame';
+    }
+
+
 }
 
 ?>
