@@ -29,14 +29,14 @@ $(document).ready(function(){
 
 
 function getOnlineUsers(){
-    ajaxCall('POST', {a:'user',method:'getAllUsers', data:null}, getOnlineUsersCallback);
+    ajaxCall('POST', {a:'user',method:'getAllUsers', data: null}, getOnlineUsersCallback);
 }
 
 function getOnlineUsersCallback(users){
-    console.log(users);
-    var tmp;
+    var tmp = [];
 
     $.each(users, function(i,itm){
+    console.log(users);
         if (itm.username !== username){
             var status;
 
@@ -44,7 +44,7 @@ function getOnlineUsersCallback(users){
                 case -1 :
                     status = 'red';
                     break;
-                case 0 :
+                case 1 :
                     status = 'green';
                     break;
                 default :
@@ -52,11 +52,11 @@ function getOnlineUsersCallback(users){
                     break;
             }
 
-            tmp += '<li id="'+ itm.id_user + '" class="' + status + '" >' + itm.username +'</li>';
+            tmp.push('<li id="'+ itm.id_user + '" class="' + status + '" >' + itm.username +'</li>');
         }
     });
 
-    $('#online-users-box').html(tmp);
+    $('#online-users-box').html(tmp.join(''));
 
     setTimeout(function(){
         getOnlineUsers();
