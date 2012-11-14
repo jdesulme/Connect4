@@ -21,7 +21,7 @@ function Cell(myParent,id,size,col,row) {
 	this.row = row;
 	//initialize the other instance vars
 	this.occupied = '';
-	this.state = 'alive';
+//	this.state = 'alive';
 	this.x = this.col * this.size;
 	this.y = this.row * this.size;
 	this.color = (((this.row+this.col)%2) == 0) ? 'white' : 'white';
