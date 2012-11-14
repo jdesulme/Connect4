@@ -57,11 +57,10 @@ function checkForChallengeCallback(jsonObj){
  */
 function acceptedChallengeCallback(data){
     //create the game board now and update the challenge record with the gameid
-    console.log(data)
-    window.location = 'game.php?gameId=' + data.gameId + '&player=' + username;
     //needs the game id
     //along with the associated players
 
+    window.location = 'game.php?gameId=' + data.gameId + '&player=' + username;
 }
 
 
@@ -111,17 +110,18 @@ function challengePlayerCallback(data){
         //redirect them to the game itself
     //else
         //cancel the challenge and wait for the user
+    console.dir(data);
 
-    if (data[0].state == 'A'){
+    if (data[0].state === 'A'){
         console.log('Challenge Accepted -> Go to the game');
         //redirects and updates their status
         var playerInfo = data[0].id_challenges + '|' + userID;
         ajaxCall('POST', {a:'user',method:'updatePlayerStatus', data: playerInfo}, null);
         window.location = 'game.php?gameId=' + data[0].gameId  + '&player=' + username;
 
-   } else if (data[0].state == 'D') {
+   } else if (data[0].state === 'D') {
         console.log('Challenge Denied -> Display a message');
-        alert('Challenge Denied -> Display a message');
+        alert('Challenge Denied');
 
     } else {
         setTimeout(function(){
