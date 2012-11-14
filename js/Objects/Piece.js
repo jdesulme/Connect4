@@ -14,7 +14,7 @@ function Piece(board,player,cellRow,cellCol,type,num){
 	this.type = type;			// piece needs to know what type of piece it is. (put in so it could be something besides a checker!)
 //	this.current_cell = boardArr[cellRow][cellCol];	// piece needs to know what its current cell/location is.
 	this.number = num;			// piece needs to know what number piece it is.
-	this.isCaptured = false;	// a boolean to know whether the piece has been captured yet or not.
+//	this.isCaptured = false;	// a boolean to know whether the piece has been captured yet or not.
 	
 	//id looks like 'piece_0|3' - for player 0, the third piece
 	this.id = "piece_" + this.player + "|" + this.number;	// the piece also needs to know what it's id is.

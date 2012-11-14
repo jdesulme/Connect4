@@ -84,6 +84,8 @@ function setMove(which){
 	//get the last position of the thing... (NOW through the transform=translate(x,y))
 	xy=getTransform(which);
 
+    console.log(which);
+
 	myX=xy[0];
 	myY=xy[1];
 	//get the object then re-append it to the document so it is on top!
@@ -111,7 +113,7 @@ function releaseMove(evt){
 			//send the move to the server!!!
 		}else{
 			//move back
-			setTransform(mover,myX,myY)
+			//setTransform(mover,myX,myY)
 		}
 		mover = '';	
 	}
@@ -122,10 +124,12 @@ function releaseMove(evt){
 //	move the thing I'm moving...
 ////////////////
 function go(evt){
-    console.log('X: '+ evt.clientX + ' Y: ' + evt.clientY );
-    var mouseX = evt.clientX;
-    var mouseY = evt.client;
-    console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
+  // console.log('X: '+ evt.clientX + ' Y: ' + evt.clientY );
+    var mouseX = (evt.clientX - 150);
+    var mouseY = (evt.clientY - 0);
+  //  console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
+
+    //console.log('go:  ' + mover);
 
     if(mover != ''){
 		setTransform(mover,mouseX,mouseY);
@@ -137,8 +141,8 @@ function go(evt){
 ////////////////
 function checkHit(x,y,which){
 	//lets change the x and y coords (mouse) to match the transform
-	x=x-BOARDX;
-	y=y-BOARDY;	
+	x = x - BOARDX;
+	y = y - BOARDY;
 	//go through ALL of the board
 	for(i=0;i<BOARDWIDTH;i++){
 		for(j=0;j<BOARDHEIGHT;j++){
@@ -180,7 +184,9 @@ function getTransform(which){
 	var hold=document.getElementById(which).getAttributeNS(null,'transform');
 	var retVal=new Array();
 	retVal[0]=hold.substring((hold.search(/\(/) + 1),hold.search(/,/));			//x value
-	retVal[1]=hold.substring((hold.search(/,/) + 1),hold.search(/\)/));;		//y value
+	retVal[1]=hold.substring((hold.search(/,/) + 1),hold.search(/\)/));     	//y value
+
+    console.log('getTransform:  ' + retVal);
 	return retVal;
 }
 			
@@ -188,6 +194,7 @@ function getTransform(which){
 //	look at the id, x, y of the piece sent in and set it's translate
 ////////////////
 function setTransform(which,x,y){
+    console.log('setTransform:  ' + which + ' x: ' + x +' y: ' +y);
 	document.getElementById(which).setAttributeNS(null,'transform','translate('+x+','+y+')');
 }
 
