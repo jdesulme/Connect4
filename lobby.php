@@ -37,13 +37,6 @@ Page::html_header(null,'Connect 4 - Lobby');
 
     <div class="line"></div>
 
-    <script type="text/javascript">
-        var userID = <?=intval($userID)?>;
-        var username = "<?=$username?>";
-        var email = "<?=$email?>";
-        var gameID = 0;
-    </script>
-
     <div class="log"></div>
 
     <div id="dialog-send-challenge" title="Challenge Player?">
@@ -59,15 +52,22 @@ Page::html_header(null,'Connect 4 - Lobby');
         <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Your challenge request has been rejected.</p>
     </div>
 
+
+    <script type="text/javascript">
+        var userID = <?=intval($userID)?>;
+        var username = "<?=$username?>";
+        var email = "<?=$email?>";
+        var gameID = 0;
+    </script>
+
+
 <?php
 
 
+new dBug($_SESSION);
+
 $js = array('chat','challenge','lobby');
 Page::html_footer($js);
-
-new dBug($ip);
-new dBug($_SESSION);
-new dBug($_COOKIE);
 
 
 ?>
