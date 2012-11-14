@@ -25,7 +25,7 @@ function Cell(myParent,id,size,col,row) {
 	this.x = this.col * this.size;
 	this.y = this.row * this.size;
 	this.color = (((this.row+this.col)%2) == 0) ? 'white' : 'white';
-	this.droppable = (((this.row+this.col)%2) == 0) ? true : false;
+	//this.droppable = (((this.row+this.col)%2) == 0) ? true : false;
 	
 	//create it...
 	this.object = this.create();

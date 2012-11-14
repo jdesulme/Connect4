@@ -74,6 +74,7 @@ Page::html_header(null,'Connect 4 - Game');
         //alert(playerId);
         initGameAjax('start', gameId);
 
+
     </script>
 
 <?php

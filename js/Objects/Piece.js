@@ -21,17 +21,17 @@ function Piece(board,player,cellRow,cellCol,type,num){
 //	this.current_cell.isOccupied(this.id);			//set THIS board cell to occupied
 //	this.x=this.current_cell.getCenterX();						// the piece needs to know what its x location value is.
 //	this.y=this.current_cell.getCenterY();						// the piece needs to know what its y location value is as well.
-   	this.x = cellRow;						// the piece needs to know what its x location value is.
-    this.y = cellCol;						// the piece needs to know what its x location value is.
+    this.x=cellRow;						// the piece needs to know what its x location value is.
+    this.y=cellCol;						// the piece needs to know what its x location value is.
 
 	//this.object = eval("new " + type + "(this)");	//eval I wrote in class because I was lazy - better on next line
 	this.object=new window[type](this);				// based on the piece type, you need to create the more specific piece object (Checker, Pawn, Rook, etc.)
 	this.piece = this.object.piece;					// a shortcut to the actual svg piece object
 	this.setAtt("id",this.id);						// make sure the SVG object has the correct id value (make sure it can be dragged)
 	if(this.player == playerId){
-		this.piece.addEventListener('mousedown',function(){ setMove(this.id);},false);	// add a mousedown event listener to your piece so that it can be dragged.
+		this.piece.addEventListener('mousedown', function(){ setMove(this.id);},false);	// add a mousedown event listener to your piece so that it can be dragged.
 	}else{
-		this.piece.addEventListener('mousedown',nypwarning,false);	//tell the user that isn't his piece!
+		this.piece.addEventListener('mousedown', nypwarning,false);	//tell the user that isn't his piece!
 	}
 	//this.piece.addEventListener('mousedown',function(){ document.getElementById('output2').firstChild.nodeValue=this.id;},false); 	//for testing purposes only...
 	document.getElementsByTagName('svg')[0].appendChild(this.piece);
@@ -52,6 +52,11 @@ Piece.prototype={
 	putOnTop:function(){
 		document.getElementsByTagName('svg')[0].removeChild(this.piece);
 		document.getElementsByTagName('svg')[0].appendChild(this.piece);
+	},
+	//will record that I'm now a king and change the one on the screen
+	kingMe:function(id){
+		this.isKing=true;
+		document.getElementById(this.id+'K').setAttributeNS(null,'opacity','0.7');
 	},
 	// function that allows a quick setting of an attribute of the specific piece object
 	setAtt:function(att,val){

@@ -20,7 +20,7 @@ function ajaxCall(GetPost,d,callback){
 ////////////////
 function initGameAjax(whatMethod,val){
 	//data is gameId
-	ajaxCall("POST",{method:whatMethod,a:"game",data:val},callbackInit);
+	ajaxCall("GET",{method:whatMethod,a:"game",data:val},callbackInit);
 }
 ////callbackInit/////
 //callback for initGameAjax
@@ -29,6 +29,7 @@ function callbackInit(jsonObj){
     console.log(jsonObj);
 	//compare the session name to the player name to find out my playerId;
 	turn = jsonObj[0].whoseTurn;
+
 	if(player == jsonObj[0].player1_name){
 		player2 = jsonObj[0].player0_name;
 		playerId = 1;
@@ -36,6 +37,10 @@ function callbackInit(jsonObj){
 		player2 = jsonObj[0].player1_name;
 		playerId = 0;
 	}
+
+    //@TODO fix this to match the object properties being returned
+
+
 	//document.getElementById('output2').firstChild.data='playerId '+playerId+ ' turn '+turn;
 	//start building the game (board and piece)
     gameInit();

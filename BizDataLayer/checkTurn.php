@@ -3,7 +3,7 @@ require_once("../../dbInfoPS.inc");
 //include exceptions
 require_once('./BizDataLayer/exception.php');
 require_once('./BizDataLayer/genericFunctions.php');
-
+/*
 	function checkTurnData($gid,$uid){
         global $mysqli;
         $sql="SELECT gameId, whoseTurn FROM game WHERE gameId=? ";
@@ -27,4 +27,5 @@ require_once('./BizDataLayer/genericFunctions.php');
 		//Select myTurn from gameTable where gameId=$gid and userId=$uid
 		return '[{"gameId":55,"turn":true}]';
 	}
+*/
 ?>

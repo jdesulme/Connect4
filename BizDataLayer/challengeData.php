@@ -127,7 +127,7 @@ function updateAcceptChallengeData($state, $player, $gameID){
 function createNewGame($p1,$p2){
     global $mysqli;
 
-    $sql = 'INSERT INTO game (player_0, player_1) VALUES (?,?)';
+    $sql = 'INSERT INTO game (player0, player1) VALUES (?,?)';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){

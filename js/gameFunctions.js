@@ -34,10 +34,10 @@ function gameInit(){
 	var idCount=0;
 	for(var i=0;i<8;i++){
 		for(var j=0;j<3;j++){
-		//	if((i+j)%2==0){
+			//if((i+j)%2==0){
 				pieceArr[0][idCount]=new Piece('game_'+gameId,0,570,250,'Checker',idCount);
 				idCount++;
-		//	}
+			//}
 		}
 	}
 				
@@ -46,10 +46,10 @@ function gameInit(){
     var idCount=0
 	for(var i=0;i<8;i++){
 		for(var j=5;j<8;j++){
-		//	if((i+j)%2==0){
+			//if((i+j)%2==0){
 				pieceArr[1][idCount]=new Piece('game_'+gameId,1,570,310,'Checker',idCount);
 				idCount++;
-		//	}
+			//}
 		}
 	}
 

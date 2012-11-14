@@ -5,6 +5,7 @@
 
 //error_reporting(E_ALL);
 require_once('./BizDataLayer/gameBizData.php');
+require_once('./svcLayer/security.php');
 //Why include the database stuff here?  (not doing any db stuff in the service layer!)
 //because it forces all to go through the service layer in order to get to the bizLayer
 //if someone tries to access the bizLayer on it's own the code will fail since there isn't a connection!
@@ -22,10 +23,10 @@ require_once('./BizDataLayer/gameBizData.php');
  */
 
 function start($d, $ip, $token){
-	//Should they be here?  (check)
+    //Should they be here?  (check)
 	//if true:
     if (verify_token($ip, $token)) {
-        return startData($d);
+        echo startData($d);
     } else {
         $result['token'] = 'fail';
         echo json_encode($result);

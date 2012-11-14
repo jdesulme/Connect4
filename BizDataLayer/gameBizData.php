@@ -20,33 +20,37 @@ function startData($gameId){
 	global $mysqli;
 	//return $gameId.'sdf';
 	//simple test for THIS 'game' - resets the last move and such to empty
-	$sql = "UPDATE game SET player_0_pieceID=null, player_0_boardI=null, player_0_boardJ=null, player_1_pieceID=null, player_1_boardI=null, player_1_boardJ=null WHERE gameId=?";
-	try{
-		if($stmt=$mysqli->prepare($sql)){
+	$sql = "UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null WHERE gameId=?";
+
+    try {
+		if ($stmt=$mysqli->prepare($sql)){
 			//bind parameters for the markers (s - string, i - int, d - double, b - blob)
 			$stmt->bind_param("i",$gameId);
 			$stmt->execute();
 			$stmt->close();
-		}else{
+		} else {
         	throw new Exception("An error occurred while setting up data");
         }
-	}catch (Exception $e) {
+	} catch (Exception $e) {
         log_error($e, $sql, null);
 		return false;
     }
+
+
 	//get the init of the game
-	$sql = "SELECT * FROM game WHERE gameId=?";
-	try{
-		if($stmt=$mysqli->prepare($sql)){
+	$sql2 = "SELECT * FROM game WHERE gameId=?";
+	try {
+		if ($stmt = $mysqli->prepare($sql2)){
 			//bind parameters for the markers (s - string, i - int, d - double, b - blob)
 			$stmt->bind_param("i",$gameId);
-			$data=returnJson($stmt);
+			$data = returnJson($stmt);
+            $stmt->close();
 			$mysqli->close();
 			return $data;
-		}else{
+		} else {
             throw new Exception("An error occurred while fetching record data");
         }
-	}catch (Exception $e) {
+	} catch (Exception $e) {
         log_error($e, $sql, null);
 		return false;
     }
