@@ -8,7 +8,7 @@ require_once('./BizDataLayer/genericFunctions.php');
 
 function getChatData($room){
     global $mysqli;
-    $sql="SELECT username, message, email, time_stamp FROM chat c JOIN user u USING(id_user) WHERE c.room = ? ORDER BY time_stamp ASC";
+    $sql="SELECT username, message, email, time_stamp FROM chat c LEFT JOIN user u USING(id_user) WHERE c.room = ? ORDER BY time_stamp ASC";
     try {
         if ($stmt = $mysqli->prepare($sql)){
 			$stmt->bind_param('i',$room);

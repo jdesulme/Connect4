@@ -6,20 +6,17 @@ session_start();
 require_once("settings.php");
 //for working on local host
 $ip = ($_SERVER['SERVER_NAME'] == 'localhost') ? '129.21.118.201' : $_SERVER['REMOTE_ADDR'];
-/*
 
-TODO: Need to put back the correct credentials
 if (!Authentication::checkToken($ip,$_COOKIE['token']) && $_SESSION['auth'] !== TRUE){
     header("Location: index.php");
-} else if (!isset($_GET['gameID'])){
+} else if (!isset($_GET['gameId'])){
     header("Location: lobby.php");
 }
 
 $email = $_SESSION['data'][0]->email;
 $userID = $_SESSION['data'][0]->id_user;
-$username = $_SESSION['data'][0]->username;
-*/
-$username = $_GET['player'];
+
+
 Page::html_header(null,'Connect 4 - Game');
 ?>
 
@@ -59,9 +56,6 @@ Page::html_header(null,'Connect 4 - Game');
                 piece id
             </text>
         </svg>
-
-
-
     </section>
 
     <script src="js/Objects/Cell.js" type="text/javascript"></script>
@@ -72,11 +66,14 @@ Page::html_header(null,'Connect 4 - Game');
     <script src="js/game.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var gameId = <?=$_GET['gameID']?>;
+        var gameId = <?=$_GET['gameId']?>;
         var player = "<?=$_GET['player']?>";
+        var username = "<?=$_GET['player']?>";
+        var userID = <?=$userID?>;
+
         //alert(playerId);
         initGameAjax('start', gameId);
-        var userID = 10;
+
     </script>
 
 <?php

@@ -16,8 +16,8 @@ function checkForChallenge(userID){
 function checkForChallengeCallback(jsonObj){
     if (jsonObj){
 
-        var player1 = jsonObj[0].player_1;
-        var player2 = jsonObj[0].player_2;
+        var player1 = jsonObj[0].player_0;
+        var player2 = jsonObj[0].player_1;
 
         //popup a dialog screen
         //make it last only for 30 seconds
@@ -58,8 +58,7 @@ function checkForChallengeCallback(jsonObj){
 function acceptedChallengeCallback(data){
     //create the game board now and update the challenge record with the gameid
     console.log(data)
-    alert(data);
-    window.location = 'game.php?gameID=' + data.gameID;
+    window.location = 'game.php?gameId=' + data.gameId + '&player=' + username;
     //needs the game id
     //along with the associated players
 
@@ -99,7 +98,7 @@ function challengePlayer(challengeId ) {
 
 
 function rejectedChallengeCallback(data){
-    console.log(data)
+    console.log(data);
 }
 
 /**
@@ -116,12 +115,12 @@ function challengePlayerCallback(data){
     if (data[0].state == 'A'){
         console.log('Challenge Accepted -> Go to the game');
         //redirects and updates their status
-        playerInfo = data[0].id_challenges + '|' + userID;
+        var playerInfo = data[0].id_challenges + '|' + userID;
         ajaxCall('POST', {a:'user',method:'updatePlayerStatus', data: playerInfo}, null);
-        window.location = 'game.php?gameID=' + data[0].id_game;
+        window.location = 'game.php?gameId=' + data[0].gameId  + '&player=' + username;
 
    } else if (data[0].state == 'D') {
-        console.log('Challenge Denied -> Display a message')
+        console.log('Challenge Denied -> Display a message');
 
     } else {
         setTimeout(function(){

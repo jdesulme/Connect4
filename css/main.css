@@ -221,6 +221,7 @@ footer {
     margin: auto;
     text-align: center;
     height: 520px;
+    width: 270px;
     display: block;
     float: left;
 }
@@ -381,20 +382,24 @@ li.red {
    Original Checker Game Style
    ========================================================================== */
 #background { fill: #F2F2F2; opacity: 0.7; }
-.player0   {fill: #990000; stroke: white; stroke-width: 1px; }
-.player1 {fill: green; stroke: #6D0D00; stroke-width: 1px; }
+.player0   {fill: #FF6600; stroke: white; stroke-width: 1px; }
+.player1 {fill: #0A4366; stroke: white; stroke-width: 1px; }
 .htmlBlock {position:absolute;top:200px;left:300px;width:200px;height:100px;background:#ffc;padding:10px;display:none;}
 body{padding:0px;margin:0px;}
-.cell_white{fill:white;stroke-width:2px;stroke:#6D0D00;}
+.cell_white{
+    fill: hsl(7, 100%, 21%);
+    stroke-width: 2px;
+    stroke: white;
+}
 .cell_black{fill:white;stroke-width:2px;stroke:#6D0D00;}
 .cell_alert{fill:white;stroke-width:2px;stroke:#6D0D00;}
 .name_black{fill:black;font-size:18px}
 .name_orange{fill:orange;font-size:24px;}
 
 .cell_circle {
-    color: transparent;
+    color: white;
     stroke: hsl(7, 100%, 21%);
-    fill: transparent;
+    fill: white;
     stroke-width: 2px;
 }
 

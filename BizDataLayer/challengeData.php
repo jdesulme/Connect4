@@ -12,7 +12,7 @@ require_once('./BizDataLayer/genericFunctions.php');
  */
 function getNewChallengeData($userID){
     global $mysqli;
-    $sql="SELECT player_1, player_2, state, id_game FROM challenges c WHERE state = 'W' AND player_2 = ?";
+    $sql="SELECT player_0, player_1, state, gameId FROM challenges c WHERE state = 'W' AND player_1 = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('i',$userID);
@@ -32,7 +32,7 @@ function getNewChallengeData($userID){
 
 function getStatusChallengeData($challengeID){
     global $mysqli;
-    $sql="SELECT id_challenges, state, id_game  FROM challenges c WHERE id_challenges = ?";
+    $sql="SELECT id_challenges, state, gameId  FROM challenges c WHERE id_challenges = ?";
     try {
         if ($stmt = $mysqli->prepare($sql)){
             $stmt->bind_param('i',$challengeID);
@@ -58,7 +58,7 @@ function getStatusChallengeData($challengeID){
  */
 function setChallengeData($p1, $p2){
     global $mysqli;
-    $sql = 'INSERT INTO challenges (player_1, player_2) VALUES (?,?)';
+    $sql = 'INSERT INTO challenges (player_0, player_1) VALUES (?,?)';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
@@ -87,7 +87,7 @@ function setChallengeData($p1, $p2){
  */
 function updateDenyChallengeData($state, $player){
     global $mysqli;
-    $sql = 'UPDATE challenges SET state = ? WHERE player_2 = ?';
+    $sql = 'UPDATE challenges SET state = ? WHERE player_1 = ?';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
@@ -108,7 +108,7 @@ function updateDenyChallengeData($state, $player){
 
 function updateAcceptChallengeData($state, $player, $gameID){
     global $mysqli;
-    $sql = 'UPDATE challenges SET state = ?, id_game = ? WHERE player_2 = ?';
+    $sql = 'UPDATE challenges SET state = ?, gameId = ? WHERE player_1 = ?';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){
@@ -127,7 +127,7 @@ function updateAcceptChallengeData($state, $player, $gameID){
 function createNewGame($p1,$p2){
     global $mysqli;
 
-    $sql = 'INSERT INTO game (player_1, player_2) VALUES (?,?)';
+    $sql = 'INSERT INTO game (player_0, player_1) VALUES (?,?)';
 
     try {
         if ($stmt = $mysqli->prepare($sql)){

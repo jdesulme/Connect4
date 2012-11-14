@@ -21,8 +21,8 @@ function Piece(board,player,cellRow,cellCol,type,num){
 //	this.current_cell.isOccupied(this.id);			//set THIS board cell to occupied
 //	this.x=this.current_cell.getCenterX();						// the piece needs to know what its x location value is.
 //	this.y=this.current_cell.getCenterY();						// the piece needs to know what its y location value is as well.
-   	this.x=cellRow;						// the piece needs to know what its x location value is.
-    this.y=cellCol;						// the piece needs to know what its x location value is.
+   	this.x = cellRow;						// the piece needs to know what its x location value is.
+    this.y = cellCol;						// the piece needs to know what its x location value is.
 
 	//this.object = eval("new " + type + "(this)");	//eval I wrote in class because I was lazy - better on next line
 	this.object=new window[type](this);				// based on the piece type, you need to create the more specific piece object (Checker, Pawn, Rook, etc.)
@@ -53,11 +53,6 @@ Piece.prototype={
 		document.getElementsByTagName('svg')[0].removeChild(this.piece);
 		document.getElementsByTagName('svg')[0].appendChild(this.piece);
 	},
-	//will record that I'm now a king and change the one on the screen
-	kingMe:function(id){
-		this.isKing=true;
-		document.getElementById(this.id+'K').setAttributeNS(null,'opacity','0.7');
-	},
 	// function that allows a quick setting of an attribute of the specific piece object
 	setAtt:function(att,val){
 		this.piece.setAttributeNS(null,att,val);
@@ -76,20 +71,21 @@ function Checker(parent) {
 		
 	// create the svg 'checker' piece.
 	var circ = document.createElementNS("http://www.w3.org/2000/svg","circle");
-	circ.setAttributeNS(null,"r",'25');
+	circ.setAttributeNS(null,"r",'22');
 	circ.setAttributeNS(null,"class",'player' + this.parent.player);					// change the color according to player
 	this.piece.appendChild(circ);												// add the svg 'checker' to svg group
 	//create more circles to prove I'm moving the group (and to make it purty)
 	var circ = document.createElementNS("http://www.w3.org/2000/svg","circle");
-	circ.setAttributeNS(null,"r",'18');
+	circ.setAttributeNS(null,"r",'16');
 	circ.setAttributeNS(null,"fill",'white');
 	circ.setAttributeNS(null,"opacity",'0.3');
 	this.piece.appendChild(circ);
 	var circ = document.createElementNS("http://www.w3.org/2000/svg","circle");
-	circ.setAttributeNS(null,"r",'10');
+	circ.setAttributeNS(null,"r",'8');
 	circ.setAttributeNS(null,"fill",'white');
 	circ.setAttributeNS(null,"opacity",'0.3');
 	this.piece.appendChild(circ);
+/*
 	var K = document.createElementNS("http://www.w3.org/2000/svg","polygon");
 	K.setAttributeNS(null,"points",'-15,-10 -8,10 8,10 15,-10 7,0 0,-18 -7,0');
 	K.setAttributeNS(null,"stroke",'black');
@@ -98,7 +94,7 @@ function Checker(parent) {
 	K.setAttributeNS(null,"opacity",'0');
 	K.setAttributeNS(null,"id",this.parent.id+'K');
 	this.piece.appendChild(K);
-	
+*/
 	// return this object to be stored in a variable
 	return this;
 }

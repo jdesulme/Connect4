@@ -2,8 +2,8 @@ var xhtmlns = "http://www.w3.org/1999/xhtml";
 var svgns = "http://www.w3.org/2000/svg";
 var BOARDX = 50;				//starting pos of board
 var BOARDY = 50;				//look above
-var boardArr = new Array();		//2d array [row][col]
-var pieceArr = new Array();		//2d array [player][piece] (player is either 0 or 1)
+var boardArr = [];		//2d array [row][col]
+var pieceArr = [];		//2d array [player][piece] (player is either 0 or 1)
 var BOARDWIDTH = 8;				//how many squares across
 var BOARDHEIGHT = 8;			//how many squares down
 //the problem of dragging....
@@ -21,19 +21,19 @@ function gameInit(){
 	document.getElementsByTagName('svg')[0].insertBefore(gEle,document.getElementsByTagName('svg')[0].childNodes[5]);
 	//create the board...
 	//var x = new Cell(document.getElementById('someIDsetByTheServer'),'cell_00',75,0,0);
-	for(i=0;i<BOARDWIDTH;i++){
-		boardArr[i]=new Array();
-		for(j=0;j<BOARDHEIGHT;j++){
+	for(var i=0;i<BOARDWIDTH;i++){
+		boardArr[i]=[];
+		for(var j=0;j<BOARDHEIGHT;j++){
 			boardArr[i][j]=new Cell(document.getElementById('game_'+gameId),'cell_'+j+i,60,j,i);
 		}
 	}
 	
 	//new Piece(board,player,cellRow,cellCol,type,num)
 	//create red
-	pieceArr[0]=new Array();
+	pieceArr[0]=[];
 	var idCount=0;
-	for(i=0;i<8;i++){
-		for(j=0;j<3;j++){
+	for(var i=0;i<8;i++){
+		for(var j=0;j<3;j++){
 		//	if((i+j)%2==0){
 				pieceArr[0][idCount]=new Piece('game_'+gameId,0,570,250,'Checker',idCount);
 				idCount++;
@@ -42,10 +42,10 @@ function gameInit(){
 	}
 				
 	//create green
-	pieceArr[1]=new Array();
-	idCount=0
-	for(i=0;i<8;i++){
-		for(j=5;j<8;j++){
+	pieceArr[1]=[];
+    var idCount=0
+	for(var i=0;i<8;i++){
+		for(var j=5;j<8;j++){
 		//	if((i+j)%2==0){
 				pieceArr[1][idCount]=new Piece('game_'+gameId,1,570,310,'Checker',idCount);
 				idCount++;
@@ -82,12 +82,12 @@ function gameInit(){
 function setMove(which){		
 	mover = which;
 	//get the last position of the thing... (NOW through the transform=translate(x,y))
-	xy=getTransform(which);
+	var xy = getTransform(which);
 
     console.log(which);
 
-	myX=xy[0];
-	myY=xy[1];
+	myX = xy[0];
+	myY = xy[1];
 	//get the object then re-append it to the document so it is on top!
 	getPiece(which).putOnTop(which);
 }
@@ -129,6 +129,16 @@ function go(evt){
   // console.log('X: '+ evt.clientX + ' Y: ' + evt.clientY );
     var mouseX = (evt.clientX - 150);
     var mouseY = (evt.clientY - 0);
+
+    /*
+    translation = C.getAttributeNS(null, "transform").slice(10,-1).split(' ');
+    sx = parseInt(translation[0]);
+    sy = parseInt(translation[1]);
+
+    C.setAttributeNS(null, "transform", "translate(" + (sx + evt.clientX - x1) + " " + (sy + evt.clientY - y1) + ")");
+    x1 = evt.clientX;
+    y1 = evt.clientY;
+    */
   //  console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
 
     //console.log('go:  ' + mover);
@@ -146,8 +156,8 @@ function checkHit(x,y,which){
 	x = x - BOARDX;
 	y = y - BOARDY;
 	//go through ALL of the board
-	for(i=0;i<BOARDWIDTH;i++){
-		for(j=0;j<BOARDHEIGHT;j++){
+	for(var i=0;i<BOARDWIDTH;i++){
+		for(var j=0;j<BOARDHEIGHT;j++){
 			var drop = boardArr[i][j].myBBox;
 			//document.getElementById('output2').firstChild.nodeValue+=x +":"+drop.x+"|";
 			if(x>drop.x && x<(drop.x+drop.width) && y>drop.y && y<(drop.y+drop.height) && boardArr[i][j].droppable && boardArr[i][j].occupied == ''){
@@ -184,7 +194,7 @@ function getPiece(which){
 ////////////////
 function getTransform(which){
 	var hold=document.getElementById(which).getAttributeNS(null,'transform');
-	var retVal=new Array();
+	var retVal=[];
 	retVal[0]=hold.substring((hold.search(/\(/) + 1),hold.search(/,/)); //x value
 	retVal[1]=hold.substring((hold.search(/,/) + 1),hold.search(/\)/)); //y value
 

@@ -26,6 +26,7 @@ function initGameAjax(whatMethod,val){
 //callback for initGameAjax
 ////////////////
 function callbackInit(jsonObj){
+    console.log(jsonObj);
 	//compare the session name to the player name to find out my playerId;
 	turn = jsonObj[0].whoseTurn;
 	if(player == jsonObj[0].player1_name){

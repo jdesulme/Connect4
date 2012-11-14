@@ -67,14 +67,14 @@ function updateChallenge($d,$ip,$token){
 
         if ($state == 'A'){
             //create a new game record and get the id to put inside the challenge record
-            $gameID = createNewGame($player1,$player2);
-            updateAcceptChallengeData($state,$player2,$gameID);
-            setPlayerStatusDataByID($gameID, $player2);
-            $result['gameID'] = $gameID;
+            $gameId = createNewGame($player1,$player2);
+            updateAcceptChallengeData($state,$player2,$gameId);
+            setPlayerStatusDataByID($gameId, $player2);
+            $result['$gameId'] = $gameId;
 
         } else {
             updateDenyChallengeData($state, $player2);
-            $result['gameID'] = null;
+            $result['$gameId'] = null;
         }
         echo json_encode($result);
     } else {

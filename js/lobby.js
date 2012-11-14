@@ -8,7 +8,7 @@ $(document).ready(function(){
 
             if (message !== ''){
                 chatMessageBox.val('');
-                sendChat(userID,message,gameID);
+                sendChat(userID,message,gameId);
             }
 		}
 	});
@@ -21,7 +21,7 @@ $(document).ready(function(){
         console.log(this.id + '  ' + $(this).text());
     });
 
-	getChat(gameID);
+	getChat(gameId);
     getOnlineUsers();
     getProfilePic();
     checkForChallenge(userID);

@@ -15,23 +15,24 @@ function getChat(roomNum){
 
 function getChatCallback(users){
 
-    var tmp = '';
-    $.each(users, function(i,itm){
-        tmp += '<li>';
+    if (users !== null) {
+        var tmp = '';
+        $.each(users, function(i,itm){
+            tmp += '<li>';
 
-        //don't display the message for the original player
-        if(itm.username !== username){
-            tmp += itm.username + ': ' ;
-        }
+            //don't display the message for the original player
+            if(itm.username !== username){
+                tmp += itm.username + ': ' ;
+            }
 
-        tmp += itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
-    });
+            tmp += itm.message +' <span class="time_stamp"> ' + itm.time_stamp+'</span></li>';
+        });
 
-    chatBox.html(tmp);
-    scrollChatBox();
-
+        chatBox.html(tmp);
+        scrollChatBox();
+    }
     setTimeout(function(){
-        getChat(gameID);
+        getChat(gameId);
     }, 2000);
 }
 

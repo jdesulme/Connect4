@@ -57,7 +57,7 @@ Page::html_header(null,'Connect 4 - Lobby');
         var userID = <?=intval($userID)?>;
         var username = "<?=$username?>";
         var email = "<?=$email?>";
-        var gameID = 0;
+        var gameId = 0;
     </script>
 
 
