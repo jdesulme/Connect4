@@ -121,6 +121,7 @@ function challengePlayerCallback(data){
 
    } else if (data[0].state == 'D') {
         console.log('Challenge Denied -> Display a message');
+        alert('Challenge Denied -> Display a message');
 
     } else {
         setTimeout(function(){

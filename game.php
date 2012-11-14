@@ -24,7 +24,7 @@ Page::html_header(null,'Connect 4 - Game');
         <nav>
             <p>Connect 4</p>
             <p><span id="profilePic"></span></p>
-            <p><?=$username?></p>
+            <p><?=$_GET['player']?></p>
             <p><a id="logout">Logout</a></p>
         </nav>
     </header>
