@@ -43,15 +43,30 @@ function Cell(myParent,id,size,col,row) {
 Cell.prototype={
 	//create it...
 	create:function(){
+
+        var gEle=document.createElementNS(svgns,'g');
+        gEle.setAttributeNS(null,'transform','translate('+this.x+','+this.y+')');
+        gEle.setAttributeNS(null,'id',this.id);
+        gEle.onclick=function(){alert(this.id);};
+
 		var rectEle=document.createElementNS(svgns,'rect');
-		rectEle.setAttributeNS(null,'x',this.x+'px');
-		rectEle.setAttributeNS(null,'y',this.y+'px');
+		rectEle.setAttributeNS(null,'x',0);
+		rectEle.setAttributeNS(null,'y',0);
 		rectEle.setAttributeNS(null,'width',this.size+'px');
 		rectEle.setAttributeNS(null,'height',this.size+'px');
 		rectEle.setAttributeNS(null,'class','cell_'+this.color);
-		rectEle.setAttributeNS(null,'id',this.id);
-		rectEle.onclick=function(){alert(this.id);};
-		return rectEle;
+
+        var circEle=document.createElementNS(svgns,'circle');
+        circEle.setAttributeNS(null,'r', ((this.size/2) - 10) +'px');
+        circEle.setAttributeNS(null,'cx',(this.size/2)+'px');
+        circEle.setAttributeNS(null,'cy',(this.size/2)+'px');
+        circEle.setAttributeNS(null,'class','cell_circle');
+
+        gEle.appendChild(rectEle);
+        gEle.appendChild(circEle);
+
+
+        return gEle;
 	},
 	//get my bbox
 	getMyBBox:function(){

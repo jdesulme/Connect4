@@ -102,16 +102,17 @@ function releaseMove(evt){
 		//is it YOUR turn?
 		if(turn == playerId){
 			var hit=checkHit(evt.clientX,evt.clientY,mover);
-		}else{
+		} else {
 			var hit=false;
 			nytwarning();
 		}
-		if(hit==true){
+
+		if (hit==true) {
 			//I'm on the square...
 			//send the move to the server!!!
-		}else{
+		} else {
 			//move back
-			setTransform(mover,myX,myY)
+			setTransform(mover,myX,myY);
 		}
 		mover = '';	
 	}
@@ -127,7 +128,7 @@ function go(evt){
     var mouseY = evt.client;
     console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
 
-    if(mover != ''){
+    if (mover != '') {
 		setTransform(mover,mouseX,mouseY);
 	}
 }

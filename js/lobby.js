@@ -38,6 +38,7 @@ function getOnlineUsersCallback(users){
     $.each(users, function(i,itm){
         if (itm.username !== username){
             var status;
+            
             switch (itm.status){
                 case -1 :
                     status = 'red';
