@@ -11,6 +11,7 @@ var myX;						//hold my last pos.
 var myY;						//hold my last pos.
 var mover='';					//hold the id of the thing I'm moving
 var turn;						//hold whose turn it is (0 or 1)
+var svg = $('svg');
 
 function gameInit(){
 	//create a parent to stick board in...
@@ -34,10 +35,8 @@ function gameInit(){
 	var idCount=0;
 	for(var i=0;i<8;i++){
 		for(var j=0;j<3;j++){
-			//if((i+j)%2==0){
 				pieceArr[0][idCount]=new Piece('game_'+gameId,0,570,250,'Checker',idCount);
 				idCount++;
-			//}
 		}
 	}
 				
@@ -46,10 +45,8 @@ function gameInit(){
     var idCount=0
 	for(var i=0;i<8;i++){
 		for(var j=5;j<8;j++){
-			//if((i+j)%2==0){
 				pieceArr[1][idCount]=new Piece('game_'+gameId,1,570,310,'Checker',idCount);
 				idCount++;
-			//}
 		}
 	}
 
@@ -62,10 +59,10 @@ function gameInit(){
 	document.getElementById('opponentPlayer').firstChild.data+=player2;
 	
 	//set the colors of whose turn it is
-	if(turn==playerId){
+	if (turn==playerId){
 		document.getElementById('youPlayer').setAttributeNS(null,'fill',"orange");
 		document.getElementById('opponentPlayer').setAttributeNS(null,'fill',"black");
-	}else{
+	} else {
 		document.getElementById('youPlayer').setAttributeNS(null,'fill',"black");
 		document.getElementById('opponentPlayer').setAttributeNS(null,'fill',"orange");
 	}
@@ -84,7 +81,7 @@ function setMove(which){
 	//get the last position of the thing... (NOW through the transform=translate(x,y))
 	var xy = getTransform(which);
 
-    console.log(which);
+  //  console.log(which);
 
 	myX = xy[0];
 	myY = xy[1];
@@ -100,12 +97,16 @@ function releaseMove(evt){
 	//alert(evt);
 	//check hit (need the current coords)
 	// get the x and y of the mouse
-	if(mover != ''){
+	if (mover !== ''){
 		//is it YOUR turn?
+
 		if(turn == playerId){
-			var hit=checkHit(evt.clientX,evt.clientY,mover);
+            var mouseX = (evt.clientX  -= svg.position().left);
+            var mouseY = (evt.clientY  -= svg.position().top);
+
+			var hit = checkHit(mouseX, mouseY, mover);
 		} else {
-			var hit=false;
+			var hit = false;
 			nytwarning();
 		}
 
@@ -114,8 +115,7 @@ function releaseMove(evt){
 			//send the move to the server!!!
 		} else {
 			//move back
-			//setTransform(mover,myX,myY)
-
+			setTransform(mover,myX,myY);
 		}
 		mover = '';	
 	}
@@ -126,22 +126,10 @@ function releaseMove(evt){
 //	move the thing I'm moving...
 ////////////////
 function go(evt){
-  // console.log('X: '+ evt.clientX + ' Y: ' + evt.clientY );
-    var mouseX = (evt.clientX - 150);
-    var mouseY = (evt.clientY - 0);
+    var mouseX = (evt.clientX  -= svg.position().left);
+    var mouseY = (evt.clientY  -= svg.position().top);
 
-    /*
-    translation = C.getAttributeNS(null, "transform").slice(10,-1).split(' ');
-    sx = parseInt(translation[0]);
-    sy = parseInt(translation[1]);
-
-    C.setAttributeNS(null, "transform", "translate(" + (sx + evt.clientX - x1) + " " + (sy + evt.clientY - y1) + ")");
-    x1 = evt.clientX;
-    y1 = evt.clientY;
-    */
-  //  console.log('mouseX: '+ evt.clientX + ' mouseY: ' + evt.clientY );
-
-    //console.log('go:  ' + mover);
+   // console.log('go: mouseX->' + mouseX + ' mouseY->' + mouseY);
 
     if (mover != '') {
 		setTransform(mover,mouseX,mouseY);
@@ -152,26 +140,42 @@ function go(evt){
 //	did I land on anything important...
 ////////////////
 function checkHit(x,y,which){
+    //console.log('checkHit:  x->' + x + 'y->' + y);
+
 	//lets change the x and y coords (mouse) to match the transform
 	x = x - BOARDX;
 	y = y - BOARDY;
+
+    //console.log('checkHit: x->' + x + ' y->' + y);
+
 	//go through ALL of the board
 	for(var i=0;i<BOARDWIDTH;i++){
 		for(var j=0;j<BOARDHEIGHT;j++){
 			var drop = boardArr[i][j].myBBox;
-			//document.getElementById('output2').firstChild.nodeValue+=x +":"+drop.x+"|";
-			if(x>drop.x && x<(drop.x+drop.width) && y>drop.y && y<(drop.y+drop.height) && boardArr[i][j].droppable && boardArr[i][j].occupied == ''){
-				
+
+			if (x>drop.x && x<(drop.x+drop.width) && y>drop.y && y<(drop.y+drop.height) && boardArr[i][j].droppable && boardArr[i][j].occupied == ''){
+               // console.dir('drop ' + drop);
 				//NEED - check is it a legal move???
 				//if it is - then
 				//put me to the center....
-				setTransform(which,boardArr[i][j].getCenterX(),boardArr[i][j].getCenterY());
-				//fill the new cell
-				//alert(parseInt(which.substring((which.search(/\|/)+1),which.length)));
-				getPiece(which).changeCell(boardArr[i][j].id,i,j);
-				//change other's board
-				changeBoardAjax(which,i,j,'changeBoard',gameId);
-				
+
+                for (var f=7; f>=0; f--){
+                    if (boardArr[f][j].occupied == '') {
+                        console.dir(boardArr[f][j]);
+
+                        setTransform(which, boardArr[f][j].getCenterX(),boardArr[f][j].getCenterY());
+                        getPiece(which).changeCell(boardArr[f][j].id,f,j);
+
+                        //fill the new cell
+                        console.log(parseInt(which.substring((which.search(/\|/)+1),which.length)));
+
+                        //change other's board
+                        changeBoardAjax(which, f, j, 'changeBoard', gameId);
+
+                        break;
+                    }
+                }
+
 				//change who's turn it is
 				changeTurn();
 				return true;
@@ -206,7 +210,7 @@ function getTransform(which){
 //	look at the id, x, y of the piece sent in and set it's translate
 ////////////////
 function setTransform(which,x,y){
-    console.log('setTransform:  ' + which + ' x: ' + x +' y: ' +y);
+   // console.log('setTransform:  ' + which + ' x: ' + x +' y: ' +y);
 	document.getElementById(which).setAttributeNS(null,'transform','translate('+x+','+y+')');
 }
 
@@ -215,10 +219,10 @@ function setTransform(which,x,y){
 //////////////////
 function changeTurn(){
 	//locally
-	turn=Math.abs(turn-1);
+	//turn = Math.abs(turn-1);
 	//how about for the server (and other player)?
 	//send JSON message to server, have both clients monitor server to know who's turn it is...
-	//document.getElementById('output2').firstChild.data='playerId '+playerId+ ' turn '+turn;
+	document.getElementById('output2').firstChild.data='playerId '+playerId+ ' turn '+turn;
 	changeServerTurnAjax('changeTurn',gameId);
 }
 
@@ -240,10 +244,11 @@ function nytwarning(){
 //	tell player it isn't his piece!
 ////////////////
 function nypwarning(){
-	if(document.getElementById('nyp').getAttributeNS(null,'display') == 'none'){
+	if (document.getElementById('nyp').getAttributeNS(null,'display') == 'none'){
 		document.getElementById('nyp').setAttributeNS(null,'display','inline');
 		setTimeout('nypwarning()',2000);
 	}else{
 		document.getElementById('nyp').setAttributeNS(null,'display','none');
 	}
 }
+

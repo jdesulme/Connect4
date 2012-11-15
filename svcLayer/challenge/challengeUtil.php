@@ -53,7 +53,7 @@ function setChallenge($d,$ip,$token){
 }
 
 /**
- * The challengee updates the status of the challenege
+ * The challengee updates the status of the challenge
  * @param $d -> the userid and state (accept or decline)
  * @param $ip
  * @param $token
@@ -73,6 +73,7 @@ function updateChallenge($d,$ip,$token){
             $result['gameId'] = $gameId;
 
         } else {
+            //the challenge has been denied
             updateDenyChallengeData($state, $player2);
             $result['gameId'] = null;
         }

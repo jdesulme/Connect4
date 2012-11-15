@@ -32,15 +32,13 @@ function checkForChallengeCallback(jsonObj){
                     //accepts the challenge to the player
                     var challengeData = player1 + '|' + player2  + '|' + 'A';
                     ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, acceptedChallengeCallback);
-
                     $(this).dialog("close");
                 },
                 "No": function() {
+                    //denies the challenge and updates the database
                     var challengeData = player1 + '|' + player2  + '|' + 'D';
-                    console.log(challengeData);
                     ajaxCall('POST', {a:'challenge',method:'updateChallenge', data:challengeData}, null);
-
-                    $(this).dialog("close");
+                     $(this).dialog("close");
                 }
             }
         });
@@ -94,14 +92,18 @@ function challengePlayer(challengeId ) {
     });
 }
 
-
-
-function rejectedChallengeCallback(data){
-    console.log(data);
+/**
+ * Checks the database to see if there has been response
+ * @param data
+ */
+function checkSentChallenge(data){
+    console.log("checkSentChallenge: " + data[0].id_challenges);
+    ajaxCall('POST', {a:'challenge',method:'getChallengeStatus', data: data[0].id_challenges}, challengePlayerCallback);
 }
 
+
 /**
- *
+ * Retrieves the response for the sent challenge
  * @param data
  */
 function challengePlayerCallback(data){
@@ -131,9 +133,8 @@ function challengePlayerCallback(data){
     }
 }
 
-
-function checkSentChallenge(data){
-    console.log("checkSentChallenge: " + data[0].id_challenges);
-
-    ajaxCall('POST', {a:'challenge',method:'getChallengeStatus', data: data[0].id_challenges}, challengePlayerCallback);
+function rejectedChallengeCallback(data){
+    console.log(data);
 }
+
+

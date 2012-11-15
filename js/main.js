@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('button').button();
 
+    //logs the user out when clicked
     $('#logout').on('click', function(){
         ajaxCall('post', {a:'user',method:'logout',data:username}, null);
         window.location = 'logout.php';
@@ -31,7 +32,6 @@ function ajaxCall(getPost, d, callback){
 
 $('.log').ajaxComplete(function(e, xhr, settings) {
     //console.log(xhr.responseText);
+    //TODO: Do something with the token fail data
 
 });
-
-//http://www.jblotus.com/2011/05/24/keeping-your-handlebars-js-templates-organized/

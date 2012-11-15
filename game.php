@@ -58,10 +58,10 @@ Page::html_header(null,'Connect 4 - Game');
         </svg>
     </section>
 
+    <script src="js/ajaxFunctions.js" type="text/javascript"></script>
+    <script src="js/gameFunctions.js" type="text/javascript"></script>
     <script src="js/Objects/Cell.js" type="text/javascript"></script>
     <script src="js/Objects/Piece.js" type="text/javascript"></script>
-    <script src="js/gameFunctions.js" type="text/javascript"></script>
-    <script src="js/ajaxFunctions.js" type="text/javascript"></script>
     <script src="js/chat.js" type="text/javascript"></script>
     <script src="js/game.js" type="text/javascript"></script>
 

@@ -1,0 +1,66 @@
+Exception caught @10:59:47 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state= 0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0 WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', '81dd0770685531e...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', '81dd0770685531e...')
+#3 {main}
+
+
+Exception caught @10:59:48 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state= 0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0 WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', 'fc58fba238adf1a...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', 'fc58fba238adf1a...')
+#3 {main}
+
+
+Exception caught @11:00:44 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state= 0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0 WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', 'fc58fba238adf1a...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', 'fc58fba238adf1a...')
+#3 {main}
+
+
+Exception caught @11:03:22 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state=0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', 'fc58fba238adf1a...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', 'fc58fba238adf1a...')
+#3 {main}
+
+
+Exception caught @11:03:28 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state=0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', 'fc58fba238adf1a...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', 'fc58fba238adf1a...')
+#3 {main}
+
+
+Exception caught @11:03:31 11.15.12
+    Message: An error occurred while setting up data
+    SQL: UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state=0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0WHERE gameId=?
+    File: C:\Users\Jeanyhwh\Documents\GitHub\Connect4\BizDataLayer\gameBizData.php
+    Line: 34
+    Trace: #0 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\svcLayer\game\gameSvc.php(29): startData('20')
+#1 [internal function]: start('20', '129.21.118.201', 'fc58fba238adf1a...')
+#2 C:\Users\Jeanyhwh\Documents\GitHub\Connect4\mid.php(17): call_user_func('start', '20', '129.21.118.201', 'fc58fba238adf1a...')
+#3 {main}
+
+

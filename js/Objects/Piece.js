@@ -12,7 +12,7 @@ function Piece(board,player,cellRow,cellCol,type,num){
 	this.board = board;			// piece needs to know the svg board object so that it can be attached to it.
 	this.player = player;		// piece needs to know what player it belongs to.
 	this.type = type;			// piece needs to know what type of piece it is. (put in so it could be something besides a checker!)
-//	this.current_cell = boardArr[cellRow][cellCol];	// piece needs to know what its current cell/location is.
+	this.current_cell = boardArr[0][0];	// piece needs to know what its current cell/location is.
 	this.number = num;			// piece needs to know what number piece it is.
 //	this.isCaptured = false;	// a boolean to know whether the piece has been captured yet or not.
 	
@@ -21,16 +21,16 @@ function Piece(board,player,cellRow,cellCol,type,num){
 //	this.current_cell.isOccupied(this.id);			//set THIS board cell to occupied
 //	this.x=this.current_cell.getCenterX();						// the piece needs to know what its x location value is.
 //	this.y=this.current_cell.getCenterY();						// the piece needs to know what its y location value is as well.
-    this.x=cellRow;						// the piece needs to know what its x location value is.
-    this.y=cellCol;						// the piece needs to know what its x location value is.
+    this.x = cellRow;						// the piece needs to know what its x location value is.
+    this.y = cellCol;						// the piece needs to know what its x location value is.
 
 	//this.object = eval("new " + type + "(this)");	//eval I wrote in class because I was lazy - better on next line
 	this.object=new window[type](this);				// based on the piece type, you need to create the more specific piece object (Checker, Pawn, Rook, etc.)
 	this.piece = this.object.piece;					// a shortcut to the actual svg piece object
 	this.setAtt("id",this.id);						// make sure the SVG object has the correct id value (make sure it can be dragged)
-	if(this.player == playerId){
+	if (this.player == playerId){
 		this.piece.addEventListener('mousedown', function(){ setMove(this.id);},false);	// add a mousedown event listener to your piece so that it can be dragged.
-	}else{
+	} else {
 		this.piece.addEventListener('mousedown', nypwarning,false);	//tell the user that isn't his piece!
 	}
 	//this.piece.addEventListener('mousedown',function(){ document.getElementById('output2').firstChild.nodeValue=this.id;},false); 	//for testing purposes only...

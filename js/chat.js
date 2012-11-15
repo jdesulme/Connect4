@@ -4,7 +4,10 @@ var KEY = {
 		ENTER : 13
 	};
 
-
+/**
+ * Retrieves the chats for a given room
+ * @param roomNum
+ */
 function getChat(roomNum){
     var chatRm = {
         room    : roomNum
@@ -13,8 +16,11 @@ function getChat(roomNum){
     ajaxCall('POST', {a:'chat',method:'getChat', data:chatRm}, getChatCallback);
 }
 
+/**
+ * Displays all the chats in chat box
+ * @param users
+ */
 function getChatCallback(users){
-
     if (users !== null) {
         var tmp = '';
         $.each(users, function(i,itm){
@@ -36,7 +42,12 @@ function getChatCallback(users){
     }, 2000);
 }
 
-
+/**
+ * Sends the chat message to the database
+ * @param player - the player currently logged in
+ * @param txt - message written
+ * @param roomNum - the lobby or game id
+ */
 function sendChat(player, txt, roomNum){
     var chatMsg = {
         id_user : player,

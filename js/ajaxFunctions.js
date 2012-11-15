@@ -1,6 +1,7 @@
 ////ajax util/////
 //d is data sent, looks like {name:value,name2:val2}
 ////////////////
+/*
 function ajaxCall(GetPost,d,callback){
 	$.ajax({
  		type: GetPost,
@@ -12,6 +13,8 @@ function ajaxCall(GetPost,d,callback){
   		success: callback
 	});
 }
+
+*/
 ////initGameAjax/////
 //d is data sent, looks like {name:value,name2:val2}
 //this is my starter call
@@ -48,10 +51,6 @@ function callbackInit(jsonObj){
         playerId = 0;
     }
 
-
-    //@TODO fix this to match the object properties being returned
-
-
 	document.getElementById('output2').firstChild.data='playerId '+playerId+ ' turn '+turn;
 	//start building the game (board and piece)
     gameInit();
@@ -79,7 +78,7 @@ function changeBoardAjax(pieceId,boardI,boardJ,whatMethod,val){
 //callback is callbackcheckTurn
 ////////////////
 function checkTurnAjax(whatMethod,val){
-	if(turn!=playerId){
+	if (turn != playerId){
 		ajaxCall("GET",{method:whatMethod,a:"game",data:val},callbackcheckTurn);
 	}
 	setTimeout(function(){checkTurnAjax('checkTurn',gameId)},3000);
@@ -95,6 +94,7 @@ function callbackcheckTurn(jsonObj){
 		getMoveAjax('getMove',gameId);
 	}
 }
+
 ////checkTurnAjax/////
 //get the last move
 //-called after I find out it is my turn
@@ -133,14 +133,3 @@ function callbackGetMove(jsonObj){
 	//Piece.prototype.changeCell = function(newCell,row,col){
 	getPiece(jsonObj[0]['player'+Math.abs(playerId-1)+'_pieceID']).changeCell('cell_'+jsonObj[0]['player'+Math.abs(playerId-1)+'_boardI']+jsonObj[0]['player'+Math.abs(playerId-1)+'_boardJ'],jsonObj[0]['player'+Math.abs(playerId-1)+'_boardI'],jsonObj[0]['player'+Math.abs(playerId-1)+'_boardJ']);
 }
-
-
-
-
-
-
-
-
-
-
-

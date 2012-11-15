@@ -18,14 +18,16 @@ require_once('./BizDataLayer/genericFunctions.php');
 */
 function startData($gameId){
 	global $mysqli;
+
+    $board_state = '0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0';
 	//return $gameId.'sdf';
 	//simple test for THIS 'game' - resets the last move and such to empty
-	$sql = "UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null WHERE gameId=?";
+	$sql = "UPDATE game SET player0_pieceID=null, player0_boardI=null, player0_boardJ=null, player1_pieceID=null, player1_boardI=null, player1_boardJ=null, board_state=? WHERE gameId=?";
 
     try {
 		if ($stmt=$mysqli->prepare($sql)){
 			//bind parameters for the markers (s - string, i - int, d - double, b - blob)
-			$stmt->bind_param("i",$gameId);
+			$stmt->bind_param("si",$board_state, $gameId);
 			$stmt->execute();
 			$stmt->close();
 		} else {
@@ -113,12 +115,31 @@ function changeTurnData($gameId){
 	changeBoardData
 */
 function changeBoardData($gameId,$pieceId,$boardI,$boardJ,$playerId){
-	//update the board
-	global $mysqli;
-	$sql="UPDATE game SET player".$playerId."_pieceId=?, player".$playerId."_boardI=?, player".$playerId."_boardJ=? WHERE gameId=?";
+    global $mysqli;
+
+    $queryBoardData = '';
+    //get the board state from the db
+    $sql="SELECT board_state FROM game WHERE gameId=?";
+    try{
+        if ($stmt = $mysqli->prepare($sql)){
+            $stmt->bind_param("i",$gameId);
+            $stmt->execute();
+            $stmt->bind_result($queryBoardData);
+            $stmt->close();
+        }else{
+            throw new Exception("An error occurred while getMoveData");
+        }
+    }catch (Exception $e) {
+        log_error($e, $sql, null);
+        return false;
+    }
+
+    $updatedBoard = updateBoardString($queryBoardData,$boardI,$boardJ,$playerId);
+
+	$sql="UPDATE game SET player".$playerId."_pieceId=?, player".$playerId."_boardI=?, player".$playerId."_boardJ=?, board_state=? WHERE gameId=?";
 	try{
 		if($stmt=$mysqli->prepare($sql)){
-			$stmt->bind_param("siii",$pieceId,$boardI,$boardJ,$gameId);
+			$stmt->bind_param("siisi",$pieceId,$boardI,$boardJ,$updatedBoard,$gameId);
 			$stmt->execute();
 			$stmt->close();
 		}else{
@@ -150,5 +171,31 @@ function getMoveData($gameId){
 		return false;
     }
 }
+
+
+/**
+ * Generates an updated 2D string that displays all the positions taken within a game
+ * @param $originalString ('0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0|0~0~0~0~0~0~0~0)
+ * @param $playerCol the column of the board
+ * @param $playerRow the row of the board
+ * @param $playerId the id of the player
+ * @return string
+ */
+function updateBoardString($originalString, $playerRow, $playerCol, $playerId){
+    foreach ( explode('|', $originalString) as $row => $col ) {
+        $result[$row] = explode('~', $col);
+    }
+
+    $result[$playerRow][$playerCol] = $playerId;
+
+    $newString = '';
+
+    foreach ($result as $row){
+        $newString .= implode('~',$row) . '|';
+    }
+
+    return substr($newString, 0, -1);
+}
+
 
 ?>

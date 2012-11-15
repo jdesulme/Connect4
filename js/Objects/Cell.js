@@ -24,9 +24,11 @@ function Cell(myParent,id,size,col,row) {
 //	this.state = 'alive';
 	this.x = this.col * this.size;
 	this.y = this.row * this.size;
-	this.color = (((this.row+this.col)%2) == 0) ? 'white' : 'white';
-	//this.droppable = (((this.row+this.col)%2) == 0) ? true : false;
-	
+	//this.color = (((this.row+this.col)%2) == 0) ? 'white' : 'white';
+    this.color = 'white';
+    this.droppable = (this.row === 0) ? true : false;
+    //this.droppable = (((this.row+this.col)%2) == 0) ? true : false;
+
 	//create it...
 	this.object = this.create();
 	this.parent.appendChild(this.object);
@@ -43,11 +45,11 @@ function Cell(myParent,id,size,col,row) {
 Cell.prototype={
 	//create it...
 	create:function(){
-
+/*
         var gEle=document.createElementNS(svgns,'g');
         gEle.setAttributeNS(null,'transform','translate('+this.x+','+this.y+')');
         gEle.setAttributeNS(null,'id',this.id);
-        gEle.onclick=function(){alert(this.id);};
+        //gEle.onclick=function(){alert(this.id);};
 
 		var rectEle=document.createElementNS(svgns,'rect');
 		rectEle.setAttributeNS(null,'x',0);
@@ -65,10 +67,22 @@ Cell.prototype={
         gEle.appendChild(rectEle);
         gEle.appendChild(circEle);
 
-
         return gEle;
-	},
-	//get my bbox
+*/
+
+        var rectEle=document.createElementNS(svgns,'rect');
+        rectEle.setAttributeNS(null,'x',this.x);
+        rectEle.setAttributeNS(null,'y',this.y);
+        rectEle.setAttributeNS(null,'width',this.size+'px');
+        rectEle.setAttributeNS(null,'height',this.size+'px');
+        rectEle.setAttributeNS(null,'class','cell_'+this.color);
+        rectEle.setAttributeNS(null,'id',this.id);
+
+        return rectEle;
+
+
+    },
+
 	getMyBBox:function(){
 		return this.object.getBBox();
 	},
