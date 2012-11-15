@@ -27,7 +27,4 @@
 
     $js = array('login');
     Page::html_footer($js);
-
-    new dBug($_SESSION);
-    new dBug($_COOKIE);
 ?>

@@ -28,10 +28,7 @@ Page::html_header();
         </div>
     </section>
 
-
 <?php
 Page::html_footer();
-
-new dBug($_SESSION);
 
 ?>

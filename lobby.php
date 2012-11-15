@@ -62,12 +62,6 @@ Page::html_header(null,'Connect 4 - Lobby');
 
 
 <?php
-
-
-new dBug($_SESSION);
-
 $js = array('chat','challenge','lobby');
 Page::html_footer($js);
-
-
 ?>
